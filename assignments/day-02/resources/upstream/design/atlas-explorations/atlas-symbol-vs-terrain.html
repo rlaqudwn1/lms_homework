@@ -1,0 +1,193 @@
+<title>심볼로 퉁 vs 맵 자체가 장르 — 대륙은 유지되나</title>
+<style>
+  :root{
+    --bg:#0a1016; --bg2:#0e1a22; --sea:#0a1a23; --panel:#101d26; --line:#1e2f3a;
+    --ink:#dbeaf1; --muted:#88a1af; --faint:#5d7684;
+    --teal:#5ad6c2; --violet:#8fa2ff; --amber:#e6b862; --red:#e77d7d; --green:#6fca8f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(130% 90% at 50% -8%,#0f1e28 0%,var(--bg) 58%);
+    color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:34px 20px 70px}
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(22px,3vw,31px);margin:0 0 12px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .lede{margin:0;color:var(--muted);max-width:74ch;font-size:15px}
+  .lede b{color:var(--ink)}
+  .cmp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px}
+  @media(max-width:720px){.cmp{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 16px 38px -26px rgba(0,0,0,.85)}
+  .card.no{border-color:#5a3535} .card.yes{border-color:#2c6f66}
+  .card h2{margin:0;padding:13px 16px 5px;font-size:15.5px;font-weight:750;display:flex;align-items:center;gap:8px}
+  .card.no h2{color:var(--red)} .card.yes h2{color:var(--teal)}
+  .card canvas{display:block;width:100%;height:auto;background:var(--sea)}
+  .card p{margin:0;padding:11px 16px 15px;font-size:12.5px;color:var(--muted)}
+  .card p b{color:var(--ink)}
+  .insight{margin-top:22px;padding:17px 20px;background:linear-gradient(90deg,rgba(90,214,194,.09),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:14.5px}
+  .insight b{color:var(--teal)}
+  h3.sec{font-size:15px;margin:32px 0 6px;font-weight:750;display:flex;align-items:center;gap:9px}
+  h3.sec .b{font-family:ui-monospace,monospace;font-size:11px;background:var(--teal);color:#08110d;padding:3px 8px;border-radius:6px}
+  .sub{margin:0 0 14px;color:var(--muted);font-size:13px;max-width:70ch}
+  /* spectrum */
+  .spec{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:18px 18px 15px}
+  .bar{height:10px;border-radius:6px;background:linear-gradient(90deg,#5a3535,#2b7d76 50%,#3a2c5a);position:relative;margin:26px 0 8px}
+  .bar .pin{position:absolute;top:-7px;width:3px;height:24px;background:var(--teal);border-radius:2px}
+  .bar .star{position:absolute;top:-30px;transform:translateX(-50%);font-size:13px;color:var(--teal);font-weight:700;white-space:nowrap}
+  .ends{display:flex;justify-content:space-between;font-size:12px;color:var(--muted)}
+  .ends .l{color:var(--red)} .ends .r{color:var(--violet)}
+  .ends b{display:block;font-size:11px;color:var(--faint);font-weight:400;margin-top:2px}
+  .cost{margin-top:14px;padding:14px 16px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted)}
+  .cost b{color:var(--amber)}
+  .ask{margin-top:26px;font-size:15px} .ask b{color:var(--teal)}
+  .foot{margin-top:16px;color:var(--faint);font-size:12px;font-family:ui-monospace,monospace}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">003 · Taste Atlas · 스펙 교정 — 인식 방식</p>
+  <h1>심볼로 퉁 ❌ vs 맵 자체가 그 장르 ✅ — 그래도 한 대륙?</h1>
+  <p class="lede">같은 3지역(액션·RPG·호러)을 두 방식으로 렌더했어요. 왼쪽 = 땅은 일반, 심볼만 얹음. 오른쪽 = <b>지형 자체가 그 장르</b>(심볼 없이도 읽힘). 둘 다 <b>실루엣·바다·인접은 동일</b> — 즉 오른쪽도 여전히 한 대륙이에요.</p>
+
+  <div class="cmp">
+    <div class="card no">
+      <h2>❌ 심볼로 퉁</h2>
+      <canvas id="cLeft" width="500" height="380"></canvas>
+      <p>땅은 다 똑같은 일반 픽셀, <b>장르는 얹은 아이콘으로만</b> 구분. → "스티커 붙인 같은 땅." 아이콘 가리면 셋이 구분 안 됨. (당신이 거부한 것 · Every Noise 함정)</p>
+    </div>
+    <div class="card yes">
+      <h2>✅ 맵 자체가 장르</h2>
+      <canvas id="cRight" width="500" height="380"></canvas>
+      <p><b>지형 언어가 장르</b> — 액션=각지고 갈라진 에너지 지형, RPG=성채 고원, 호러=죽은 늪·묘지·안개. 심볼 없어도 읽힘. <b>상징성 확보.</b></p>
+    </div>
+  </div>
+
+  <div class="insight">🧭 핵심: <b>대륙의 통일성은 "지역이 닮아서"가 아니라 "해안선·바다·고도·인접"에서 온다.</b> 실제 대륙도 사막·툰드라·늪이 딴판이어도 하나잖아요. → 지역이 서로 딴판이어도 <b>한 매질(픽셀 카토그래피)</b> 안에 있고 한 해안선에 묶이면 대륙은 유지돼요. "뭉침"이 좀 느슨해질 뿐, 안 깨져요.</div>
+
+  <h3 class="sec"><span class="b">다이얼</span> 어디에 설까 — 통일 ⟷ 정체성</h3>
+  <p class="sub">이건 on/off가 아니라 다이얼이에요. 왼쪽 끝은 약하고, 오른쪽 끝은 대륙이 깨져요.</p>
+  <div class="spec">
+    <div class="bar">
+      <div class="pin" style="left:62%"></div>
+      <div class="star" style="left:62%">★ 추천: 지형-네이티브 · 한 매질</div>
+    </div>
+    <div class="ends">
+      <span class="l">◀ 심볼로 퉁<b>통일 강함 · 정체성 없음</b></span>
+      <span class="r">풀 패치워크 ▶<b>지역마다 딴 게임 화면(HUD/딴 화풍) · 대륙 깨짐</b></span>
+    </div>
+  </div>
+  <div class="cost">⚖️ <b>정직한 비용:</b> 정체성을 오른쪽으로 밀수록 — ①지역 경계 봉합이 어려워짐(늪이 에너지지형으로 자연스럽게 이어지게) ②장르별 지형 언어를 12개 발명·생성해야 함 ③"뭉침"이 느슨해짐(곶·반도가 늘어남). 대륙을 지키는 <b>단 하나의 조건 = 한 매질 유지</b>(전부 픽셀 지도 지형이지, 어떤 건 실사 HUD면 깨짐).</div>
+
+  <p class="ask">그래서 당신 방향(맵 자체가 장르)은 <b>맞고, 대륙과도 양립해요</b> — ★지점(지형-네이티브 · 한 매질)으로 스펙을 굳히면 돼요. 이야기할 것: <b>①이 ★지점으로 고정</b>할지, 아니면 더 오른쪽(정체성 극대)으로 밀지 · <b>②그럼 A-1 사전에서 "오브젝트형" 칸을 빼고</b> 전 장르를 "지형 언어"로 통일할지(스펙 교정). 어떻게 갈까요?</p>
+  <p class="foot">// 지형 스케치는 거친 방향 — 최종 아님(생성기 산출) · 한 매질=픽셀 카토그래피 · 쿨 단일.</p>
+</div>
+
+<script>
+(function(){
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  // 3 regions forming ONE connected landmass
+  var SEEDS=[{x:0.34,y:0.56},{x:0.56,y:0.40},{x:0.50,y:0.72}]; // 액션, RPG, 호러
+  var NAMES=["액션","RPG","호러"];
+  function makeNoise(COLS,ROWS,seed){var rng=mulberry32(seed),nStep=6,nC=Math.ceil(COLS/nStep)+2,nR=Math.ceil(ROWS/nStep)+2,NN=[];
+    for(var k=0;k<nC*nR;k++)NN.push(rng()*2-1);
+    return function(i,j){var gx=i/nStep,gy=j/nStep,x0=Math.floor(gx),y0=Math.floor(gy),tx=gx-x0,ty=gy-y0;
+      var a=NN[y0*nC+x0],b=NN[y0*nC+x0+1],c=NN[(y0+1)*nC+x0],d=NN[(y0+1)*nC+x0+1];
+      var sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
+      return (a*(1-sx)+b*sx)*(1-sy)+(c*(1-sx)+d*sx)*sy;};}
+
+  function build(W,H,cols){
+    var COLS=cols,ROWS=Math.round(cols*H/W),pad=0.16,noise=makeNoise(COLS,ROWS,77);
+    var seeds=SEEDS.map(function(p){return [(pad+p.x*(1-2*pad))*COLS,(pad+p.y*(1-2*pad))*ROWS];});
+    var baseR=COLS*0.30;
+    var reg=new Int16Array(COLS*ROWS);reg.fill(-1);
+    var bb=SEEDS.map(function(){return {minx:1e9,miny:1e9,maxx:-1,maxy:-1,x:0,y:0,n:0};});
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){var best=-1,bd=1e9;
+      for(var g=0;g<seeds.length;g++){var dx=i+0.5-seeds[g][0],dy=j+0.5-seeds[g][1],d=Math.sqrt(dx*dx+dy*dy);if(d<bd){bd=d;best=g;}}
+      if(bd<baseR*(1+0.28*noise(i,j))){reg[j*COLS+i]=best;var b=bb[best];b.minx=Math.min(b.minx,i);b.miny=Math.min(b.miny,j);b.maxx=Math.max(b.maxx,i);b.maxy=Math.max(b.maxy,j);b.x+=i;b.y+=j;b.n++;}}
+    return {reg:reg,COLS:COLS,ROWS:ROWS,bb:bb};
+  }
+  function isLandF(reg,COLS,ROWS){return function(i,j){return i>=0&&j>=0&&i<COLS&&j<ROWS&&reg[j*COLS+i]>=0;};}
+
+  function drawBaseSea(ctx,W,H){ctx.fillStyle="#0a1a23";ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle="rgba(120,180,200,0.05)";ctx.lineWidth=1;
+    for(var g=0;g<=10;g++){ctx.beginPath();ctx.moveTo(g/10*W,0);ctx.lineTo(g/10*W,H);ctx.stroke();ctx.beginPath();ctx.moveTo(0,g/10*H);ctx.lineTo(W,g/10*H);ctx.stroke();}}
+
+  function coastAndSil(ctx,R,cw,ch){var reg=R.reg,COLS=R.COLS,ROWS=R.ROWS,isL=isLandF(reg,COLS,ROWS);
+    ctx.strokeStyle="rgba(120,222,205,0.5)";ctx.lineWidth=Math.max(1.4,cw*0.16);ctx.lineCap="round";
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){if(!isL(i,j))continue;var x=i*cw,y=j*ch;
+      if(!isL(i-1,j)){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+ch);ctx.stroke();}
+      if(!isL(i+1,j)){ctx.beginPath();ctx.moveTo(x+cw,y);ctx.lineTo(x+cw,y+ch);ctx.stroke();}
+      if(!isL(i,j-1)){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+cw,y);ctx.stroke();}
+      if(!isL(i,j+1)){ctx.beginPath();ctx.moveTo(x,y+ch);ctx.lineTo(x+cw,y+ch);ctx.stroke();}}}
+
+  // LEFT: generic land + symbol
+  (function(){var c=document.getElementById("cLeft"),ctx=c.getContext("2d"),W=c.width,H=c.height;
+    var R=build(W,H,64),reg=R.reg,COLS=R.COLS,ROWS=R.ROWS,cw=W/COLS,ch=H/ROWS,isL=isLandF(reg,COLS,ROWS);
+    drawBaseSea(ctx,W,H);
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){if(reg[j*COLS+i]<0)continue;
+      var coast=!(isL(i-1,j)&&isL(i+1,j)&&isL(i,j-1)&&isL(i,j+1));
+      ctx.fillStyle=coast?"#1c554f":"#2b7d76";ctx.fillRect(Math.floor(i*cw),Math.floor(j*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+    // faint region borders
+    ctx.fillStyle="rgba(9,16,22,0.4)";
+    for(var j2=0;j2<ROWS;j2++)for(var i2=0;i2<COLS;i2++){var g=reg[j2*COLS+i2];if(g<0)continue;
+      if((isL(i2+1,j2)&&reg[j2*COLS+i2+1]!==g)||(isL(i2,j2+1)&&reg[(j2+1)*COLS+i2]!==g))ctx.fillRect(Math.floor(i2*cw),Math.floor(j2*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+    coastAndSil(ctx,R,cw,ch);
+    var syms=["bolt","sword","skull"];
+    R.bb.forEach(function(b,idx){if(b.n===0)return;var cx=(b.x/b.n+0.5)*cw,cy=(b.y/b.n+0.5)*ch;
+      drawIcon(ctx,syms[idx],cx,cy,22,"#dff4f1");
+      ctx.font="600 11px ui-monospace,monospace";ctx.textAlign="center";ctx.fillStyle="#bcd";ctx.fillText(NAMES[idx],cx,cy+22);});
+  })();
+
+  // RIGHT: terrain IS the genre
+  (function(){var c=document.getElementById("cRight"),ctx=c.getContext("2d"),W=c.width,H=c.height;
+    var R=build(W,H,64),reg=R.reg,COLS=R.COLS,ROWS=R.ROWS,cw=W/COLS,ch=H/ROWS,isL=isLandF(reg,COLS,ROWS);
+    drawBaseSea(ctx,W,H);
+    // per-region base fill + texture
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){var g=reg[j*COLS+i];if(g<0)continue;
+      var coast=!(isL(i-1,j)&&isL(i+1,j)&&isL(i,j-1)&&isL(i,j+1));
+      var base;
+      if(g===0){base=coast?"#1c554f":"#2b7d76";}                 // 액션 mid teal
+      else if(g===1){base=coast?"#2a6f66":"#3aa593";}            // RPG bright highland
+      else{base=coast?"#12333a":"#1a4149";}                     // 호러 dark
+      ctx.fillStyle=base;ctx.fillRect(Math.floor(i*cw),Math.floor(j*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);
+      // textures
+      if(g===0){ // 액션: angular dark shards + energy
+        if((i*2+j)%7===0){ctx.fillStyle="rgba(8,20,24,0.5)";ctx.beginPath();ctx.moveTo(i*cw,j*ch);ctx.lineTo(i*cw+cw*1.6,j*ch);ctx.lineTo(i*cw,j*ch+ch*1.6);ctx.closePath();ctx.fill();}}
+      else if(g===1){ if((i+j)%9===0){ctx.fillStyle="rgba(200,240,235,0.14)";ctx.fillRect(Math.floor(i*cw),Math.floor(j*ch),Math.ceil(cw),2);}}
+      else{ if((i+j)%2===0){ctx.fillStyle="rgba(120,150,170,0.10)";ctx.fillRect(Math.floor(i*cw),Math.floor(j*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);}}
+    }
+    // region borders faint
+    ctx.fillStyle="rgba(9,16,22,0.45)";
+    for(var jb=0;jb<ROWS;jb++)for(var ib=0;ib<COLS;ib++){var gg=reg[jb*COLS+ib];if(gg<0)continue;
+      if((isL(ib+1,jb)&&reg[jb*COLS+ib+1]!==gg)||(isL(ib,jb+1)&&reg[(jb+1)*COLS+ib]!==gg))ctx.fillRect(Math.floor(ib*cw),Math.floor(jb*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+    // motifs per region (terrain features, not stickers)
+    var b0=R.bb[0],b1=R.bb[1],b2=R.bb[2];
+    function cen(b){return [(b.x/b.n+0.5)*cw,(b.y/b.n+0.5)*ch];}
+    // 액션: energy bolt-lines (bright diagonal breaks)
+    var a=cen(b0);ctx.strokeStyle="#9fe6da";ctx.lineWidth=2;
+    [[-24,-10],[6,18]].forEach(function(o){ctx.beginPath();ctx.moveTo(a[0]+o[0],a[1]+o[1]-14);ctx.lineTo(a[0]+o[0]+10,a[1]+o[1]);ctx.lineTo(a[0]+o[0]+2,a[1]+o[1]+4);ctx.lineTo(a[0]+o[0]+12,a[1]+o[1]+16);ctx.stroke();});
+    // RPG: castle + banner
+    var p=cen(b1),cwd=30,cht=22;ctx.fillStyle="#0e2b2f";ctx.fillRect(p[0]-cwd/2,p[1]-4,cwd,cht);
+    for(var k=0;k<4;k++)ctx.fillRect(p[0]-cwd/2+k*(cwd/4),p[1]-9,cwd/4-2,5);
+    ctx.fillStyle="#9fe6da";ctx.fillRect(p[0]-1,p[1]-22,2,13);ctx.fillStyle="#5ad6c2";ctx.beginPath();ctx.moveTo(p[0]+1,p[1]-22);ctx.lineTo(p[0]+12,p[1]-18);ctx.lineTo(p[0]+1,p[1]-14);ctx.closePath();ctx.fill();
+    // 호러: fog dither already; tombstones + bare tree
+    var hh=cen(b2);ctx.fillStyle="#0a2028";
+    [-16,0,16].forEach(function(dx,idx){var th=idx===1?16:11;ctx.beginPath();ctx.moveTo(hh[0]+dx-5,hh[1]+8);ctx.lineTo(hh[0]+dx-5,hh[1]+8-th);ctx.arc(hh[0]+dx,hh[1]+8-th,5,Math.PI,0);ctx.lineTo(hh[0]+dx+5,hh[1]+8);ctx.closePath();ctx.fill();});
+    ctx.strokeStyle="#12333a";ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(hh[0]+24,hh[1]+10);ctx.lineTo(hh[0]+24,hh[1]-10);ctx.moveTo(hh[0]+24,hh[1]-4);ctx.lineTo(hh[0]+30,hh[1]-10);ctx.moveTo(hh[0]+24,hh[1]-2);ctx.lineTo(hh[0]+18,hh[1]-8);ctx.stroke();
+    // fog band over horror
+    var fg=ctx.createLinearGradient(0,hh[1]-30,0,hh[1]+30);fg.addColorStop(0,"rgba(143,162,255,0.12)");fg.addColorStop(1,"rgba(143,162,255,0)");
+    ctx.fillStyle=fg;ctx.fillRect(b2.minx*cw,b2.miny*ch,(b2.maxx-b2.minx)*cw,(b2.maxy-b2.miny)*ch*0.6);
+    coastAndSil(ctx,R,cw,ch);
+    // tiny genre labels
+    ctx.font="600 10px ui-monospace,monospace";ctx.textAlign="center";ctx.fillStyle="rgba(230,244,242,0.85)";
+    [[b0,"액션"],[b1,"RPG"],[b2,"호러"]].forEach(function(pr){var cc=cen(pr[0]);
+      var tw=ctx.measureText(pr[1]).width;ctx.fillStyle="rgba(8,14,20,0.6)";ctx.fillRect(cc[0]-tw/2-3,cc[1]+22,tw+6,13);
+      ctx.fillStyle="rgba(230,244,242,0.9)";ctx.fillText(pr[1],cc[0],cc[1]+29);});
+  })();
+
+  function drawIcon(ctx,sym,x,y,s,col){ctx.save();ctx.translate(x,y);ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=1.8;ctx.lineJoin="round";ctx.lineCap="round";var h=s/2;function P(){ctx.beginPath();}
+    if(sym==="sword"){P();ctx.moveTo(0,-h);ctx.lineTo(0,h*0.55);ctx.stroke();P();ctx.moveTo(-h*0.55,h*0.55);ctx.lineTo(h*0.55,h*0.55);ctx.stroke();P();ctx.moveTo(0,h*0.55);ctx.lineTo(0,h);ctx.stroke();}
+    else if(sym==="bolt"){P();ctx.moveTo(h*0.5,-h);ctx.lineTo(-h*0.5,h*0.15);ctx.lineTo(h*0.1,h*0.15);ctx.lineTo(-h*0.4,h);ctx.lineTo(h*0.6,-h*0.2);ctx.lineTo(0,-h*0.2);ctx.closePath();ctx.fill();}
+    else if(sym==="skull"){P();ctx.arc(0,-h*0.15,h*0.75,Math.PI,0);ctx.lineTo(h*0.45,h*0.4);ctx.lineTo(-h*0.45,h*0.4);ctx.closePath();ctx.stroke();ctx.fillStyle=col;P();ctx.arc(-h*0.3,-h*0.15,h*0.2,0,7);ctx.arc(h*0.3,-h*0.15,h*0.2,0,7);ctx.fill();}
+    ctx.restore();}
+})();
+</script>

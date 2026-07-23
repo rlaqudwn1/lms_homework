@@ -1,0 +1,5 @@
+{
+  "title": "003 · NEXT SAVE 랜딩 — 실제 아이디어 실생산",
+  "date": "2026-07-07",
+  "status": "v0.8(2026-07-14): 경쟁사 voice teardown(한/외 2병렬)로 카피 보이스 결정 역산 → 백본 해요체 담백 + 1인칭 + 정직어휘, 슬랭·음슴체는 리뷰만 격리(비속어 Level 1). copy.ts 스파인(S0~S10) 전면 재작성·푸시(64eace2), 어체 오너 통과. direction.md 리비전 v0.8 결정장부. 이후 오너 방향전환 = 세부조정(스프라이트 재도트·맵 스케일) 보류하고 기반 정비 먼저: ①우리 design.md 정립(현재 토큰이 direction 히스토리에 흩어짐) ②컴포넌트 관리(atlas.tsx 625줄 모놀리스 분할 + 해요체 포팅 + landing.css 2405줄 레거시 정리) ③레퍼런스 확장 후 design.md 확정. 상세 = NEXT-SESSION.md. 대기: idea 정식 /handoff 미착지, domain-research 승격 게이트."
+}

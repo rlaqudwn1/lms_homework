@@ -1,0 +1,182 @@
+<title>맵 vs 이미지 — 같은 장르, 네 가지 표현</title>
+<style>
+  :root{
+    --bg:#0a1016; --bg2:#0e1a22; --sea:#0a1a23; --panel:#101d26; --line:#1e2f3a;
+    --ink:#dbeaf1; --muted:#88a1af; --faint:#5d7684;
+    --teal:#5ad6c2; --violet:#8fa2ff; --amber:#e6b862;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(130% 90% at 50% -8%,#0f1e28 0%,var(--bg) 58%);
+    color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:34px 20px 70px}
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(22px,3vw,31px);margin:0 0 12px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .lede{margin:0;color:var(--muted);max-width:76ch;font-size:15px}
+  .lede b{color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:26px}
+  @media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 16px 38px -26px rgba(0,0,0,.85)}
+  .card.pick{border-color:#2c6f66}
+  .card h2{margin:0;padding:13px 15px 3px;font-size:15px;font-weight:750;display:flex;align-items:center;gap:7px}
+  .card .kind{font-family:ui-monospace,monospace;font-size:10px;color:var(--faint);padding:0 15px 8px}
+  .card canvas{display:block;width:100%;height:auto;background:var(--sea)}
+  .card .tr{padding:11px 15px 14px;font-size:12px;color:var(--muted);flex:1}
+  .card .tr b{color:var(--ink)} .card .tr .g{color:var(--teal)} .card .tr .x{color:#e08a8a}
+  .matrix{margin-top:26px;width:100%;border-collapse:separate;border-spacing:0;font-size:13px;background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .matrix th,.matrix td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--line)}
+  .matrix th{background:var(--bg2);color:var(--muted);font-weight:600;font-size:12px;font-family:ui-monospace,monospace}
+  .matrix td:first-child,.matrix th:first-child{text-align:left;font-weight:700;color:var(--ink);white-space:nowrap}
+  .matrix tr:last-child td{border-bottom:none}
+  .matrix .full{color:var(--teal)} .matrix .half{color:var(--amber)} .matrix .none{color:var(--faint)}
+  .note{margin-top:20px;padding:15px 18px;background:linear-gradient(90deg,rgba(90,214,194,.08),transparent);border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:14px}
+  .note b{color:var(--teal)}
+  .ask{margin-top:24px;font-size:15px} .ask b{color:var(--teal)}
+  .foot{margin-top:16px;color:var(--faint);font-size:12px;font-family:ui-monospace,monospace}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">003 · Taste Atlas · 표현 방식 비교</p>
+  <h1>같은 취향(장르), 네 가지로 표현 — 지도냐 이미지냐</h1>
+  <p class="lede">확인한 대로: 이건 <b>"장르를 무엇으로 그리느냐"</b>의 문제지 aha(공유·자랑)가 아니에요. 같은 8장르 데이터(보유·정복)를 <b>지도 1 + 이미지 3형태</b>로 그렸어요. 넷 다 "각 땅/조각이 그 장르로 읽히게"(심볼-퉁 아님)는 지켰어요.</p>
+
+  <div class="grid">
+    <div class="card pick">
+      <h2>① 탐험 지도</h2><div class="kind">MAP · 현행 방향</div>
+      <canvas id="cMap" width="360" height="300"></canvas>
+      <div class="tr"><span class="g">+ 탐험성·결정지원(땅 클릭→추천)·진화</span><br><span class="x">− 한눈에 안 들어옴·제작 복잡</span></div>
+    </div>
+    <div class="card">
+      <h2>② 문장(엠블럼)</h2><div class="kind">IMAGE · 배지형</div>
+      <canvas id="cCrest" width="360" height="300"></canvas>
+      <div class="tr"><span class="g">+ 강한 정체성·공유·한눈에·제작 쉬움</span><br><span class="x">− 탐험 없음·결정지원 약함</span></div>
+    </div>
+    <div class="card">
+      <h2>③ 패널 포스터</h2><div class="kind">IMAGE · 모자이크형</div>
+      <canvas id="cPoster" width="360" height="300"></canvas>
+      <div class="tr"><span class="g">+ "각 칸이 그 장르" 강함·공유·크기=보유</span><br><span class="x">− 지형/인접 없음·탐험 약함</span></div>
+    </div>
+    <div class="card">
+      <h2>④ 취향 성좌</h2><div class="kind">IMAGE · 성좌형</div>
+      <canvas id="cConst" width="360" height="300"></canvas>
+      <div class="tr"><span class="g">+ 서명감·인접 일부 유지·우아함</span><br><span class="x">− 영토감 없음·Every Noise 함정 근접</span></div>
+    </div>
+  </div>
+
+  <table class="matrix">
+    <thead><tr><th>표현</th><th>탐험성</th><th>결정 지원</th><th>공유력</th><th>진화(자람)</th><th>제작 난이도</th></tr></thead>
+    <tbody>
+      <tr><td>① 지도</td><td class="full">●</td><td class="full">●</td><td class="half">◐<span style="color:var(--faint)"> 스냅샷</span></td><td class="full">●</td><td class="none">어려움</td></tr>
+      <tr><td>② 문장</td><td class="none">○</td><td class="none">○</td><td class="full">●</td><td class="half">◐</td><td class="full">쉬움</td></tr>
+      <tr><td>③ 포스터</td><td class="none">○</td><td class="half">◐</td><td class="full">●</td><td class="half">◐</td><td class="half">중간</td></tr>
+      <tr><td>④ 성좌</td><td class="half">◐</td><td class="half">◐</td><td class="full">●</td><td class="half">◐</td><td class="half">중간</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">🧭 핵심: <b>지도만 "탐험 + 결정 지원"을 둘 다 해요</b>(땅을 눌러 "오늘 뭐 켤지"를 받는 구조). 이미지 3형태는 <b>공유·정체성</b>은 세지만 "결정 job"이 약해져요 — 003의 1차 고통이 결정 마비였다는 걸 기억하면, 이게 핵심 트레이드오프예요. 셋 다 <b>정적</b>이라 클릭·진화가 어려워요.</div>
+
+  <p class="ask">어느 표현이 끌려요? — 아니면 <b>하이브리드</b>(지도=도구, 문장/포스터=공유 스냅샷)로 갈지. 이건 "결정 지원을 포기할 수 있나"가 갈림점이에요.</p>
+  <p class="foot">// 같은 8장르 데이터 · 지형/조각은 거친 방향(최종=생성기) · 쿨 단일 팔레트 · 예시맵.</p>
+</div>
+
+<script>
+(function(){
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  var GEN=[
+    {name:"RPG",sym:"sword",owned:0.95,mastery:0.90},
+    {name:"액션",sym:"bolt",owned:0.80,mastery:0.85},
+    {name:"오픈월드",sym:"mtn",owned:0.85,mastery:0.70},
+    {name:"소울라이크",sym:"skull",owned:0.60,mastery:0.78},
+    {name:"로그라이크",sym:"dice",owned:0.55,mastery:0.60},
+    {name:"전략",sym:"rook",owned:0.45,mastery:0.28},
+    {name:"퍼즐",sym:"puzzle",owned:0.40,mastery:0.50},
+    {name:"레이싱",sym:"race",owned:0.35,mastery:0.35}
+  ];
+  var TIER={hi:"#59d6c2",mid:"#2b7d76",lo:"#173a3f"},TIER_C={hi:"#3aa593",mid:"#1c554f",lo:"#0e2529"};
+  function tcol(m,coast){var t=m>=0.66?"hi":m>=0.33?"mid":"lo";return coast?TIER_C[t]:TIER[t];}
+
+  // ---------- ① MAP ----------
+  (function(){var c=document.getElementById("cMap"),ctx=c.getContext("2d"),W=c.width,H=c.height;
+    var COLS=54,ROWS=Math.round(COLS*H/W),cw=W/COLS,ch=H/ROWS,pad=0.15;
+    var SE=[[.5,.46],[.34,.34],[.68,.36],[.30,.62],[.52,.66],[.72,.62],[.18,.5],[.84,.48]];
+    var seeds=SE.map(function(p){return [(pad+p[0]*(1-2*pad))*COLS,(pad+p[1]*(1-2*pad))*ROWS];});
+    var rng=mulberry32(9),nStep=6,nC=Math.ceil(COLS/nStep)+2,nR=Math.ceil(ROWS/nStep)+2,NN=[];for(var k=0;k<nC*nR;k++)NN.push(rng()*2-1);
+    function noise(i,j){var gx=i/nStep,gy=j/nStep,x0=Math.floor(gx),y0=Math.floor(gy),tx=gx-x0,ty=gy-y0;var a=NN[y0*nC+x0],b=NN[y0*nC+x0+1],cc=NN[(y0+1)*nC+x0],d=NN[(y0+1)*nC+x0+1];var sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);return (a*(1-sx)+b*sx)*(1-sy)+(cc*(1-sx)+d*sx)*sy;}
+    var reg=new Int16Array(COLS*ROWS);reg.fill(-1);var sum=GEN.map(function(){return{x:0,y:0,n:0};});
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){var bst=-1,bd=1e9;for(var g=0;g<seeds.length;g++){var dx=i+.5-seeds[g][0],dy=j+.5-seeds[g][1],d=Math.sqrt(dx*dx+dy*dy);if(d<bd){bd=d;bst=g;}}
+      var R=COLS*0.108*(0.72+0.6*GEN[bst].owned);if(bd<R*(1+0.3*noise(i,j))){reg[j*COLS+i]=bst;sum[bst].x+=i;sum[bst].y+=j;sum[bst].n++;}}
+    function isL(i,j){return i>=0&&j>=0&&i<COLS&&j<ROWS&&reg[j*COLS+i]>=0;}
+    ctx.fillStyle="#0a1a23";ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle="rgba(120,180,200,0.05)";for(var gg=0;gg<=10;gg++){ctx.beginPath();ctx.moveTo(gg/10*W,0);ctx.lineTo(gg/10*W,H);ctx.stroke();ctx.beginPath();ctx.moveTo(0,gg/10*H);ctx.lineTo(W,gg/10*H);ctx.stroke();}
+    for(var j2=0;j2<ROWS;j2++)for(var i2=0;i2<COLS;i2++){var g2=reg[j2*COLS+i2];if(g2<0)continue;var coast=!(isL(i2-1,j2)&&isL(i2+1,j2)&&isL(i2,j2-1)&&isL(i2,j2+1));ctx.fillStyle=tcol(GEN[g2].mastery,coast);ctx.fillRect(Math.floor(i2*cw),Math.floor(j2*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+    ctx.fillStyle="rgba(9,16,22,0.45)";for(var j3=0;j3<ROWS;j3++)for(var i3=0;i3<COLS;i3++){var g3=reg[j3*COLS+i3];if(g3<0)continue;if((isL(i3+1,j3)&&reg[j3*COLS+i3+1]!==g3)||(isL(i3,j3+1)&&reg[(j3+1)*COLS+i3]!==g3))ctx.fillRect(Math.floor(i3*cw),Math.floor(j3*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+    ctx.strokeStyle="rgba(120,222,205,0.5)";ctx.lineWidth=1.6;ctx.lineCap="round";
+    for(var j4=0;j4<ROWS;j4++)for(var i4=0;i4<COLS;i4++){if(!isL(i4,j4))continue;var x=i4*cw,y=j4*ch;if(!isL(i4-1,j4)){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+ch);ctx.stroke();}if(!isL(i4+1,j4)){ctx.beginPath();ctx.moveTo(x+cw,y);ctx.lineTo(x+cw,y+ch);ctx.stroke();}if(!isL(i4,j4-1)){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+cw,y);ctx.stroke();}if(!isL(i4,j4+1)){ctx.beginPath();ctx.moveTo(x,y+ch);ctx.lineTo(x+cw,y+ch);ctx.stroke();}}
+    for(var g5=0;g5<GEN.length;g5++){if(sum[g5].n===0)continue;var cx=(sum[g5].x/sum[g5].n+0.5)*cw,cy=(sum[g5].y/sum[g5].n+0.5)*ch;drawIcon(ctx,GEN[g5].sym,cx,cy,13,"#dff4f1");}
+  })();
+
+  // ---------- ② CREST (emblem) ----------
+  (function(){var c=document.getElementById("cCrest"),ctx=c.getContext("2d"),W=c.width,H=c.height,cx=W/2,cy=H/2+6,Rr=Math.min(W,H)*0.40;
+    ctx.fillStyle="#0c1620";ctx.fillRect(0,0,W,H);
+    var tot=GEN.reduce(function(s,g){return s+g.owned;},0),ang=-Math.PI/2;
+    GEN.forEach(function(g){var a2=ang+g.owned/tot*Math.PI*2;
+      ctx.beginPath();ctx.moveTo(cx,cy);ctx.arc(cx,cy,Rr,ang,a2);ctx.closePath();
+      var t=g.mastery>=0.66?"hi":g.mastery>=0.33?"mid":"lo";ctx.fillStyle=TIER[t];ctx.fill();
+      ctx.strokeStyle="#0a141b";ctx.lineWidth=2;ctx.stroke();
+      var mid=(ang+a2)/2;drawIcon(ctx,g.sym,cx+Math.cos(mid)*Rr*0.62,cy+Math.sin(mid)*Rr*0.62,13,"#08131a");
+      ang=a2;});
+    // frame rings
+    ctx.strokeStyle="#5ad6c2";ctx.lineWidth=2.5;ctx.beginPath();ctx.arc(cx,cy,Rr+5,0,7);ctx.stroke();
+    ctx.strokeStyle="rgba(143,162,255,0.5)";ctx.lineWidth=1;ctx.beginPath();ctx.arc(cx,cy,Rr+10,0,7);ctx.stroke();
+    ctx.fillStyle="#0a141b";ctx.beginPath();ctx.arc(cx,cy,Rr*0.26,0,7);ctx.fill();ctx.strokeStyle="#5ad6c2";ctx.lineWidth=1.5;ctx.stroke();
+    ctx.fillStyle="#cfeee8";ctx.font="700 10px ui-monospace,monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText("TASTE",cx,cy-4);ctx.fillText("CREST",cx,cy+7);
+    // top notch
+    ctx.fillStyle="#5ad6c2";ctx.beginPath();ctx.moveTo(cx-7,cy-Rr-8);ctx.lineTo(cx+7,cy-Rr-8);ctx.lineTo(cx,cy-Rr-1);ctx.closePath();ctx.fill();
+  })();
+
+  // ---------- ③ POSTER (panels, size ~ owned) ----------
+  (function(){var c=document.getElementById("cPoster"),ctx=c.getContext("2d"),W=c.width,H=c.height,pd=8;
+    ctx.fillStyle="#0a141b";ctx.fillRect(0,0,W,H);
+    var rows=[[0,1,2],[3,4,5],[6,7]],rowH=(H-pd*(rows.length+1))/rows.length,y=pd;
+    rows.forEach(function(row){var sum=row.reduce(function(s,idx){return s+GEN[idx].owned;},0),x=pd,availW=W-pd*(row.length+1);
+      row.forEach(function(idx){var g=GEN[idx],w=availW*g.owned/sum;
+        var t=g.mastery>=0.66?"hi":g.mastery>=0.33?"mid":"lo";
+        ctx.fillStyle=TIER[t];ctx.fillRect(x,y,w,rowH);
+        // terrain hint: darker angular notches
+        ctx.fillStyle="rgba(8,18,22,0.28)";for(var q=0;q<w;q+=10)if((q+y|0)%20===0)ctx.fillRect(x+q,y,5,rowH);
+        ctx.strokeStyle="#0a141b";ctx.lineWidth=3;ctx.strokeRect(x+0.5,y+0.5,w-1,rowH-1);
+        drawIcon(ctx,g.sym,x+w/2,y+rowH/2-6,Math.min(18,w*0.4),g.mastery<0.33?"#08131a":"#08131a");
+        ctx.fillStyle="rgba(6,12,17,0.6)";ctx.font="600 10px ui-monospace,monospace";ctx.textAlign="center";var tw=ctx.measureText(g.name).width;
+        if(w>tw+8){ctx.fillRect(x+w/2-tw/2-3,y+rowH-16,tw+6,13);ctx.fillStyle="#e6f4f2";ctx.textBaseline="middle";ctx.fillText(g.name,x+w/2,y+rowH-9);}
+        x+=w+pd;});
+      y+=rowH+pd;});
+  })();
+
+  // ---------- ④ CONSTELLATION ----------
+  (function(){var c=document.getElementById("cConst"),ctx=c.getContext("2d"),W=c.width,H=c.height;
+    ctx.fillStyle="#0a1220";ctx.fillRect(0,0,W,H);
+    // faint stars
+    var rng=mulberry32(21);for(var s=0;s<60;s++){ctx.fillStyle="rgba(200,215,240,"+(0.05+rng()*0.12)+")";ctx.fillRect(rng()*W,rng()*H,1,1);}
+    var P=[[.5,.5],[.32,.34],[.7,.36],[.28,.68],[.5,.82],[.74,.66],[.16,.5],[.86,.5]];
+    var E=[[0,1],[0,2],[0,3],[1,4],[3,4],[5,4],[6,3],[7,2],[1,6],[5,7]];
+    function pt(i){return [P[i][0]*W,P[i][1]*H];}
+    ctx.strokeStyle="rgba(143,162,255,0.4)";ctx.lineWidth=1;E.forEach(function(e){var a=pt(e[0]),b=pt(e[1]);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();});
+    for(var i=0;i<GEN.length;i++){var p=pt(i),g=GEN[i],r=6+g.owned*9,t=g.mastery>=0.66?"hi":g.mastery>=0.33?"mid":"lo";
+      ctx.fillStyle="rgba(10,18,32,0.9)";ctx.beginPath();ctx.arc(p[0],p[1],r+3,0,7);ctx.fill();
+      ctx.fillStyle=TIER[t];ctx.strokeStyle="#8fa2ff";ctx.lineWidth=1.2;ctx.beginPath();ctx.arc(p[0],p[1],r,0,7);ctx.fill();ctx.stroke();
+      drawIcon(ctx,g.sym,p[0],p[1],r*1.3,"#08131a");
+      ctx.fillStyle="#aeb9d8";ctx.font="600 9px ui-monospace,monospace";ctx.textAlign="center";ctx.textBaseline="middle";ctx.fillText(g.name,p[0],p[1]+r+8);}
+  })();
+
+  function drawIcon(ctx,sym,x,y,s,col){ctx.save();ctx.translate(x,y);ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=1.7;ctx.lineJoin="round";ctx.lineCap="round";var h=s/2;function P(){ctx.beginPath();}
+    if(sym==="sword"){P();ctx.moveTo(0,-h);ctx.lineTo(0,h*0.55);ctx.stroke();P();ctx.moveTo(-h*0.55,h*0.55);ctx.lineTo(h*0.55,h*0.55);ctx.stroke();P();ctx.moveTo(0,h*0.55);ctx.lineTo(0,h);ctx.stroke();}
+    else if(sym==="bolt"){P();ctx.moveTo(h*0.5,-h);ctx.lineTo(-h*0.5,h*0.15);ctx.lineTo(h*0.1,h*0.15);ctx.lineTo(-h*0.4,h);ctx.lineTo(h*0.6,-h*0.2);ctx.lineTo(0,-h*0.2);ctx.closePath();ctx.fill();}
+    else if(sym==="mtn"){P();ctx.moveTo(-h,h*0.7);ctx.lineTo(-h*0.15,-h*0.8);ctx.lineTo(h*0.25,-h*0.1);ctx.lineTo(h*0.5,-h*0.5);ctx.lineTo(h,h*0.7);ctx.closePath();ctx.stroke();}
+    else if(sym==="skull"){P();ctx.arc(0,-h*0.15,h*0.7,Math.PI,0);ctx.lineTo(h*0.42,h*0.4);ctx.lineTo(-h*0.42,h*0.4);ctx.closePath();ctx.stroke();ctx.fillStyle=col;P();ctx.arc(-h*0.28,-h*0.15,h*0.18,0,7);ctx.arc(h*0.28,-h*0.15,h*0.18,0,7);ctx.fill();}
+    else if(sym==="dice"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);var d=h*0.34;[[-1,-1],[1,1],[-1,1]].forEach(function(p){P();ctx.arc(p[0]*d,p[1]*d,1.4,0,7);ctx.fill();});}
+    else if(sym==="rook"){ctx.strokeRect(-h*0.5,-h*0.2,h*1.0,h*0.9);P();ctx.moveTo(-h*0.6,-h*0.2);ctx.lineTo(-h*0.6,-h*0.6);ctx.lineTo(-h*0.3,-h*0.6);ctx.lineTo(-h*0.3,-h*0.4);ctx.lineTo(0,-h*0.4);ctx.lineTo(0,-h*0.6);ctx.lineTo(h*0.3,-h*0.6);ctx.lineTo(h*0.3,-h*0.4);ctx.lineTo(h*0.6,-h*0.4);ctx.lineTo(h*0.6,-h*0.2);ctx.stroke();}
+    else if(sym==="puzzle"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);P();ctx.arc(h*0.8,0,h*0.26,-1.6,1.6);ctx.stroke();}
+    else if(sym==="race"){P();ctx.moveTo(-h*0.7,-h*0.6);ctx.lineTo(-h*0.05,0);ctx.lineTo(-h*0.7,h*0.6);ctx.stroke();P();ctx.moveTo(h*0.05,-h*0.6);ctx.lineTo(h*0.7,0);ctx.lineTo(h*0.05,h*0.6);ctx.stroke();}
+    ctx.restore();}
+})();
+</script>

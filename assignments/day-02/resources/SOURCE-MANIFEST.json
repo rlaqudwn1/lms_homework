@@ -1,0 +1,455 @@
+﻿{
+    "schemaVersion":  1,
+    "repositories":  [
+                         {
+                             "name":  "idea",
+                             "url":  "https://github.com/rlaqudwn1/idea.git",
+                             "branch":  "master",
+                             "commit":  "56efd48215a791febf111ccd4a5a3965364a4598"
+                         },
+                         {
+                             "name":  "design",
+                             "url":  "https://github.com/rlaqudwn1/design.git",
+                             "branch":  "main",
+                             "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209"
+                         }
+                     ],
+    "exclusions":  [
+                       "design candidates/*.png (third-party research captures)",
+                       "superseded pre-v0.9 captures",
+                       "idea archive and legacy 2x2/island prototypes",
+                       "secrets, environment files, cookies, and real user data"
+                   ],
+    "files":  [
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "ideas/next-save.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/ideas/next-save.md",
+                      "gitBlob":  "f2b43cdcfaa73e4396af2f6833ef4d86c6f5216e",
+                      "sha256":  "a2ab5f21477765fe12aa50104bbb19d3f777bf9efe50cf74309a93199bb0701f",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "handoff/next-save.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/handoff/next-save.md",
+                      "gitBlob":  "67f6466ab9d1147b7b1d98e85e424428edba90f2",
+                      "sha256":  "3d27804dad9473c875f57c87d5887fc7d8f747511c251b71762a8fd4d957525d",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "ideas/next-save-domains.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/ideas/next-save-domains.md",
+                      "gitBlob":  "ea628f41b23dda699a7f0c329f995598d37c8fb8",
+                      "sha256":  "f9a3d1b696442f2c2c66c550f23123cb5c8df98f0716456478d87cdc7a259b52",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "sessions/2026-07-20-archetype-soft-core-pivot.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/sessions/2026-07-20-archetype-soft-core-pivot.md",
+                      "gitBlob":  "640cfd4c7c3d112365cfd50fe9347690cb85f393",
+                      "sha256":  "cd6fc77ec5b15c78801eb6998fa8529190ddb43741cddcc88174760520ba825d",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "research/signal-sufficiency-sheet.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/research/signal-sufficiency-sheet.md",
+                      "gitBlob":  "431bf9776dabbee7bcfe60081662e95dcb811be4",
+                      "sha256":  "182140786c38a7798e58193210e94f0d09ccfdbd1a74caf06fd67e88ca304e7e",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "research/genre-core-mapping.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/research/genre-core-mapping.md",
+                      "gitBlob":  "c24fda75b4b5b26ab68b5ab43c654d1b9e4ff7f3",
+                      "sha256":  "a2b5f6561291cfda1495c473297bc605904380c91fd266519b45f643fbf3c709",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "research/archetype-naming-research.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/research/archetype-naming-research.md",
+                      "gitBlob":  "761c6ffc71e71e6c2518f235cfe4e95dd67d3e27",
+                      "sha256":  "0b8ac0b540465ca9c94a0a2eb405cd8a882f7ab14ae0ca4192dbacad3e59cea4",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "research/gpt-pro-archetype-consult.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/research/gpt-pro-archetype-consult.md",
+                      "gitBlob":  "094cd2a7081cd090403d2e51f29134b13f0a1fa2",
+                      "sha256":  "ed876ec68befb006a389d79ea1453589ded4a290a36936b8c3645b22fd711ce9",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/page.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/page.tsx",
+                      "gitBlob":  "a46e5f9cdb6d19f6ae9004102545351c5d49d59c",
+                      "sha256":  "cdbb93bae24f08157c4b711abfa3c1e50d0b024802e71f4b986ee60aff355a27",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/landing.css",
+                      "localPath":  "assignments/day-02/resources/upstream/design/landing.css",
+                      "gitBlob":  "b8259ded5d999ad56638d2eb0d0b3477238d4d8e",
+                      "sha256":  "df6e725d70c3088dc4e77611caa2997a8a81b9394a66651f2ba3da65ef79a52f",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas.tsx",
+                      "gitBlob":  "a2a6d849a82967edb26c12699d17c657e3c968ff",
+                      "sha256":  "2545a0636627a6fe13e79f5c01b85df433c5610d5949a4e9cb2c5c76c9f16f07",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas.pixel.css",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas.pixel.css",
+                      "gitBlob":  "c0d6bb2e6c0a768dfb1aded98f69995c98d29df4",
+                      "sha256":  "37b4f6f4652627aeffd60d3ff5d1fa984ae1efefda311403e245d1ead5dce78d",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/copy.ts",
+                      "localPath":  "assignments/day-02/resources/upstream/design/copy.ts",
+                      "gitBlob":  "405b7fb5fdcdae919d9d627f91b7181c54af8f92",
+                      "sha256":  "75d5b1c28299336d1a457e5fdd383cd1da8d45a3cccaf85ab86ce14f8f578385",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/fonts.ts",
+                      "localPath":  "assignments/day-02/resources/upstream/design/fonts.ts",
+                      "gitBlob":  "01ee82e5fed463df38fb1c1324d11483a0d4c5ee",
+                      "sha256":  "79f66166f5b1b8c5ae94c8970c98a6d984199fca645c375bfea42328c9348573",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/steam.ts",
+                      "localPath":  "assignments/day-02/resources/upstream/design/steam.ts",
+                      "gitBlob":  "8d6fb8d3f5896567d1bcba431a315e772c1881f2",
+                      "sha256":  "189d41e2b5abcf63ab5908f4f1575f6fc2d21973a2212698436fe0fd5fb8d39c",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/meta.json",
+                      "localPath":  "assignments/day-02/resources/upstream/design/meta.json",
+                      "gitBlob":  "e19a6bde9a3c1d98c8fb2081ee6da8f44372e683",
+                      "sha256":  "07a53b2b3fad2336e44c3565527b770244f1754e7e4cb618889ccaf7bbceacb1",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/Nav.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/Nav.tsx",
+                      "gitBlob":  "a1f8dc85bde5f93fb64846d736221dc4a09ad09a",
+                      "sha256":  "fd37b577763778951f0d4cdb1b7277ef9208b52012b800a697e5848ff8cdbb50",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/DemoBar.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/DemoBar.tsx",
+                      "gitBlob":  "ce4b3c6e8c1a3edc34b8e204d5330903d50a202b",
+                      "sha256":  "6d9080fdd838b63cc069225c5381465bc67319d21b9c2ce97f178bde320b3855",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/Hero.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/Hero.tsx",
+                      "gitBlob":  "d0a97ec847d30e72fcb371d300e4b2c1e682e1fc",
+                      "sha256":  "6446842d0b36dc1f53129ce5435c6bae2e292c14a672a13c09365bd7ff0b3cff",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/ProfileStrip.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/ProfileStrip.tsx",
+                      "gitBlob":  "0c15904c9e8370ebc2e05869cecf1533c0b3d027",
+                      "sha256":  "17c92a6c3bfa530ae59dba548ba5ea4927fae5e66bd318ba3340764ba14292a3",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/HowItWorks.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/HowItWorks.tsx",
+                      "gitBlob":  "e794f81b575fd820011192ec93f90978dbc50848",
+                      "sha256":  "93510543c957d8525199e28bce9d7a1c61085973c5d730251c540e0d5c774a30",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/Community.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/Community.tsx",
+                      "gitBlob":  "d274215f6f7c98f51a55f28d4d30536bb208e207",
+                      "sha256":  "49eed2b4394daf29422eb48be04f4f1dc2f0de556da6c4b236372dee3141c9c8",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/Footer.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/Footer.tsx",
+                      "gitBlob":  "3a9900d428726dab29515085c86ed3201a7caa17",
+                      "sha256":  "9215578670c13f536fad59ad2da9de9076b508af3970064ac4aa72d75283be4e",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/components/Icons.tsx",
+                      "localPath":  "assignments/day-02/resources/upstream/design/components/Icons.tsx",
+                      "gitBlob":  "6f90454a0edde365cc51ff57c02c5551978ae30d",
+                      "sha256":  "ac291e6e60676c4401a737ab90a6cbb970f86d71dfb928ad3cae50dc0be58233",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/brief.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/brief.md",
+                      "gitBlob":  "f2d953393139c3780d3e819c9763def246da9141",
+                      "sha256":  "d24ffa30823c9b2f1261a4ec515e505f9cb48b3d5942e32c1cb61dbf4b0656c0",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/direction.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/direction.md",
+                      "gitBlob":  "1a86694adce518c4b90b93fabf6afdcc4cd3275b",
+                      "sha256":  "a59a7ff6ccd1e51aacafef1d9d8e296bd258e0e03c59edd423cf5967752da966",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-plan.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-plan.md",
+                      "gitBlob":  "8070e92040e17dc538d8acb747a8ff9d2d318843",
+                      "sha256":  "d4dbddda99b639ffc92bce216c30e74c8a3d8fe82d1187e8085cee6bc2108253",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/NEXT-SESSION.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/NEXT-SESSION.md",
+                      "gitBlob":  "62aae033496eb887bda4f806d8a7db5913d56c41",
+                      "sha256":  "791079a6815f50beee90f5dc02d004786bdf6db9c5262082e26b461e7dc2c2e7",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/copy.final.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/copy.final.md",
+                      "gitBlob":  "f1c0d45c92a46cf76967601ad88db1a8d806e90a",
+                      "sha256":  "303418a4e8f24206edae1de549a9bd231a74100c31501a4b1fbec3dc0a4f8a3a",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/voice-corpus.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/voice-corpus.md",
+                      "gitBlob":  "27bd8e2248db06a1090a615a6079b166ff32ebaa",
+                      "sha256":  "2b06da951758a576a660ef7074463dbd1082efff47ecb93aaca2350b3c79aa7b",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/design-needs.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/design-needs.md",
+                      "gitBlob":  "e8fd065b4d74fa57f1c5efe02105e33107268457",
+                      "sha256":  "9008642a5300717e57b33fff427811bb8d24f400ace64b7416353b71c4879d2c",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/HANDOFF.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/HANDOFF.md",
+                      "gitBlob":  "bb1caa909015608034f34a2f263319420a7e5298",
+                      "sha256":  "3448022378a5cc5fc59284e6bd69f864ec1f91258807d4bae9ab1052d9c2ace9",
+                      "usage":  "design-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-explorations/README.md",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-explorations/README.md",
+                      "gitBlob":  "b2f3255be98476db5a8e04adea65a69bc9be07b7",
+                      "sha256":  "c79c72fe42ffae4011d1e420c6493999bba370e946ceae651df9e2226137e481",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-explorations/atlas-a1-howto.html",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-explorations/atlas-a1-howto.html",
+                      "gitBlob":  "0ee74459d0d85398891bac285c102fe821ed7082",
+                      "sha256":  "2e4eb111f0f696b79a5cca7ced68fd634a18cf943e67dc0c8771605e897944d8",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-explorations/atlas-howitworks.html",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-explorations/atlas-howitworks.html",
+                      "gitBlob":  "2433550f93d270fa5de1ee701f20425a67a6fc4a",
+                      "sha256":  "8a9073f320f56e25f80a928225fc48ac5c7c02b68a03649a6e4e89867476d81f",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-explorations/atlas-map-vs-image.html",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-explorations/atlas-map-vs-image.html",
+                      "gitBlob":  "ed6b1232e3d34ed210bf463ea7576d480d5446a9",
+                      "sha256":  "fdb9f89078dd852b4889a98c1ed1b35cfdb2999707314eeed2a30c1bdd289734",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-explorations/atlas-structure.html",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-explorations/atlas-structure.html",
+                      "gitBlob":  "163b9dd4b4969ba4888972f9e86136115512ab12",
+                      "sha256":  "d890a7c0c3d81078256acc8ac6cb9b583b7d2317bbe95b1d543bc375618245c0",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-explorations/atlas-symbol-vs-terrain.html",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-explorations/atlas-symbol-vs-terrain.html",
+                      "gitBlob":  "2867aa42fd56896fd2f04ea2f29e69f25e3fd5a1",
+                      "sha256":  "de1e3ceebd27ad0c9ef85fe3c06489b362a1ef627af1c0d96a9b5726e4e207e0",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/atlas-explorations/continent-character.html",
+                      "localPath":  "assignments/day-02/resources/upstream/design/atlas-explorations/continent-character.html",
+                      "gitBlob":  "7a0958453824588736e5cf7278569bac8ae0e0b1",
+                      "sha256":  "342b7f2af6e369a2828314fc529724c5cf340dd8590f8a92855651c45255d635",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/capture/shoot-v09.mjs",
+                      "localPath":  "assignments/day-02/resources/upstream/design/capture/shoot-v09.mjs",
+                      "gitBlob":  "32c48aab81d76142e9c99baccb92c88b5e98b1ab",
+                      "sha256":  "9cc1d71495fd03666a6d2d68955b380f9a5e1599200eb04ee2d9ddc23e3b45ee",
+                      "usage":  "runtime-reference-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/capture/v09-full.png",
+                      "localPath":  "assignments/day-02/resources/upstream/design/capture/v09-full.png",
+                      "gitBlob":  "5bd6d8b84e72a51f67737a3ea1d9976e867dd1a3",
+                      "sha256":  "739038422339b0b9c37850c333f0e7b0999c5b948049fe47f9a9fd99b6849e6e",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/capture/v09-hero.png",
+                      "localPath":  "assignments/day-02/resources/upstream/design/capture/v09-hero.png",
+                      "gitBlob":  "794020d3cd662e3e96a71f67cc5effc6fbc9ed16",
+                      "sha256":  "724cd9d5637a932f0d2a31de6e54370b2dbd4894d391f73052cfae073bf3cdc1",
+                      "usage":  "design-evidence-only"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/design.git",
+                      "branch":  "main",
+                      "commit":  "3aa6c37c1c7415ff74917a803037cc227c62b209",
+                      "sourcePath":  "app/e/003-next-save-landing/capture/v09-mobile-hero.png",
+                      "localPath":  "assignments/day-02/resources/upstream/design/capture/v09-mobile-hero.png",
+                      "gitBlob":  "afc192aa8d50b5b48884f1e4c0e97ab04bcded19",
+                      "sha256":  "cce3ff4c991e4eb81171f01f84e70a575a9574277af2222a524c1c9cb25dfed7",
+                      "usage":  "design-evidence-only"
+                  }
+              ]
+}
