@@ -45,6 +45,13 @@
 - The first CLI invocation unexpectedly targeted production; no environment variables or custom domains were added. Do not remove it without separate approval.
 - PR #1 should be updated by pushing this evidence commit, but must not be merged. Day 5 LMS submission remains separately gated.
 
+## Day 5 LMS submission result
+
+- Submitted with explicit action-time approval at `2026-07-23 11:39 KST`.
+- Submitted URL: `https://next-save-course-mock.vercel.app`.
+- LMS receipt: `제출됨 · 지각`; code review `리뷰를 기다리고 있어요`.
+- PR #1 remains open and unmerged.
+
 ## Important references
 
 - `assignments/day-05/PROGRESS.md`
