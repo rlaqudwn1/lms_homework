@@ -119,6 +119,28 @@ Use this log for product, environment, and submission decisions that an agent mu
   `https://next-save-course-mock.vercel.app`, and Day 6 LMS receipt
   `제출됨 · 지각`.
 
+## Day 7 prototype design gate
+
+- Decision: Use the prototype-design track and accept the existing NEXT SAVE
+  course-mock render as the minimum Day 7 design.
+- Owner: User
+- Date (KST): 2026-07-23
+- Status: approved for local evidence only; external submission pending
+- Scope / affected assignment: Day 7 design packet and rendered evidence.
+- Options considered: administrator-service design; prototype design; unnecessary
+  product expansion or visual regeneration.
+- Chosen option and reason: the prototype directly continues the approved Day 6
+  flow and already expresses the canonical calm decision instrument. New screens
+  or generated assets would add scope without improving the assignment evidence.
+- Exact target/environment: local branch `codex/day-02-next-save`; fixture-only
+  desktop and 360 px renders.
+- Risks and mock boundary: no live Steam request, real profile, personal data,
+  secret, account, social action, database write, or external API.
+- Reversal path: revise only the local Day 7 packet and screenshots before any
+  approved publication or LMS submission.
+- Evidence / links:
+  `assignments/day-07/steps/step-01-prototype-design-gate/`.
+
 ## Decision record template
 
 ```md

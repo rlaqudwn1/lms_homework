@@ -9,6 +9,28 @@ Describe the prototype/admin design and the minimum screens needed to implement 
 - Design specification: [`../../specs/course/next-save/DESIGN.md`](../../specs/course/next-save/DESIGN.md)
 - Product specification: [`../../specs/course/next-save/SPEC.md`](../../specs/course/next-save/SPEC.md)
 - Source design revision: `rlaqudwn1/design@7ab6d2350eb6db20d4ca8174ee54c7cdc7ea44eb`
+- Completed design gate:
+  [`steps/step-01-prototype-design-gate/EVIDENCE.md`](steps/step-01-prototype-design-gate/EVIDENCE.md)
+- Implemented prototype:
+  [`steps/step-02-distinct-prototype-ui/EVIDENCE.md`](steps/step-02-distinct-prototype-ui/EVIDENCE.md)
+- Desktop screenshot:
+  [`evidence/day-07-claude-design-desktop.png`](evidence/day-07-claude-design-desktop.png)
+- 360 px screenshot:
+  [`evidence/day-07-claude-design-mobile-360.png`](evidence/day-07-claude-design-mobile-360.png)
+- Selected-success screenshot:
+  [`evidence/day-07-claude-design-selection-360.png`](evidence/day-07-claude-design-selection-360.png)
+- Readability-pass desktop screenshot:
+  [`evidence/day-07-readable-map-desktop.png`](evidence/day-07-readable-map-desktop.png)
+- Readability-pass mobile 360 px screenshot:
+  [`evidence/day-07-readable-map-mobile-360.png`](evidence/day-07-readable-map-mobile-360.png)
+- Human-journey selected desktop screenshot:
+  [`evidence/day-07-human-journey-selected-desktop.png`](evidence/day-07-human-journey-selected-desktop.png)
+- Human-journey mobile 360 px screenshot:
+  [`evidence/day-07-human-journey-mobile-360.png`](evidence/day-07-human-journey-mobile-360.png)
+- Game-language refinement desktop screenshot:
+  [`evidence/day-07-game-language-desktop.png`](evidence/day-07-game-language-desktop.png)
+- Game-language refinement mobile 360 px screenshot:
+  [`evidence/day-07-game-language-mobile-360.png`](evidence/day-07-game-language-mobile-360.png)
 
 ## Verification
 
@@ -23,7 +45,9 @@ The design intentionally covers a narrow course slice. Social, reviews, live dat
 ## Submission record
 
 - Repository: `https://github.com/rlaqudwn1/lms_homework`
-- Commit SHA: `TBD after commit`
-- PR / submitted URL: `TBD`
-- Screenshots: `TBD after implementation`
+- Local source SHA at gate review:
+  `920af24f67ac115de5d172747938b5ef723c8eb3`
+- Intended submission route: `/prototype`
+- PR / submitted URL: `TBD — external action not approved`
+- Screenshots: desktop and 360 px evidence linked above
 - User-approved LMS submission timestamp: `TBD — explicit approval required`
