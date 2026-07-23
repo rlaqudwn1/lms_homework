@@ -6,7 +6,7 @@ This board tracks only the incomplete LMS work required before Day 16. It is a p
 |---|---|---|---|---|
 | 02 | [day-02](day-02/PROGRESS.md) | React project-introduction page | submitted · late | Await code review |
 | 05 | [day-05](day-05/PROGRESS.md) | GitHub + Vercel deployment | submitted · late | Await code review |
-| 06 | [day-06](day-06/PROGRESS.md) | Prototype planning | scope gate passed; locally ready | Publication/submission approval |
+| 06 | [day-06](day-06/PROGRESS.md) | Prototype planning | submitted · late | Await code review |
 | 07 | [day-07](day-07/PROGRESS.md) | Prototype design | evidence drafted | Design gate |
 | 08 | [day-08](day-08/PROGRESS.md) | Database design | planned | Minimal schema approval |
 | 09 | [day-09](day-09/PROGRESS.md) | Supabase test schema | planned | Supabase target approval |

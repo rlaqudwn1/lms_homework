@@ -3,7 +3,7 @@
 - Owner: incoming Day 6 coordinator
 - Track: course-mock planning evidence
 - Branch/worktree: `codex/day-02-next-save` / main working line
-- Status: scope and market-positioning steps complete; local evidence ready; external actions pending
+- Status: Day 6 published, deployed, and LMS-submitted; code review pending
 - Handoff at: 2026-07-23 KST
 
 ## Completed
@@ -22,29 +22,32 @@
 - Added a sourced operating-service landscape covering Backloggd, Grouvee, and
   HowLongToBeat without unsupported market-size or demand claims.
 - Added a compact landing section positioning NEXT SAVE around decision support.
-- Focused tests pass 2/2; the full unit suite passes 15/15; production build
+- Focused tests pass 3/3; the full unit suite passes 16/16; production build
   passes.
+- Added a public comparison-document link to the landing page.
+- Published commit `f0a5a2863fb59ad22b305b3470be0944a0988e28` to the existing
+  open PR #1 without merging it.
+- Deployed and aliased the updated page to
+  `https://next-save-course-mock.vercel.app`.
+- Submitted the public URL to Day 6 at 2026-07-23 12:52 KST. Receipt:
+  `제출됨 · 지각`; code review pending.
 
 ## Current external state
 
 - Day 5 URL was submitted at 2026-07-23 11:39 KST with receipt
   `제출됨 · 지각`; code review is pending.
 - PR #1 is open, clean, and unmerged according to the incoming handoff.
-- Day 6 LMS status is `미제출`; no value was entered.
+- Day 6 LMS status is `제출됨 · 지각`; submitted URL is
+  `https://next-save-course-mock.vercel.app`.
 
 ## Next action
 
-1. Review the local Day 6 evidence bundle.
-2. If publication is desired, obtain explicit approval before committing or
-   pushing changes or updating PR #1.
-3. Obtain separate action-time approval before entering or submitting any Day 6
-   URL/file in the LMS.
+Await Day 6 code review. Do not merge PR #1 without separate approval.
 
 ## Authorization boundary
 
-No Git staging, commit, push, PR change/merge, LMS entry/submission, Supabase
-change, Vercel change, or real Steam/personal-data use is authorized by this
-handoff.
+No PR merge, resubmission, Supabase change, custom-domain change, or real
+Steam/personal-data use is authorized by this handoff.
 
 ## Key references
 

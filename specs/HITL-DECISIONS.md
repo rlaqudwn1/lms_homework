@@ -99,7 +99,7 @@ Use this log for product, environment, and submission decisions that an agent mu
   exactly three recommendations → selection receipt.
 - Owner: User
 - Date (KST): 2026-07-23
-- Status: approved for local planning evidence
+- Status: complete; published, deployed, and LMS-submitted at 2026-07-23 12:52 KST
 - Scope / affected assignment: Day 6 planning and the scope boundary inherited
   by Day 8–10.
 - Options considered: administrator-service planning; prototype planning.
@@ -114,7 +114,10 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Reversal path: revise the local Day 6 packet and canonical scope before any
   publication; no external state was changed by this decision.
 - Evidence / links:
-  `assignments/day-06/steps/step-01-prototype-scope-gate/`.
+  `assignments/day-06/steps/`, commit
+  `f0a5a2863fb59ad22b305b3470be0944a0988e28`,
+  `https://next-save-course-mock.vercel.app`, and Day 6 LMS receipt
+  `제출됨 · 지각`.
 
 ## Decision record template
 

@@ -23,8 +23,8 @@ landing-positioning pillars before their implementation existed.
 
 ## Green
 
-- Focused test: 2/2 passed.
-- Full unit suite: 15/15 passed across 3 files.
+- Focused test: 3/3 passed.
+- Full unit suite: 16/16 passed across 3 files.
 - Production build: passed, including TypeScript and static page generation.
 - Local production browser verification: passed all checks, including 360 px
   overflow, keyboard flow/focus, fixture disclosure, two profiles, exactly

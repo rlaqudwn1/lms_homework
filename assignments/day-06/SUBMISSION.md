@@ -67,10 +67,14 @@ This plan describes a course mock with two seeded profiles and deterministic rec
 ## Submission record
 
 - Repository: `https://github.com/rlaqudwn1/lms_homework`
-- Commit SHA: `TBD — local changes are not committed`
-- Candidate PR / submitted URL: `https://github.com/rlaqudwn1/lms_homework/pull/1`
-- LMS status checked 2026-07-23 KST: `미제출`
-- User-approved LMS submission timestamp: `TBD — explicit action-time approval required`
+- Commit SHA: `f0a5a2863fb59ad22b305b3470be0944a0988e28`
+- Open PR: `https://github.com/rlaqudwn1/lms_homework/pull/1`
+- Submitted URL: `https://next-save-course-mock.vercel.app`
+- Production deployment:
+  `https://next-save-course-mock-bs7sz8veb-kimbyeongju.vercel.app`
+- User-approved LMS submission timestamp: `2026-07-23 12:52 KST`
+- LMS receipt: `제출됨 · 지각`
+- Code review: `리뷰를 기다리고 있어요`
 
-The candidate PR is currently open, clean, and unmerged. Updating that PR or
-submitting it to the LMS remains outside this local evidence step.
+PR #1 remains open and unmerged. The deployed page links directly to the public
+Day 6 backlog-service comparison document.

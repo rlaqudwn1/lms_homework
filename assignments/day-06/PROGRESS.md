@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | scope gate passed; submission locally ready |
+| State | submitted · late |
 | Dependency | `specs/course/next-save/SPEC.md` |
-| Next action | Obtain explicit approval before Git publication or LMS submission |
-| HITL | External publication/submission only |
+| Next action | Await code review |
+| HITL | Complete for Day 6 publication/deployment/submission |
 
 ## Evidence
 
@@ -35,5 +35,9 @@ expanding the functional product scope.
 
 ## External-action status
 
-Day 6 remains unsubmitted in the LMS. No external Git, PR, Supabase, Vercel, or
-LMS change was made while completing this gate.
+Published commit `f0a5a2863fb59ad22b305b3470be0944a0988e28` to the existing
+open PR #1, deployed the updated fixture-only course mock to
+`https://next-save-course-mock.vercel.app`, and submitted that URL to Day 6 at
+2026-07-23 12:52 KST. LMS receipt: `제출됨 · 지각`; code review pending.
+PR #1 remains open and unmerged. No Supabase, Steam, personal-data, secret, or
+custom-domain change was made.
