@@ -8,7 +8,7 @@ NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a 
 
 | LMS Day | Evidence in this project | State |
 |---|---|---|
-| 2 | Responsive React introduction plus core-flow entry | planned |
+| 2 | Responsive React introduction plus core-flow entry | PR #1 published; LMS submission authorized |
 | 5 | Private Git history and Vercel preview URL | planned |
 | 6 | `SPEC.md`, core flow, non-goals, acceptance criteria | ready for review |
 | 7 | `DESIGN.md`, source links, components, responsive/a11y rules | ready for review |
@@ -21,24 +21,24 @@ NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a 
 
 ## Required evidence checklist
 
-- [ ] Create the applicable `assignments/day-XX/SUBMISSION.md` from the repository template requirement.
+- [x] Create the applicable `assignments/day-XX/SUBMISSION.md` from the repository template requirement.
 - [ ] Add deployed URL and PR/branch URL.
-- [ ] Add exact commit SHA used for submission.
-- [ ] Add desktop, 360 px, keyboard-focus, and completed-flow screenshots.
-- [ ] Record build, test, and accessibility verification commands and results.
+- [x] Add exact commit SHA used for submission.
+- [x] Add desktop, 360 px, keyboard-focus, and completed-flow screenshots.
+- [x] Record build, test, and accessibility verification commands and results.
 - [ ] Confirm `예시 데이터 · 데모` is visible on input and result surfaces.
-- [ ] Confirm browser network logs contain no Steam request.
+- [x] Confirm browser network logs contain no Steam request.
 - [ ] Record known limitations and any failed checks instead of hiding them.
 - [ ] Record the user-approved LMS submission timestamp only after explicit approval.
 
 ## Placeholders
 
 - Repository: `https://github.com/rlaqudwn1/lms_homework`
-- Branch / PR: `TBD`
+- Branch / PR: `codex/day-02-next-save` / `https://github.com/rlaqudwn1/lms_homework/pull/1`
 - Deploy URL: `TBD`
-- Submission commit: `TBD`
-- Verification date: `TBD`
-- LMS submission date: `TBD — requires user approval`
+- Submission commit: `ee9db565a82eda9bf8634c20b62263304ea2c709`
+- Verification date: `2026-07-23 KST`
+- LMS submission date: `authorized on 2026-07-23 KST; execution pending`
 
 ## Reviewer walkthrough
 

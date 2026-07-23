@@ -7,4 +7,4 @@
 - Result: approved compact dashboard, three fictional recommendations, responsive atlas, profile states, and fixture-safe `CommunityPreview` implemented
 - Verification: 8/8 unit tests, production build, and browser checks pass; desktop/default-mobile/invalid/success evidence refreshed
 - Refactor: fixture rendering is data-driven and the browser harness uses an isolated CDP port
-- Publication: not authorized; no stage, commit, push, PR, deployment, or LMS submission
+- Publication: implementation committed as `ee9db56`, pushed to `codex/day-02-next-save`, and opened as ready PR #1 after owner approval

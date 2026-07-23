@@ -53,6 +53,19 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Reversal path: revert only Step 08-owned application files to the last locally verified composition.
 - Evidence / links: `assignments/day-02/steps/step-08-approved-dashboard-implementation/` and the active Codex task.
 
+## Day 2 public publication and LMS submission
+
+- Decision: Make `rlaqudwn1/lms_homework` public, publish the reviewed Day 2 branch as a ready PR, and submit that PR URL to the Day 2 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-23
+- Status: approved; repository and PR publication complete, LMS execution pending
+- Scope / affected assignment: Day 2 only.
+- Chosen option and reason: A public PR lets the instructor inspect both the implementation diff and full branch source without collaborator access.
+- Exact target/environment: public GitHub repository `rlaqudwn1/lms_homework`, PR #1 to `master`, Day 2 LMS link field.
+- Risks and mock boundary: public source includes only fictional fixtures and course evidence; no secrets, real profiles, live social data, remote assets, or Steam requests.
+- Reversal path: LMS correction through the course UI if available; repository visibility or PR closure requires a separate follow-up decision.
+- Evidence / links: `https://github.com/rlaqudwn1/lms_homework/pull/1` and `assignments/day-02/SUBMISSION.md`.
+
 ## Pending — Day 16 domain connection
 
 - **Decision:** Select the registrar, exact domain, and Vercel target for the course slice.

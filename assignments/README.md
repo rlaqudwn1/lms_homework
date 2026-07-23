@@ -4,7 +4,7 @@ This board tracks only the incomplete LMS work required before Day 16. It is a p
 
 | Day | Folder | Deliverable | Local state | Next checkpoint |
 |---|---|---|---|---|
-| 02 | [day-02](day-02/PROGRESS.md) | React project-introduction page | local verified | Owner visual review, then PR publication |
+| 02 | [day-02](day-02/PROGRESS.md) | React project-introduction page | PR #1 published | Submit approved PR URL to LMS |
 | 05 | [day-05](day-05/PROGRESS.md) | GitHub + Vercel deployment | planned | Deployment target approval |
 | 06 | [day-06](day-06/PROGRESS.md) | Prototype planning | evidence drafted | Scope gate |
 | 07 | [day-07](day-07/PROGRESS.md) | Prototype design | evidence drafted | Design gate |
