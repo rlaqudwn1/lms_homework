@@ -2,11 +2,11 @@
 
 | Field | Value |
 |---|---|
-| State | published in ready PR #1; LMS submission authorized |
+| State | submitted to LMS with ready PR #1; review pending |
 | LMS requirement | Main-project concept + React introduction site |
 | Submission target | GitHub PR URL |
 | Current implementation | Approved compact dashboard with three fictional recommendations, two fixture profiles, connected atlas, default/invalid/success states, and fixture-safe community preview |
-| Next action | Submit PR #1 URL to the Day 2 LMS assignment and record the receipt |
+| Next action | Await LMS code review; continue with the next assignment Day in a fresh Codex task |
 | HITL | Owner authorized public repository visibility, PR creation, and Day 2 LMS submission on 2026-07-23 KST |
 
 ## Verified facts
@@ -23,3 +23,4 @@
 - Implementation commit: `ee9db565a82eda9bf8634c20b62263304ea2c709`.
 - Ready PR: `https://github.com/rlaqudwn1/lms_homework/pull/1` targeting `master`.
 - Repository visibility: public by explicit owner approval.
+- LMS receipt: submitted at `2026-07-23 10:33 KST`, marked `제출됨 · 지각`, review pending.

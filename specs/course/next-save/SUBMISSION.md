@@ -8,7 +8,7 @@ NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a 
 
 | LMS Day | Evidence in this project | State |
 |---|---|---|
-| 2 | Responsive React introduction plus core-flow entry | PR #1 published; LMS submission authorized |
+| 2 | Responsive React introduction plus core-flow entry | submitted 2026-07-23 10:33 KST; review pending |
 | 5 | Private Git history and Vercel preview URL | planned |
 | 6 | `SPEC.md`, core flow, non-goals, acceptance criteria | ready for review |
 | 7 | `DESIGN.md`, source links, components, responsive/a11y rules | ready for review |
@@ -29,7 +29,7 @@ NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a 
 - [ ] Confirm `예시 데이터 · 데모` is visible on input and result surfaces.
 - [x] Confirm browser network logs contain no Steam request.
 - [ ] Record known limitations and any failed checks instead of hiding them.
-- [ ] Record the user-approved LMS submission timestamp only after explicit approval.
+- [x] Record the user-approved LMS submission timestamp only after explicit approval.
 
 ## Placeholders
 
@@ -38,7 +38,7 @@ NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a 
 - Deploy URL: `TBD`
 - Submission commit: `ee9db565a82eda9bf8634c20b62263304ea2c709`
 - Verification date: `2026-07-23 KST`
-- LMS submission date: `authorized on 2026-07-23 KST; execution pending`
+- LMS submission date: `2026-07-23 10:33 KST` (`제출됨 · 지각`)
 
 ## Reviewer walkthrough
 
