@@ -3,7 +3,7 @@
 - Owner: incoming Day 5 coordinator
 - Track: course-mock deployment evidence
 - Branch/worktree: `codex/day-02-next-save` / main working line
-- Status: Day 2 submitted; Day 5 preparation may begin
+- Status: Day 2 submitted; Day 5 deployed and verified; LMS submission pending
 - Handoff at: 2026-07-23 10:33 KST
 
 ## Completed dependency
@@ -21,12 +21,29 @@
 3. Review the Day 5 LMS requirement and prepare a scoped deployment runbook/step packet.
 4. Identify the exact Vercel account, project, environment, and preview-versus-production choice needed from the owner.
 
+## Reusable browser submission kit
+
+- Read root `CLAUDE.md`, then `browser/CLAUDE.md` and `browser/PR-AND-LMS-SUBMISSION.md` for every browser/PR/LMS flow.
+- `browser/components/lms-assignment.mjs` now provides exact-Day discovery, explicit-authorization guards, and receipt parsing.
+- Day 2 is documented only as a sanitized example; never reuse its assignment identifier or approval for Day 5.
+- Step evidence: `assignments/day-05/steps/step-01-browser-submission-kit/`.
+
 ## Authorization boundary
 
 - The request to continue Day work authorizes local Day 5 inspection, planning, and documentation.
 - It does not authorize merging PR #1, linking a Vercel account, creating a Vercel project, deploying, changing environment variables/domains, or submitting Day 5 to the LMS.
 - Ask for the exact Vercel target and deploy type immediately before any external deployment action.
 - Preserve the fixture-only boundary and do not add secrets or real Steam/profile/social data.
+
+## Day 5 deployment result
+
+- Personal Vercel scope/project: `kimbyeongju/next-save-course-mock` (authenticated CLI user: `rlaqudwn1`).
+- Approved Preview: `https://next-save-course-mock-pundrek0l-kimbyeongju.vercel.app`; it is protected by Vercel Authentication.
+- Public verification URL: `https://next-save-course-mock.vercel.app`.
+- Deployed source: `fef598cc26c05e348030dbb5bb301f9dd870a2ae` from `codex/day-02-next-save`.
+- Fresh-browser verification passed, including visible fixture disclosure and zero Steam-domain requests.
+- The first CLI invocation unexpectedly targeted production; no environment variables or custom domains were added. Do not remove it without separate approval.
+- PR #1 should be updated by pushing this evidence commit, but must not be merged. Day 5 LMS submission remains separately gated.
 
 ## Important references
 

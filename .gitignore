@@ -17,3 +17,5 @@ Thumbs.db
 
 # Private upstream working copies used by the selective NEXT SAVE sync.
 .source-cache/
+
+.vercel

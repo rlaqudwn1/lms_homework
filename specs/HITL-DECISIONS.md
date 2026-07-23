@@ -76,6 +76,21 @@ Use this log for product, environment, and submission decisions that an agent mu
 - **Required confirmation before execution:** Exact domain, registrar account, annual price/renewal terms, Vercel project, and DNS-change approval.
 - **Reversal:** Remove the Vercel domain assignment and restore prior DNS records; do not cancel a purchased domain without separate user approval.
 
+## Approved — Day 5 Vercel deployment target
+
+- Decision: Select the exact Vercel target and deployment type for the fixture-only NEXT SAVE course slice.
+- Owner: User
+- Date (KST): 2026-07-23
+- Status: approved and executed; LMS submission remains pending
+- Scope / affected assignment: Day 5 deployment only; no custom domain or Day 16 production-domain work.
+- Options considered: preview to an existing named course-mock project; preview to a new specifically named course-mock project; production only if explicitly selected.
+- Chosen option and reason: new fixture-only project and Preview deployment, keeping Day 5 isolated from later production/domain work.
+- Exact target/environment: personal scope `kimbyeongju` (CLI user `rlaqudwn1`), project `next-save-course-mock`, Preview, no environment variables, no custom domains, branch `codex/day-02-next-save`, source `fef598cc26c05e348030dbb5bb301f9dd870a2ae`.
+- Risks and mock boundary: deployment remains fixture-only, requires no real Steam data or live secrets, and preserves visible mock disclosures. Project linking, creation, deployment, environment variables, domains, Git publishing, and LMS submission are not authorized by local preparation.
+- Reversal path: remove the approved deployment or unlink the local project only with follow-up approval; keep local source and evidence intact.
+- Execution note: the first Vercel CLI invocation unexpectedly produced a production deployment and public aliases; an explicit Preview was subsequently created. Removal was not authorized, so both are documented without concealment.
+- Evidence / links: `assignments/day-05/steps/step-02-deployment-readiness/`, `https://next-save-course-mock.vercel.app`, and protected Preview `https://next-save-course-mock-pundrek0l-kimbyeongju.vercel.app`.
+
 ## Decision record template
 
 ```md
