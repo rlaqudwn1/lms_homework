@@ -1,4 +1,5 @@
 import { DemoExperience } from "@/components/demo-experience";
+import { MarketPositioning } from "@/components/market-positioning";
 
 const steps = [
   ["01", "Steam URL 붙여넣기", "공개 프로필 링크만 있으면 돼요. 이 과제에서는 주소를 전송하지 않아요."],
@@ -16,11 +17,12 @@ export default function Home() {
 
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="NEXT SAVE 홈"><i />NEXT SAVE</a>
-        <nav aria-label="주요 메뉴"><a href="#recommendations">추천</a><a href="#atlas">취향 지도</a><a href="#how">작동법</a></nav>
+        <nav aria-label="주요 메뉴"><a href="#recommendations">추천</a><a href="#positioning">차이점</a><a href="#how">작동법</a></nav>
       </header>
 
       <div id="top">
         <div id="demo"><DemoExperience /></div>
+        <div id="positioning"><MarketPositioning /></div>
         <section id="how" className="how-section" aria-labelledby="how-title">
           <div className="section-heading">
             <p className="eyebrow">작동법</p>

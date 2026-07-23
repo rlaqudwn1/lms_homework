@@ -92,6 +92,30 @@ Use this log for product, environment, and submission decisions that an agent mu
 - LMS execution: after separate action-time approval, submitted `https://next-save-course-mock.vercel.app`; receipt is `제출됨 · 지각`, with code review pending.
 - Evidence / links: `assignments/day-05/steps/step-02-deployment-readiness/`, `https://next-save-course-mock.vercel.app`, and protected Preview `https://next-save-course-mock-pundrek0l-kimbyeongju.vercel.app`.
 
+## Day 6 prototype scope gate
+
+- Decision: Use the prototype-planning option and freeze the minimum NEXT SAVE
+  course-mock flow as input → disclosed fixture selection → atlas/evidence →
+  exactly three recommendations → selection receipt.
+- Owner: User
+- Date (KST): 2026-07-23
+- Status: approved for local planning evidence
+- Scope / affected assignment: Day 6 planning and the scope boundary inherited
+  by Day 8–10.
+- Options considered: administrator-service planning; prototype planning.
+- Chosen option and reason: the prototype directly exercises NEXT SAVE's primary
+  user job. An administrator service would introduce unsupported actors and
+  management workflows.
+- Exact target/environment: local branch `codex/day-02-next-save`; fixture-only
+  course-mock documents.
+- Risks and mock boundary: exactly two fictional seeded profiles, deterministic
+  recommendations, no Steam request, real profile/personal data, secret,
+  database write, external API, account, or live community behavior.
+- Reversal path: revise the local Day 6 packet and canonical scope before any
+  publication; no external state was changed by this decision.
+- Evidence / links:
+  `assignments/day-06/steps/step-01-prototype-scope-gate/`.
+
 ## Decision record template
 
 ```md

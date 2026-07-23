@@ -18,10 +18,12 @@ Product-wide actors, use cases, journeys, and the staged community strategy are 
 
 1. Navigation: wordmark, `데모 보기` anchor.
 2. Hero/input: decision-first headline, honest demo label, URL field, primary CTA.
-3. How it works: read signals → map taste → explain three picks.
-4. Atlas result: profile summary, genre map, core/confidence, evidence.
-5. Next picks: three ranked cards with expandable reasons.
-6. Completion: selected game, rationale recap, restart action.
+3. Market positioning: explain that NEXT SAVE supports a decision rather than
+   adding another tracking list; keep competitor details in planning evidence.
+4. How it works: read signals → map taste → explain three picks.
+5. Atlas result: profile summary, genre map, core/confidence, evidence.
+6. Next picks: three ranked cards with expandable reasons.
+7. Completion: selected game, rationale recap, restart action.
 
 ## Visual tokens
 
