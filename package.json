@@ -1,0 +1,30 @@
+{
+  "name": "next-save-lms",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Submit-ready LMS course slice for NEXT SAVE",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "test": "vitest run",
+    "test:browser": "node scripts/verify-day-02-browser.mjs",
+    "supabase": "supabase"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.1.1",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "supabase": "^2.109.1",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
+  },
+  "dependencies": {
+    "next": "^16.2.11",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "wanted-sans": "^1.0.3"
+  }
+}

@@ -1,0 +1,239 @@
+<title>A-1 어떻게 진행하나 — biome 사전 만들기</title>
+<style>
+  :root{
+    --bg:#0a1016; --bg2:#0e1a22; --panel:#101d26; --line:#1e2f3a;
+    --ink:#dbeaf1; --muted:#88a1af; --faint:#5d7684;
+    --teal:#5ad6c2; --violet:#8fa2ff; --amber:#e6b862; --red:#e77d7d; --green:#6fca8f;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(130% 90% at 50% -8%,#0f1e28 0%,var(--bg) 58%);
+    color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding:34px 20px 72px}
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(22px,3vw,31px);margin:0 0 12px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .lede{margin:0;color:var(--muted);max-width:74ch;font-size:15px}
+  .lede b{color:var(--ink)}
+  .reframe{margin:18px 0 4px;padding:15px 18px;background:linear-gradient(90deg,rgba(90,214,194,.09),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:14.5px}
+  .reframe b{color:var(--teal)}
+  h2.sec{font-size:16px;margin:38px 0 6px;font-weight:750;display:flex;align-items:center;gap:9px}
+  h2.sec .b{font-family:ui-monospace,monospace;font-size:11px;background:var(--teal);color:#08110d;padding:3px 8px;border-radius:6px;letter-spacing:.05em}
+  .sub{margin:0 0 16px;color:var(--muted);font-size:13.5px;max-width:72ch}
+
+  /* process steps */
+  .steps{display:grid;grid-template-columns:repeat(5,1fr);gap:9px}
+  @media(max-width:820px){.steps{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:520px){.steps{grid-template-columns:1fr}}
+  .step{background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:13px 13px 14px;position:relative}
+  .step.gate{border-color:var(--amber);background:linear-gradient(180deg,rgba(230,184,98,.07),var(--panel))}
+  .step .n{font-family:ui-monospace,monospace;font-size:11px;font-weight:700;color:#08110d;background:var(--teal);
+    border-radius:5px;width:20px;height:20px;display:grid;place-items:center;margin-bottom:8px}
+  .step.gate .n{background:var(--amber);color:#1c1408}
+  .step h3{margin:0 0 4px;font-size:13.5px;font-weight:700}
+  .step p{margin:0;font-size:12px;color:var(--muted)}
+  .step .ch{display:inline-block;margin-top:8px;font-size:10px;font-family:ui-monospace,monospace;color:var(--faint);
+    border:1px solid var(--line);border-radius:4px;padding:1px 6px}
+  .step.gate .ch{color:var(--amber);border-color:#4a3a1c}
+
+  /* worked table */
+  .dict{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;
+    background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .dict th{background:var(--bg2);color:var(--muted);font-weight:600;text-align:left;padding:11px 13px;font-size:12px;
+    border-bottom:1px solid var(--line);font-family:ui-monospace,monospace;letter-spacing:.03em}
+  .dict td{padding:13px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+  .dict tr:last-child td{border-bottom:none}
+  .dict .g{font-weight:750;font-size:14px;color:var(--ink);white-space:nowrap}
+  .dict .now{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .dict .now canvas{background:#0c1a22;border:1px solid var(--line);border-radius:7px}
+  .dict .now span{font-size:10px;color:var(--faint);font-family:ui-monospace,monospace}
+  .dict .strat{color:var(--teal);font-weight:600;font-size:12px}
+  .dict .terr{color:var(--muted);font-size:12.5px}
+  .dict .key{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--violet)}
+  .dict .goal canvas{border-radius:7px;border:1px solid var(--line);display:block}
+  .dict .goal span{display:block;font-size:10px;color:var(--faint);margin-top:3px;font-family:ui-monospace,monospace;text-align:center}
+
+  /* difficulty map */
+  .diff{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  @media(max-width:760px){.diff{grid-template-columns:1fr}}
+  .dcol{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px}
+  .dcol.easy{border-color:#2f5f3f} .dcol.hard{border-color:#5a3535}
+  .dcol h3{margin:0 0 3px;font-size:14px;font-weight:750;display:flex;align-items:center;gap:7px}
+  .dcol.easy h3{color:var(--green)} .dcol.mid h3{color:var(--teal)} .dcol.hard h3{color:var(--red)}
+  .dcol .note{margin:0 0 11px;font-size:11.5px;color:var(--faint)}
+  .grow{display:flex;flex-direction:column;gap:9px}
+  .gitem{display:flex;gap:9px;align-items:flex-start}
+  .gitem canvas{flex:0 0 auto;background:#0c1a22;border:1px solid var(--line);border-radius:6px;margin-top:1px}
+  .gitem .gt{font-size:12.5px}
+  .gitem .gt b{color:var(--ink);font-weight:650} .gitem .gt span{color:var(--muted)}
+
+  .gate2{margin-top:8px;padding:16px 18px;background:var(--bg2);border:1px solid var(--line);border-radius:13px;
+    border-left:3px solid var(--amber)}
+  .gate2 h3{margin:0 0 6px;font-size:15px;font-weight:750;color:var(--amber)}
+  .gate2 p{margin:0 0 10px;font-size:13.5px;color:var(--muted)} .gate2 p b{color:var(--ink)}
+  .quiz{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .quiz .q{display:flex;flex-direction:column;align-items:center;gap:5px}
+  .quiz .q canvas{border:1px solid var(--line);border-radius:8px;background:#0c1a22}
+  .quiz .q span{font-size:11px;color:var(--faint);font-family:ui-monospace,monospace}
+  .quiz .arrow{color:var(--faint);font-size:13px}
+
+  .ask{margin-top:28px;font-size:15px} .ask b{color:var(--teal)}
+  .foot{margin-top:18px;color:var(--faint);font-size:12px;font-family:ui-monospace,monospace}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">003 · Taste Atlas · A-1 진행 방법</p>
+  <h1>"땅이 곧 장르로 인식"을 어떻게 만드나 — biome 사전</h1>
+  <p class="lede">A-1의 헷갈리는 지점은 이거예요: <b>생성은 아웃소싱인데(Claude Design/Pencil), 그럼 우리가 뭘 하지?</b> 답 — 우리는 그림을 안 그려요. 대신 <b>"어떤 장르가 어떤 지형으로 보여야 하는지"의 규칙서(biome 사전)</b>를 채우고, 인식되는지 <b>테스트</b>해요. 그림은 생성기가.</p>
+  <div class="reframe">🎯 산출물 = <b>biome 사전</b> 하나. 12장르 × [모티프 전략 · 지형 · 색 · 인식키] 표. 이게 생성기 입력이자 A-1의 전부예요. 아래가 그 사전을 <b>채우는 과정</b>이에요.</div>
+
+  <h2 class="sec"><span class="b">과정</span> 사전을 채우는 5걸음</h2>
+  <p class="sub">④가 핵심 게이트예요 — "라벨 없이 알아보나"를 통과 못 하면 그 장르는 다시.</p>
+  <div class="steps">
+    <div class="step"><div class="n">1</div><h3>레퍼런스 수집</h3><p>장르별로 "이걸 픽셀로 어떻게 표현하나" 사례. 컴포넌트 단위.</p><span class="ch">Playwright 캡처</span></div>
+    <div class="step"><div class="n">2</div><h3>모티프 전략</h3><p>오브젝트형(검·성) vs 지형-은유형(경작지·격자) vs 혼합. 장르마다 다름.</p><span class="ch">우리 결정</span></div>
+    <div class="step"><div class="n">3</div><h3>사전 초안</h3><p>12행 규칙서 작성. 각 행 = 그 장르 인식 레시피.</p><span class="ch">스펙 산출</span></div>
+    <div class="step gate"><div class="n">4</div><h3>블라인드 인식 테스트</h3><p>라벨 가리고 알아보나? 유일한 객관 기준. (Every Noise가 진 이유)</p><span class="ch">게이트</span></div>
+    <div class="step"><div class="n">5</div><h3>생성기 A/B</h3><p>사전 → Claude Design·Pencil → 실제 렌더 비교 → 약한 것 iterate.</p><span class="ch">아웃소싱</span></div>
+  </div>
+
+  <h2 class="sec"><span class="b">예시</span> biome 사전 "한 줄"이 이렇게 생겼다</h2>
+  <p class="sub">쉬운 장르(RPG)와 어려운 장르(로그라이크) 두 줄을 채워봤어요. "지금"은 현행 심볼, "목표 방향"은 거친 스케치(최종 아님 — 생성기가 그림).</p>
+  <table class="dict">
+    <thead><tr><th>장르</th><th>지금</th><th>모티프 전략</th><th>지형 · 색(쿨 내)</th><th>인식키</th><th>목표 방향</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="g">RPG</td>
+        <td><div class="now"><canvas data-sym="sword" width="40" height="40"></canvas><span>검 심볼</span></div></td>
+        <td class="strat">오브젝트형<br><span style="color:var(--faint);font-weight:400">(자명)</span></td>
+        <td class="terr">밝은 teal 고원 + 성채·던전 입구. 정복도=밝기.</td>
+        <td class="key">성 + 검깃발</td>
+        <td class="goal"><canvas id="sk-rpg" width="104" height="72"></canvas><span>거친 방향</span></td>
+      </tr>
+      <tr>
+        <td class="g">로그라이크</td>
+        <td><div class="now"><canvas data-sym="dice" width="40" height="40"></canvas><span>주사위 심볼</span></div></td>
+        <td class="strat">지형-은유형<br><span style="color:var(--faint);font-weight:400">(추상·어려움)</span></td>
+        <td class="terr">매번 재구성된 듯한 <b style="color:var(--muted)">던전 격자 지형</b> + 주사위 탑 + 안개.</td>
+        <td class="key">격자미로 + 주사위</td>
+        <td class="goal"><canvas id="sk-rogue" width="104" height="72"></canvas><span>거친 방향</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sec"><span class="b">난이도</span> 12장르 — 어디가 쉽고 어디가 진짜 작업인가</h2>
+  <p class="sub">일부는 모티프가 자명하지만, <b style="color:var(--red)">추상 장르 4개가 A-1의 심장</b>이에요. "무엇이 그 장르로 읽히나"를 발명해야 하니까.</p>
+  <div class="diff">
+    <div class="dcol easy"><h3>● 자명 — 오브젝트형</h3><p class="note">알아볼 물건이 이미 있음. 사전 채우기 쉬움.</p>
+      <div class="grow" id="grp-easy"></div></div>
+    <div class="dcol mid"><h3>● 중간</h3><p class="note">물건 or 구조 은유. 손봐야 읽힘.</p>
+      <div class="grow" id="grp-mid"></div></div>
+    <div class="dcol hard"><h3>● 어려움 — 지형-은유 발명</h3><p class="note">알아볼 물건이 없음. 여기가 진짜 디자인.</p>
+      <div class="grow" id="grp-hard"></div></div>
+  </div>
+
+  <h2 class="sec"><span class="b">게이트</span> 유일한 객관 기준 — 블라인드 인식</h2>
+  <div class="gate2">
+    <h3>라벨 가리고 알아보면 통과</h3>
+    <p>"이게 그 장르로 보이나"는 취향 다툼이 되기 쉬워요. 그래서 딱 하나의 객관 테스트: <b>라벨을 가리고 → 무슨 장르게? → 맞히면 통과, 못 맞히면 그 biome 다시.</b> 채점자는 사람(당신) 또는 신선한 서브에이전트를 프록시로. Every Noise가 진 건 라벨에만 기댔기 때문 — 우리는 지형이 스스로 말하게.</p>
+    <div class="quiz">
+      <div class="q"><canvas id="qz1" width="92" height="64"></canvas><span>무슨 장르?</span></div>
+      <span class="arrow">→</span>
+      <div class="q"><canvas id="qz2" width="92" height="64"></canvas><span>무슨 장르?</span></div>
+      <span class="arrow">→</span>
+      <span style="font-size:12.5px;color:var(--muted)">…맞히면 그 행 통과. 이게 12장르 반복.</span>
+    </div>
+  </div>
+
+  <p class="ask">이제 "어떻게 진행하는지" 감이 오나요? 이야기하고 싶은 갈래 — <b>①모티프 전략</b>을 어디까지 지형-은유로 밀지(오브젝트가 편하지만 웜/유치 리스크), <b>②어려운 4장르(퍼즐·시뮬·전략·로그라이크)</b>를 먼저 붙어볼지, <b>③블라인드 테스트 채점</b>을 당신이 할지 서브에이전트 프록시로 할지. 어디부터 풀까요?</p>
+  <p class="foot">// 스케치는 과정 설명용 거친 방향 — 최종 픽셀아트 아님(생성기 산출). 쿨 단일 팔레트.</p>
+</div>
+
+<script>
+(function(){
+  // ---- reused icon drawing ----
+  function drawIcon(ctx,sym,x,y,s,col){
+    ctx.save();ctx.translate(x,y);ctx.strokeStyle=col;ctx.fillStyle=col;
+    ctx.lineWidth=1.7;ctx.lineJoin="round";ctx.lineCap="round";var h=s/2;
+    function P(){ctx.beginPath();}
+    if(sym==="sword"){P();ctx.moveTo(0,-h);ctx.lineTo(0,h*0.55);ctx.stroke();P();ctx.moveTo(-h*0.55,h*0.55);ctx.lineTo(h*0.55,h*0.55);ctx.stroke();P();ctx.moveTo(0,h*0.55);ctx.lineTo(0,h);ctx.stroke();}
+    else if(sym==="dice"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);var d=h*0.34;[[-1,-1],[1,1],[-1,1]].forEach(function(p){P();ctx.arc(p[0]*d,p[1]*d,1.6,0,7);ctx.fill();});}
+    else if(sym==="bolt"){P();ctx.moveTo(h*0.5,-h);ctx.lineTo(-h*0.5,h*0.15);ctx.lineTo(h*0.1,h*0.15);ctx.lineTo(-h*0.4,h);ctx.lineTo(h*0.6,-h*0.2);ctx.lineTo(0,-h*0.2);ctx.closePath();ctx.fill();}
+    else if(sym==="cross"){P();ctx.arc(0,0,h*0.75,0,7);ctx.stroke();P();ctx.moveTo(0,-h);ctx.lineTo(0,-h*0.35);ctx.moveTo(0,h*0.35);ctx.lineTo(0,h);ctx.moveTo(-h,0);ctx.lineTo(-h*0.35,0);ctx.moveTo(h*0.35,0);ctx.lineTo(h,0);ctx.stroke();P();ctx.arc(0,0,1.4,0,7);ctx.fill();}
+    else if(sym==="fist"){ctx.strokeRect(-h*0.7,-h*0.4,h*1.4,h*1.1);for(var i=0;i<3;i++){P();ctx.arc(-h*0.4+i*h*0.4,-h*0.4,h*0.2,Math.PI,0);ctx.stroke();}}
+    else if(sym==="puzzle"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);P();ctx.arc(h*0.8,0,h*0.28,-1.6,1.6);ctx.stroke();}
+    else if(sym==="skull"){P();ctx.arc(0,-h*0.15,h*0.75,Math.PI,0);ctx.lineTo(h*0.45,h*0.4);ctx.lineTo(-h*0.45,h*0.4);ctx.closePath();ctx.stroke();ctx.fillStyle=col;P();ctx.arc(-h*0.3,-h*0.15,h*0.2,0,7);ctx.arc(h*0.3,-h*0.15,h*0.2,0,7);ctx.fill();}
+    else if(sym==="mtn"){P();ctx.moveTo(-h,h*0.7);ctx.lineTo(-h*0.15,-h*0.8);ctx.lineTo(h*0.25,-h*0.1);ctx.lineTo(h*0.5,-h*0.5);ctx.lineTo(h,h*0.7);ctx.closePath();ctx.stroke();}
+    else if(sym==="key"){P();ctx.arc(-h*0.4,0,h*0.42,0,7);ctx.stroke();P();ctx.moveTo(-h*0.02,0);ctx.lineTo(h*0.85,0);ctx.moveTo(h*0.6,0);ctx.lineTo(h*0.6,h*0.35);ctx.moveTo(h*0.85,0);ctx.lineTo(h*0.85,h*0.3);ctx.stroke();}
+    else if(sym==="sprout"){P();ctx.moveTo(0,h);ctx.lineTo(0,-h*0.2);ctx.stroke();P();ctx.ellipse(-h*0.35,-h*0.35,h*0.4,h*0.22,0.7,0,7);ctx.ellipse(h*0.35,-h*0.35,h*0.4,h*0.22,-0.7,0,7);ctx.fill();}
+    else if(sym==="flag"){P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(-h*0.6,h);ctx.stroke();P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(h*0.7,-h*0.55);ctx.lineTo(-h*0.6,-h*0.1);ctx.closePath();ctx.fill();}
+    else if(sym==="race"){P();ctx.moveTo(-h*0.7,-h*0.6);ctx.lineTo(-h*0.05,0);ctx.lineTo(-h*0.7,h*0.6);ctx.stroke();P();ctx.moveTo(h*0.05,-h*0.6);ctx.lineTo(h*0.7,0);ctx.lineTo(h*0.05,h*0.6);ctx.stroke();}
+    else if(sym==="rook"){ctx.strokeRect(-h*0.5,-h*0.2,h*1.0,h*0.9);P();ctx.moveTo(-h*0.6,-h*0.2);ctx.lineTo(-h*0.6,-h*0.6);ctx.lineTo(-h*0.3,-h*0.6);ctx.lineTo(-h*0.3,-h*0.4);ctx.lineTo(0,-h*0.4);ctx.lineTo(0,-h*0.6);ctx.lineTo(h*0.3,-h*0.6);ctx.lineTo(h*0.3,-h*0.4);ctx.lineTo(h*0.6,-h*0.4);ctx.lineTo(h*0.6,-h*0.2);ctx.stroke();}
+    else if(sym==="house"){P();ctx.moveTo(-h*0.75,h*0.7);ctx.lineTo(-h*0.75,-h*0.1);ctx.lineTo(0,-h*0.7);ctx.lineTo(h*0.75,-h*0.1);ctx.lineTo(h*0.75,h*0.7);ctx.closePath();ctx.stroke();}
+    else if(sym==="rooms"){ctx.strokeRect(-h*0.8,-h*0.5,h*0.7,h*0.7);ctx.strokeRect(h*0.1,-h*0.5,h*0.7,h*0.7);P();ctx.moveTo(-h*0.1,-h*0.15);ctx.lineTo(h*0.1,-h*0.15);ctx.stroke();}
+    ctx.restore();
+  }
+
+  // small icon canvases (worked table + difficulty groups via data-sym)
+  document.querySelectorAll("canvas[data-sym]").forEach(function(c){
+    var ctx=c.getContext("2d");drawIcon(ctx,c.getAttribute("data-sym"),c.width/2,c.height/2,c.width*0.5,"#cfeee8");
+  });
+
+  // ---- rough biome direction sketches (process illustration, not final) ----
+  function px(ctx,x,y,w,h,col){ctx.fillStyle=col;ctx.fillRect(x,y,w,h);}
+  function sketchRPG(ctx,W,H){
+    // teal highland
+    px(ctx,0,0,W,H,"#173a3f");px(ctx,0,H*0.28,W,H*0.72,"#2b7d76");
+    // brighter plateau top band (정복)
+    px(ctx,0,H*0.28,W,6,"#3aa593");
+    // castle
+    var bx=W*0.36,by=H*0.4,bw=W*0.28,bh=H*0.42;
+    px(ctx,bx,by,bw,bh,"#0e2b2f");
+    for(var i=0;i<4;i++)px(ctx,bx+i*(bw/4),by-6,bw/4-2,6,"#0e2b2f"); // crenellations
+    // banner
+    px(ctx,bx+bw*0.5-1,by-20,2,16,"#9fe6da");
+    ctx.fillStyle="#5ad6c2";ctx.beginPath();ctx.moveTo(bx+bw*0.5+1,by-20);ctx.lineTo(bx+bw*0.5+14,by-15);ctx.lineTo(bx+bw*0.5+1,by-10);ctx.closePath();ctx.fill();
+    // small sword to the left
+    drawIcon(ctx,"sword",W*0.16,H*0.6,14,"#dff4f1");
+  }
+  function sketchRogue(ctx,W,H){
+    px(ctx,0,0,W,H,"#0f2830");
+    // dungeon grid corridors
+    ctx.strokeStyle="#1c4048";ctx.lineWidth=1;
+    for(var x=W*0.12;x<W;x+=W*0.16){ctx.beginPath();ctx.moveTo(x,H*0.15);ctx.lineTo(x,H);ctx.stroke();}
+    for(var y=H*0.2;y<H;y+=H*0.24){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+    // a couple "rooms"
+    px(ctx,W*0.28,H*0.45,W*0.14,H*0.22,"#22555c");
+    px(ctx,W*0.58,H*0.28,W*0.12,H*0.2,"#22555c");
+    // fog dither top
+    ctx.fillStyle="rgba(143,162,255,0.16)";
+    for(var fx=0;fx<W;fx+=4)for(var fy=0;fy<H*0.28;fy+=4)if((fx+fy)%8===0)ctx.fillRect(fx,fy,2,2);
+    // die tower
+    drawIcon(ctx,"dice",W*0.72,H*0.66,16,"#c7cffb");
+  }
+  var r1=document.getElementById("sk-rpg");if(r1)sketchRPG(r1.getContext("2d"),r1.width,r1.height);
+  var r2=document.getElementById("sk-rogue");if(r2)sketchRogue(r2.getContext("2d"),r2.width,r2.height);
+
+  // ---- difficulty groups ----
+  var GROUPS={
+    easy:[["sword","RPG","성채·검 — 이미 알아봄"],["race","레이싱","체크 트랙·깃발"],["skull","호러","안개 낀 묘지·폐허"],["mtn","오픈월드","광활한 산맥·지평선"]],
+    mid:[["bolt","액션","번개·역동 라인"],["cross","FPS","조준선·엄폐 벙커"],["rooms","메트로배니아","이어진 방-미로 지형"],["fist","대전격투","대칭 링·도장"]],
+    hard:[["puzzle","퍼즐","격자·조각 지층? — 발명"],["house","시뮬","경작지·격자 도시? — 발명"],["rook","전략","격자 요새 평원? — 발명"],["dice","로그라이크","재구성 던전 격자 — 발명"]]
+  };
+  function fillGroup(id,arr,col){var root=document.getElementById(id);
+    arr.forEach(function(it){
+      var row=document.createElement("div");row.className="gitem";
+      var cv=document.createElement("canvas");cv.width=30;cv.height=30;drawIcon(cv.getContext("2d"),it[0],15,15,15,col);
+      var t=document.createElement("div");t.className="gt";t.innerHTML="<b>"+it[1]+"</b> · <span>"+it[2]+"</span>";
+      row.appendChild(cv);row.appendChild(t);root.appendChild(row);
+    });}
+  fillGroup("grp-easy",GROUPS.easy,"#a7e6bd");
+  fillGroup("grp-mid",GROUPS.mid,"#a8ede4");
+  fillGroup("grp-hard",GROUPS.hard,"#f0b3b3");
+
+  // ---- blind quiz patches (unlabeled) ----
+  var q1=document.getElementById("qz1");if(q1)sketchRPG(q1.getContext("2d"),q1.width,q1.height);
+  var q2=document.getElementById("qz2");if(q2)sketchRogue(q2.getContext("2d"),q2.width,q2.height);
+})();
+</script>

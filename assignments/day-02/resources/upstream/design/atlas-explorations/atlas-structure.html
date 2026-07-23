@@ -1,0 +1,195 @@
+<title>Taste Atlas 구조 비교 — 군도 vs 대륙</title>
+<style>
+  :root{
+    --stage:#0a1016; --sea:#0b1c26; --panel:#0e1a22; --line:#1d2e39;
+    --ink:#d6e7ee; --muted:#8098a6; --faint:#5a7382;
+    --teal:#5ad6c2; --teal2:#2f8a80; --violet:#8fa2ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:
+      radial-gradient(120% 90% at 50% -10%, #0f1e28 0%, var(--stage) 60%);
+    color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:36px 20px 64px}
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(22px,3vw,31px);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .lede{margin:0;color:var(--muted);max-width:66ch;font-size:15px}
+  .q{margin:14px 0 0;font-size:15px;color:var(--ink)}
+  .q b{color:var(--teal)}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(360px,1fr));gap:20px;margin-top:30px}
+  .map{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:0 18px 40px -24px rgba(0,0,0,.8)}
+  .map h2{margin:0;padding:15px 18px 4px;font-size:17px;font-weight:750;display:flex;gap:9px;align-items:center}
+  .map h2 .n{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--stage);
+    background:var(--teal);border-radius:5px;padding:2px 7px}
+  canvas{display:block;width:100%;height:auto;background:var(--sea)}
+  .tr{padding:13px 18px 17px;font-size:13px;color:var(--muted);display:flex;flex-direction:column;gap:7px}
+  .tr .g{color:var(--teal)}
+  .tr .b{color:#e88}
+  .legend{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;
+    padding:15px 18px;background:var(--panel);border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted)}
+  .legend .sw{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+  .foot{margin-top:20px;color:var(--faint);font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+  .demo{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--violet);
+    border:1px solid #2c3566;border-radius:5px;padding:2px 7px;margin-left:8px;vertical-align:2px}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">003 · Taste Atlas · 시그니처 구조 결정<span class="demo">예시 데이터</span></p>
+  <h1>같은 12장르, 두 구조 — 어느 쪽이 "내 취향 세계"로 읽히나</h1>
+  <p class="lede">둘 다 <b style="color:var(--ink)">쿨 단일 팔레트</b>(teal=플레이 고도, 장르=심볼 모양) 규칙은 동일. 다른 건 <b style="color:var(--ink)">배치</b> 하나다. 왼쪽은 지금처럼 섬이 떠 있고, 오른쪽은 유사 장르가 지협으로 이어진 하나의 대륙이다.</p>
+  <p class="q">판정 질문: <b>흩어진 군도</b>냐 <b>이어진 대륙</b>이냐 — 어느 쪽이 "이게 내 취향의 지형이다"로 더 강하게 읽혀요?</p>
+
+  <div class="cols">
+    <div class="map">
+      <h2><span class="n">①</span> 흩어진 군도 <span style="font-weight:400;color:var(--muted);font-size:13px">(현행)</span></h2>
+      <canvas id="c-arch" width="760" height="520" aria-label="흩어진 군도 구조의 픽셀 지도"></canvas>
+      <div class="tr">
+        <span><span class="g">+</span> 섬 하나하나가 또렷·독립적 — 장르별 정복 상태가 명확</span>
+        <span><span class="b">−</span> 섬들이 서로 무관계 — "왜 이 배치인지" 뜻이 없음</span>
+        <span><span class="b">−</span> 빈 바다가 많아 좁고 산만 · 모바일에서 라벨이 흩어져 판독 저하</span>
+      </div>
+    </div>
+    <div class="map">
+      <h2><span class="n">②</span> 이어진 대륙 <span style="font-weight:400;color:var(--muted);font-size:13px">(제안)</span></h2>
+      <canvas id="c-cont" width="760" height="520" aria-label="이어진 대륙 구조의 픽셀 지도"></canvas>
+      <div class="tr">
+        <span><span class="g">+</span> 인접 = 유사 장르 — 지형 자체가 "내 취향의 결"을 말함</span>
+        <span><span class="g">+</span> 하나의 땅 → "실제 대륙"으로 읽힘 · 여백 없이 꽉 참</span>
+        <span><span class="g">+</span> 경계·지협이 관계를 나르니 라벨 의존이 줄어 모바일 유리</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <span style="color:var(--ink);font-weight:600">읽는 법</span>
+    <span><span class="sw" style="background:#59d6c2"></span>정복(플레이 많음)</span>
+    <span><span class="sw" style="background:#2b7d76"></span>탐험 중</span>
+    <span><span class="sw" style="background:#173a3f"></span>거의 안 함</span>
+    <span><span class="sw" style="background:#2f3566;border:1px solid #8fa2ff"></span>미개척(다음 땅)</span>
+    <span>· 심볼 = 장르(검=RPG · 주사위=로그 · 번개=액션 …) · 격자 = 탐험 지도 좌표</span>
+  </div>
+  <p class="foot">// 쿨 단일 팔레트 · 웜 색 0 · 절차 생성 예시맵(실제 라이브러리 아님). 구조 비교용 스케치 — 최종 질감은 생성기(Claude Design/Pencil)가 만든다.</p>
+</div>
+
+<script>
+(function(){
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+  // 12 genres — tier: 0=frontier(violet), 1..3 teal brightness. sym = icon id.
+  var GEN = [
+    {name:"RPG",        sym:"sword",  tier:3},
+    {name:"로그라이크",  sym:"dice",   tier:2},
+    {name:"액션",       sym:"bolt",   tier:3},
+    {name:"FPS",        sym:"cross",  tier:1},
+    {name:"대전격투",    sym:"fist",   tier:1},
+    {name:"퍼즐",       sym:"puzzle", tier:2},
+    {name:"소울라이크",  sym:"skull",  tier:2},
+    {name:"오픈월드",    sym:"mtn",    tier:3},
+    {name:"메트로배니아", sym:"key",    tier:1},
+    {name:"시뮬",       sym:"sprout", tier:0},
+    {name:"로그라이트",  sym:"dice",   tier:2},
+    {name:"전략",       sym:"flag",   tier:0}
+  ];
+  // continent: similar genres clustered & adjacent (normalized centers)
+  var CONT = [[.55,.36],[.42,.44],[.20,.36],[.30,.24],[.17,.60],[.83,.60],[.31,.70],[.64,.55],[.52,.70],[.80,.40],[.46,.60],[.72,.27]];
+  // archipelago: even scatter grid, no similarity meaning
+  var ARCH = [];
+  (function(){var seed=mulberry32(99);for(var r=0;r<3;r++)for(var c=0;c<4;c++){ARCH.push([.14+c*.243+(seed()-.5)*.05, .22+r*.29+(seed()-.5)*.05]);}})();
+
+  var TIER = {0:"#2f3566",1:"#173a3f",2:"#2b7d76",3:"#59d6c2"};
+  var TIER_COAST = {0:"#20264a",1:"#0e2529",2:"#1c554f",3:"#3aa593"};
+
+  function build(canvas, mode){
+    var ctx=canvas.getContext("2d");
+    var W=canvas.width,H=canvas.height, COLS=76, ROWS=52, cw=W/COLS, ch=H/ROWS;
+    var centers=(mode==="cont"?CONT:ARCH).map(function(p){return [p[0]*COLS,p[1]*ROWS];});
+    var rng=mulberry32(mode==="cont"?4242:1337);
+    var baseR=mode==="cont"?8.2:4.9;
+    var Rj=GEN.map(function(){return baseR*(0.82+rng()*0.5);});
+    // value-noise field
+    var nStep=6, nC=Math.ceil(COLS/nStep)+2, nR=Math.ceil(ROWS/nStep)+2, NN=[];
+    for(var k=0;k<nC*nR;k++)NN.push(rng()*2-1);
+    function noise(i,j){var gx=i/nStep,gy=j/nStep,x0=Math.floor(gx),y0=Math.floor(gy),tx=gx-x0,ty=gy-y0;
+      var a=NN[y0*nC+x0],b=NN[y0*nC+x0+1],c=NN[(y0+1)*nC+x0],d=NN[(y0+1)*nC+x0+1];
+      var sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
+      return (a*(1-sx)+b*sx)*(1-sy)+(c*(1-sx)+d*sx)*sy;}
+    var reg=new Int16Array(COLS*ROWS); reg.fill(-1);
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){
+      var best=-1,bd=1e9;
+      for(var g=0;g<centers.length;g++){var dx=i+0.5-centers[g][0],dy=j+0.5-centers[g][1];var d=Math.sqrt(dx*dx+dy*dy);if(d<bd){bd=d;best=g;}}
+      var eff=Rj[best]*(1+0.42*noise(i,j));
+      if(bd<eff) reg[j*COLS+i]=best;
+    }
+    // background: sea + graticule
+    ctx.fillStyle=getComputedStyle(document.documentElement).getPropertyValue("--sea").trim()||"#0b1c26";
+    ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle="rgba(120,180,200,0.06)"; ctx.lineWidth=1;
+    for(var gi=0;gi<=COLS;gi+=8){ctx.beginPath();ctx.moveTo(gi*cw,0);ctx.lineTo(gi*cw,H);ctx.stroke();}
+    for(var gj=0;gj<=ROWS;gj+=8){ctx.beginPath();ctx.moveTo(0,gj*ch);ctx.lineTo(W,gj*ch);ctx.stroke();}
+    // land cells
+    function isLand(i,j){return i>=0&&j>=0&&i<COLS&&j<ROWS&&reg[j*COLS+i]>=0;}
+    var sum={};
+    for(var j2=0;j2<ROWS;j2++)for(var i2=0;i2<COLS;i2++){
+      var g2=reg[j2*COLS+i2]; if(g2<0)continue;
+      var coast=!(isLand(i2-1,j2)&&isLand(i2+1,j2)&&isLand(i2,j2-1)&&isLand(i2,j2+1));
+      var t=GEN[g2].tier;
+      ctx.fillStyle=coast?TIER_COAST[t]:TIER[t];
+      ctx.fillRect(Math.floor(i2*cw),Math.floor(j2*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);
+      if(t===0&&!coast&&((i2+j2)%2===0)){ctx.fillStyle="rgba(143,162,255,0.22)";ctx.fillRect(Math.floor(i2*cw),Math.floor(j2*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+      if(!sum[g2])sum[g2]={x:0,y:0,n:0}; sum[g2].x+=i2; sum[g2].y+=j2; sum[g2].n++;
+    }
+    // region borders (continent only) — faint lines between different regions
+    if(mode==="cont"){
+      ctx.fillStyle="rgba(9,16,22,0.55)";
+      for(var j3=0;j3<ROWS;j3++)for(var i3=0;i3<COLS;i3++){
+        var g3=reg[j3*COLS+i3]; if(g3<0)continue;
+        if((isLand(i3+1,j3)&&reg[j3*COLS+i3+1]!==g3)||(isLand(i3,j3+1)&&reg[(j3+1)*COLS+i3]!==g3)){
+          ctx.fillRect(Math.floor(i3*cw),Math.floor(j3*ch),Math.ceil(cw)+1,Math.ceil(ch)+1);
+        }
+      }
+    }
+    // labels + icons at centroids
+    for(var g4 in sum){
+      var s=sum[g4], cx=(s.x/s.n+0.5)*cw, cy=(s.y/s.n+0.5)*ch, name=GEN[g4].name, tier=GEN[g4].tier;
+      var ic=tier===0?"#aeb9ff":"#d9f2f0";
+      drawIcon(ctx,GEN[g4].sym,cx,cy-7,15,ic);
+      ctx.font="600 12px ui-monospace,Menlo,monospace";
+      ctx.textAlign="center"; ctx.textBaseline="middle";
+      var tw=ctx.measureText(name).width;
+      ctx.fillStyle="rgba(8,14,20,0.68)"; ctx.fillRect(cx-tw/2-4,cy+7,tw+8,15);
+      ctx.fillStyle=tier===0?"#c7cffb":"#e6f4f2"; ctx.fillText(name,cx,cy+15);
+    }
+    // compass rose
+    var ox=W-40,oy=H-40;
+    ctx.strokeStyle="rgba(143,162,255,0.5)";ctx.fillStyle="rgba(143,162,255,0.5)";ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(ox,oy-16);ctx.lineTo(ox,oy+16);ctx.moveTo(ox-16,oy);ctx.lineTo(ox+16,oy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ox,oy-16);ctx.lineTo(ox-3.5,oy-6);ctx.lineTo(ox+3.5,oy-6);ctx.closePath();ctx.fill();
+    ctx.font="700 9px ui-monospace,monospace";ctx.textAlign="center";ctx.fillText("N",ox,oy-20);
+  }
+
+  function drawIcon(ctx,sym,x,y,s,col){
+    ctx.save();ctx.translate(x,y);ctx.strokeStyle=col;ctx.fillStyle=col;
+    ctx.lineWidth=1.6;ctx.lineJoin="round";ctx.lineCap="round";
+    var h=s/2;
+    function P(){ctx.beginPath();}
+    if(sym==="sword"){P();ctx.moveTo(0,-h);ctx.lineTo(0,h*0.55);ctx.stroke();P();ctx.moveTo(-h*0.55,h*0.55);ctx.lineTo(h*0.55,h*0.55);ctx.stroke();P();ctx.moveTo(0,h*0.55);ctx.lineTo(0,h);ctx.stroke();}
+    else if(sym==="dice"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);var d=h*0.34;[[-1,-1],[1,1],[-1,1]].forEach(function(p){P();ctx.arc(p[0]*d,p[1]*d,1.5,0,7);ctx.fill();});}
+    else if(sym==="bolt"){P();ctx.moveTo(h*0.5,-h);ctx.lineTo(-h*0.5,h*0.15);ctx.lineTo(h*0.1,h*0.15);ctx.lineTo(-h*0.4,h);ctx.lineTo(h*0.6,-h*0.2);ctx.lineTo(0,-h*0.2);ctx.closePath();ctx.fill();}
+    else if(sym==="cross"){P();ctx.arc(0,0,h*0.75,0,7);ctx.stroke();P();ctx.moveTo(0,-h);ctx.lineTo(0,-h*0.35);ctx.moveTo(0,h*0.35);ctx.lineTo(0,h);ctx.moveTo(-h,0);ctx.lineTo(-h*0.35,0);ctx.moveTo(h*0.35,0);ctx.lineTo(h,0);ctx.stroke();P();ctx.arc(0,0,1.3,0,7);ctx.fill();}
+    else if(sym==="fist"){ctx.strokeRect(-h*0.7,-h*0.4,h*1.4,h*1.1);for(var i=0;i<3;i++){P();ctx.arc(-h*0.4+i*h*0.4,-h*0.4,h*0.2,Math.PI,0);ctx.stroke();}}
+    else if(sym==="puzzle"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);P();ctx.arc(h*0.8,0,h*0.28,-1.6,1.6);ctx.stroke();P();ctx.arc(0,-h*0.8,h*0.28,0,3.14);ctx.fillStyle=col;ctx.fill();}
+    else if(sym==="skull"){P();ctx.arc(0,-h*0.15,h*0.75,Math.PI,0);ctx.lineTo(h*0.45,h*0.4);ctx.lineTo(-h*0.45,h*0.4);ctx.closePath();ctx.stroke();ctx.fillStyle=col;P();ctx.arc(-h*0.3,-h*0.15,h*0.2,0,7);ctx.arc(h*0.3,-h*0.15,h*0.2,0,7);ctx.fill();}
+    else if(sym==="mtn"){P();ctx.moveTo(-h,h*0.7);ctx.lineTo(-h*0.15,-h*0.8);ctx.lineTo(h*0.25,-h*0.1);ctx.lineTo(h*0.5,-h*0.5);ctx.lineTo(h,h*0.7);ctx.closePath();ctx.stroke();}
+    else if(sym==="key"){P();ctx.arc(-h*0.4,0,h*0.42,0,7);ctx.stroke();P();ctx.moveTo(-h*0.02,0);ctx.lineTo(h*0.85,0);ctx.moveTo(h*0.6,0);ctx.lineTo(h*0.6,h*0.35);ctx.moveTo(h*0.85,0);ctx.lineTo(h*0.85,h*0.3);ctx.stroke();}
+    else if(sym==="sprout"){P();ctx.moveTo(0,h);ctx.lineTo(0,-h*0.2);ctx.stroke();P();ctx.ellipse(-h*0.35,-h*0.35,h*0.4,h*0.22,0.7,0,7);ctx.ellipse(h*0.35,-h*0.35,h*0.4,h*0.22,-0.7,0,7);ctx.fill();}
+    else if(sym==="flag"){P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(-h*0.6,h);ctx.stroke();P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(h*0.7,-h*0.55);ctx.lineTo(-h*0.6,-h*0.1);ctx.closePath();ctx.fill();}
+    ctx.restore();
+  }
+
+  build(document.getElementById("c-arch"),"arch");
+  build(document.getElementById("c-cont"),"cont");
+})();
+</script>

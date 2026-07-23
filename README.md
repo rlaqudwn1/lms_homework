@@ -2,7 +2,7 @@
 
 This workspace turns a future product idea and design into a deliberately small, submit-ready course mock. It is not a copy of the course mini-Notion project and it is not automatically the production project.
 
-Start with [PRD intake](specs/PRD-INTAKE.md), decide the track in [project tracks](docs/PROJECT-TRACKS.md), then follow the [SDD workflow](docs/SDD-WORKFLOW.md) before implementation. The course requirements are recorded in [assignment map](specs/ASSIGNMENT-MAP.md).
+Start with the [project brief](docs/PROJECT-BRIEF.md) and [PRD intake](specs/PRD-INTAKE.md), decide the track in [project tracks](docs/PROJECT-TRACKS.md), then follow the [SDD workflow](docs/SDD-WORKFLOW.md) before implementation. The course requirements are recorded in [assignment map](specs/ASSIGNMENT-MAP.md). Design execution and the mandatory pre-PR result review are defined in [design and preview workflow](docs/DESIGN-AND-PREVIEW-WORKFLOW.md).
 
 ## Operating rules
 

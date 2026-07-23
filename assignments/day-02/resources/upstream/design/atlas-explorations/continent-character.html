@@ -1,0 +1,233 @@
+<title>취향 대륙 — 특징을 살리는 4개 레버</title>
+<style>
+  :root{
+    --stage:#0a1016; --sea:#0a1a23; --panel:#0e1a22; --line:#1d2e39;
+    --ink:#d9e9f0; --muted:#87a0ae; --faint:#5a7382;
+    --teal:#5ad6c2; --violet:#8fa2ff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(120% 90% at 50% -10%, #0f1e28 0%, var(--stage) 62%);
+    color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1120px;margin:0 auto;padding:34px 20px 60px}
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(22px,3vw,32px);margin:0 0 10px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .lede{margin:0;color:var(--muted);max-width:70ch;font-size:15px}
+  .lede b{color:var(--ink)}
+  .stage{margin-top:26px;background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:0 22px 50px -28px rgba(0,0,0,.85)}
+  canvas{display:block;width:100%;height:auto;background:var(--sea)}
+  .levers{margin-top:26px;display:grid;grid-template-columns:repeat(auto-fit,minmax(232px,1fr));gap:14px}
+  .lev{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:15px 16px}
+  .lev .h{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .lev .n{font-family:ui-monospace,Menlo,monospace;font-size:12px;font-weight:700;color:var(--stage);
+    background:var(--teal);border-radius:6px;width:22px;height:22px;display:grid;place-items:center;flex:0 0 auto}
+  .lev .t{font-weight:750;font-size:15px}
+  .lev .g{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--teal);margin-left:auto}
+  .lev p{margin:0;font-size:13px;color:var(--muted)}
+  .lev p b{color:var(--ink);font-weight:600}
+  .sig{margin-top:16px;padding:14px 18px;background:linear-gradient(90deg,rgba(90,214,194,.07),transparent);
+    border:1px solid var(--line);border-left:3px solid var(--teal);border-radius:0 12px 12px 0;font-size:14px;color:var(--ink)}
+  .sig b{color:var(--teal)}
+  .q{margin-top:22px;font-size:15px}
+  .q b{color:var(--teal)}
+  .foot{margin-top:18px;color:var(--faint);font-size:12.5px;font-family:ui-monospace,Menlo,monospace}
+  .demo{display:inline-block;font-family:ui-monospace,Menlo,monospace;font-size:11px;color:var(--violet);
+    border:1px solid #2c3566;border-radius:5px;padding:2px 7px;margin-left:8px;vertical-align:2px}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">003 · Taste Atlas · 대륙의 특징 살리기<span class="demo">예시 데이터</span></p>
+  <h1>지형이 곧 데이터 — 취향 대륙을 읽는 4개 레버</h1>
+  <p class="lede">대륙의 힘은 <b>모양에 뜻이 있다</b>는 것. 아래 하나의 픽셀 대륙에서 — 어디가 크고, 밝고, 이어지고, 흐릿한지가 전부 <b>내 플레이 기록</b>을 말한다. 쿨 단일 팔레트, 웜 색 0.</p>
+
+  <div class="stage">
+    <canvas id="cv" width="1040" height="660" aria-label="취향 대륙과 4개 특징 레버를 표시한 픽셀 지도"></canvas>
+  </div>
+
+  <div class="levers">
+    <div class="lev">
+      <div class="h"><span class="n">1</span><span class="t">심장부</span><span class="g">terrain=shape</span></div>
+      <p>대륙 한가운데 제일 큰 덩어리 = <b>핵심 취향</b>. 제일 많이 켜는 장르가 문자 그대로 세계의 중심에 앉는다. 섬은 못 하는 것.</p>
+    </div>
+    <div class="lev">
+      <div class="h"><span class="n">2</span><span class="t">크기</span><span class="g">area=count</span></div>
+      <p>땅 넓이 = 그 장르 <b>보유량·플레이시간</b>. 가끔 하는 장르는 작은 <b>곶</b>으로 삐죽 나온다.</p>
+    </div>
+    <div class="lev">
+      <div class="h"><span class="n">3</span><span class="t">고도</span><span class="g">bright=mastery</span></div>
+      <p>밝은 <b>고원(△)</b> = 정복한 땅, 어두운 저지 = 사두고 방치. 밝기 하나로 마스터도가 읽힌다.</p>
+    </div>
+    <div class="lev">
+      <div class="h"><span class="n">4</span><span class="t">안개 해안</span><span class="g">fog=frontier</span></div>
+      <p>가장자리 흐릿한 <b>변방(보라 ?)</b> = 미개척. "오늘 여길 켜볼까"의 <b>다음 개척지</b>가 지도 끝에 있다.</p>
+    </div>
+  </div>
+
+  <div class="sig">🖋 그리고 전체가 <b>하나의 실루엣</b> — 이 대륙 윤곽이 곧 "이게 내 취향 대륙 모양"이라는 <b>서명</b>이 된다. 남과 절대 안 겹치는 나만의 지형.</div>
+
+  <p class="q">이 4개 레버 중 <b>어떤 걸 살리고 싶어요?</b> 다 넣으면 과할 수도 있어요 — 골라주면 그게 design-system.md 씨앗이 돼요.</p>
+  <p class="foot">// 절차 생성 예시맵(실제 라이브러리 아님) · 쿨 단일 팔레트 · 최종 질감은 생성기(Claude Design/Pencil)가 만든다.</p>
+</div>
+
+<script>
+(function(){
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+  var cv=document.getElementById("cv"), ctx=cv.getContext("2d");
+  var W=cv.width,H=cv.height;
+  // map area (left) + callout column (right)
+  var MX=20,MY=56,MW=640,MH=584;              // map box
+  var COLS=80, ROWS=Math.round(COLS*MH/MW), cw=MW/COLS, ch=MH/ROWS;
+
+  // role: hl=heartland(big,central), mid, niche(small cape), fr=frontier(edge)
+  // tier: 3 bright(정복) .. 1 dark(방치), 0 frontier(violet)
+  var GEN=[
+    {name:"RPG",        sym:"sword",  tier:3, role:"hl",    c:[.42,.47], r:12.5},
+    {name:"오픈월드",    sym:"mtn",    tier:3, role:"hl",    c:[.55,.41], r:11.5},
+    {name:"액션",       sym:"bolt",   tier:3, role:"mid",   c:[.30,.31], r:8.4},
+    {name:"소울라이크",  sym:"skull",  tier:2, role:"mid",   c:[.35,.62], r:8.0},
+    {name:"로그라이크",  sym:"dice",   tier:2, role:"mid",   c:[.57,.60], r:8.2},
+    {name:"메트로배니아", sym:"key",    tier:1, role:"mid",   c:[.45,.28], r:6.6},
+    {name:"퍼즐",       sym:"puzzle", tier:1, role:"niche", c:[.15,.56], r:4.6},
+    {name:"대전격투",    sym:"fist",   tier:1, role:"niche", c:[.64,.74], r:4.7},
+    {name:"시뮬",       sym:"sprout", tier:0, role:"fr",    c:[.74,.45], r:7.2},
+    {name:"전략",       sym:"flag",   tier:0, role:"fr",    c:[.72,.60], r:7.0}
+  ];
+  var TIER={0:"#2f3566",1:"#173a3f",2:"#2b7d76",3:"#59d6c2"};
+  var TIER_COAST={0:"#20264a",1:"#0e2529",2:"#1c554f",3:"#3aa593"};
+
+  var centers=GEN.map(function(g){return [g.c[0]*COLS,g.c[1]*ROWS];});
+  var rng=mulberry32(7);
+  // value noise
+  var nStep=6,nC=Math.ceil(COLS/nStep)+2,nR=Math.ceil(ROWS/nStep)+2,NN=[];
+  for(var k=0;k<nC*nR;k++)NN.push(rng()*2-1);
+  function noise(i,j){var gx=i/nStep,gy=j/nStep,x0=Math.floor(gx),y0=Math.floor(gy),tx=gx-x0,ty=gy-y0;
+    var a=NN[y0*nC+x0],b=NN[y0*nC+x0+1],c=NN[(y0+1)*nC+x0],d=NN[(y0+1)*nC+x0+1];
+    var sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
+    return (a*(1-sx)+b*sx)*(1-sy)+(c*(1-sx)+d*sx)*sy;}
+
+  var reg=new Int16Array(COLS*ROWS); reg.fill(-1);
+  for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){
+    var best=-1,bd=1e9;
+    for(var g=0;g<centers.length;g++){var dx=i+.5-centers[g][0],dy=j+.5-centers[g][1];var d=Math.sqrt(dx*dx+dy*dy);if(d<bd){bd=d;best=g;}}
+    var eff=GEN[best].r*(1+0.40*noise(i,j));
+    if(bd<eff) reg[j*COLS+i]=best;
+  }
+  function isLand(i,j){return i>=0&&j>=0&&i<COLS&&j<ROWS&&reg[j*COLS+i]>=0;}
+  function px(i){return MX+i*cw;} function py(j){return MY+j*ch;}
+
+  // ---- background: sea + graticule ----
+  ctx.fillStyle="#0a1a23"; ctx.fillRect(0,0,W,H);
+  ctx.strokeStyle="rgba(120,180,200,0.055)"; ctx.lineWidth=1;
+  for(var gi=0;gi<=COLS;gi+=8){ctx.beginPath();ctx.moveTo(px(gi),MY);ctx.lineTo(px(gi),MY+MH);ctx.stroke();}
+  for(var gj=0;gj<=ROWS;gj+=8){ctx.beginPath();ctx.moveTo(MX,py(gj));ctx.lineTo(MX+MW,py(gj));ctx.stroke();}
+
+  // ---- land cells ----
+  var sum={};
+  for(var j2=0;j2<ROWS;j2++)for(var i2=0;i2<COLS;i2++){
+    var g2=reg[j2*COLS+i2]; if(g2<0)continue;
+    var coast=!(isLand(i2-1,j2)&&isLand(i2+1,j2)&&isLand(i2,j2-1)&&isLand(i2,j2+1));
+    var t=GEN[g2].tier;
+    ctx.fillStyle=coast?TIER_COAST[t]:TIER[t];
+    ctx.fillRect(Math.floor(px(i2)),Math.floor(py(j2)),Math.ceil(cw)+1,Math.ceil(ch)+1);
+    // frontier violet dither + fog
+    if(t===0&&!coast&&((i2+j2)%2===0)){ctx.fillStyle="rgba(143,162,255,0.24)";ctx.fillRect(Math.floor(px(i2)),Math.floor(py(j2)),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+    // highland carets on bright tier3 interior (고도=정복)
+    if(t===3&&!coast&&noise(i2,j2)>0.28&&((i2*3+j2)%5===0)){
+      ctx.strokeStyle="rgba(214,244,240,0.5)";ctx.lineWidth=1.2;
+      var mx=px(i2)+cw/2,my=py(j2)+ch/2;ctx.beginPath();ctx.moveTo(mx-3,my+2);ctx.lineTo(mx,my-2.5);ctx.lineTo(mx+3,my+2);ctx.stroke();
+    }
+    if(!sum[g2])sum[g2]={x:0,y:0,n:0,minx:99,maxx:-1}; var S=sum[g2];S.x+=i2;S.y+=j2;S.n++;
+  }
+  // region borders (faint) — shows adjacency without walls
+  ctx.fillStyle="rgba(9,16,22,0.5)";
+  for(var j3=0;j3<ROWS;j3++)for(var i3=0;i3<COLS;i3++){
+    var g3=reg[j3*COLS+i3]; if(g3<0)continue;
+    if((isLand(i3+1,j3)&&reg[j3*COLS+i3+1]!==g3)||(isLand(i3,j3+1)&&reg[(j3+1)*COLS+i3]!==g3))
+      ctx.fillRect(Math.floor(px(i3)),Math.floor(py(j3)),Math.ceil(cw)+1,Math.ceil(ch)+1);
+  }
+  // ---- silhouette: one bright coastline (signature) ----
+  ctx.strokeStyle="rgba(120,222,205,0.55)"; ctx.lineWidth=2; ctx.lineCap="round";
+  for(var j4=0;j4<ROWS;j4++)for(var i4=0;i4<COLS;i4++){
+    if(!isLand(i4,j4))continue;
+    var x=px(i4),y=py(j4);
+    if(!isLand(i4-1,j4)){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y+ch);ctx.stroke();}
+    if(!isLand(i4+1,j4)){ctx.beginPath();ctx.moveTo(x+cw,y);ctx.lineTo(x+cw,y+ch);ctx.stroke();}
+    if(!isLand(i4,j4-1)){ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+cw,y);ctx.stroke();}
+    if(!isLand(i4,j4+1)){ctx.beginPath();ctx.moveTo(x,y+ch);ctx.lineTo(x+cw,y+ch);ctx.stroke();}
+  }
+  // fog gradient over frontier (right edge of continent)
+  var fg=ctx.createLinearGradient(px(COLS*0.60),0,px(COLS*0.92),0);
+  fg.addColorStop(0,"rgba(10,26,35,0)"); fg.addColorStop(1,"rgba(47,53,102,0.28)");
+  ctx.fillStyle=fg; ctx.fillRect(px(COLS*0.60),MY,MW*0.40,MH);
+
+  // ---- genre labels + icons ----
+  for(var gk in sum){
+    var s=sum[gk], cx=px(s.x/s.n+.5), cy=py(s.y/s.n+.5), G=GEN[gk], tier=G.tier;
+    var ic=tier===0?"#aeb9ff":"#dff4f1";
+    drawIcon(ctx,G.sym,cx,cy-6,14,ic);
+    ctx.font="600 11px ui-monospace,Menlo,monospace";ctx.textAlign="center";ctx.textBaseline="middle";
+    var tw=ctx.measureText(G.name).width;
+    ctx.fillStyle="rgba(8,14,20,0.66)";ctx.fillRect(cx-tw/2-4,cy+6,tw+8,14);
+    ctx.fillStyle=tier===0?"#c7cffb":"#e6f4f2";
+    if(tier===0){var q="? "+G.name;var qw=ctx.measureText(q).width;ctx.fillStyle="rgba(8,14,20,0.66)";ctx.fillRect(cx-qw/2-4,cy+6,qw+8,14);ctx.fillStyle="#c7cffb";ctx.fillText(q,cx,cy+13);}
+    else ctx.fillText(G.name,cx,cy+13);
+  }
+  // compass
+  var ox=MX+MW-30,oy=MY+MH-28;
+  ctx.strokeStyle="rgba(143,162,255,0.5)";ctx.fillStyle="rgba(143,162,255,0.5)";ctx.lineWidth=1.5;
+  ctx.beginPath();ctx.moveTo(ox,oy-14);ctx.lineTo(ox,oy+14);ctx.moveTo(ox-14,oy);ctx.lineTo(ox+14,oy);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(ox,oy-14);ctx.lineTo(ox-3,oy-5);ctx.lineTo(ox+3,oy-5);ctx.closePath();ctx.fill();
+  ctx.font="700 9px ui-monospace,monospace";ctx.textAlign="center";ctx.fillText("N",ox,oy-18);
+
+  // ---- callouts (right column) with leader lines to map targets ----
+  function cell(nx,ny){return [px(nx*COLS),py(ny*ROWS)];}
+  var CALLS=[
+    {n:1,title:"심장부",sub:"핵심 취향",tgt:cell(.48,.47),cy:120},
+    {n:2,title:"크기 = 보유량",sub:"작은 곶 = 가끔",tgt:cell(.15,.57),cy:258},
+    {n:3,title:"고도 = 정복도",sub:"밝은 고원 = 마스터",tgt:cell(.30,.31),cy:396},
+    {n:4,title:"안개 해안",sub:"미개척 · 다음 개척지",tgt:cell(.73,.52),cy:534}
+  ];
+  var CLX=700, CLW=322;
+  CALLS.forEach(function(c){
+    // leader line
+    ctx.strokeStyle="rgba(143,162,255,0.45)";ctx.lineWidth=1.3;ctx.setLineDash([4,3]);
+    ctx.beginPath();ctx.moveTo(c.tgt[0],c.tgt[1]);ctx.lineTo(CLX-8,c.cy);ctx.stroke();ctx.setLineDash([]);
+    // target dot
+    ctx.fillStyle="#8fa2ff";ctx.beginPath();ctx.arc(c.tgt[0],c.tgt[1],3.2,0,7);ctx.fill();
+    ctx.strokeStyle="rgba(143,162,255,0.35)";ctx.lineWidth=1;ctx.beginPath();ctx.arc(c.tgt[0],c.tgt[1],6.5,0,7);ctx.stroke();
+    // chip
+    ctx.fillStyle="rgba(14,26,34,0.92)";roundRect(ctx,CLX,c.cy-30,CLW,60,10);ctx.fill();
+    ctx.strokeStyle="#22384a";ctx.lineWidth=1;roundRect(ctx,CLX,c.cy-30,CLW,60,10);ctx.stroke();
+    // number badge
+    ctx.fillStyle="#5ad6c2";roundRect(ctx,CLX+14,c.cy-13,26,26,7);ctx.fill();
+    ctx.fillStyle="#0a1016";ctx.font="700 14px ui-monospace,Menlo,monospace";ctx.textAlign="center";ctx.textBaseline="middle";
+    ctx.fillText(c.n,CLX+27,c.cy+1);
+    // text
+    ctx.textAlign="left";
+    ctx.fillStyle="#e6f4f2";ctx.font="750 16px system-ui,'Malgun Gothic',sans-serif";ctx.fillText(c.title,CLX+52,c.cy-6);
+    ctx.fillStyle="#87a0ae";ctx.font="400 13px system-ui,'Malgun Gothic',sans-serif";ctx.fillText(c.sub,CLX+52,c.cy+13);
+  });
+
+  function roundRect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+
+  function drawIcon(ctx,sym,x,y,s,col){
+    ctx.save();ctx.translate(x,y);ctx.strokeStyle=col;ctx.fillStyle=col;
+    ctx.lineWidth=1.6;ctx.lineJoin="round";ctx.lineCap="round";var h=s/2;
+    function P(){ctx.beginPath();}
+    if(sym==="sword"){P();ctx.moveTo(0,-h);ctx.lineTo(0,h*0.55);ctx.stroke();P();ctx.moveTo(-h*0.55,h*0.55);ctx.lineTo(h*0.55,h*0.55);ctx.stroke();P();ctx.moveTo(0,h*0.55);ctx.lineTo(0,h);ctx.stroke();}
+    else if(sym==="dice"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);var d=h*0.34;[[-1,-1],[1,1],[-1,1]].forEach(function(p){P();ctx.arc(p[0]*d,p[1]*d,1.5,0,7);ctx.fill();});}
+    else if(sym==="bolt"){P();ctx.moveTo(h*0.5,-h);ctx.lineTo(-h*0.5,h*0.15);ctx.lineTo(h*0.1,h*0.15);ctx.lineTo(-h*0.4,h);ctx.lineTo(h*0.6,-h*0.2);ctx.lineTo(0,-h*0.2);ctx.closePath();ctx.fill();}
+    else if(sym==="fist"){ctx.strokeRect(-h*0.7,-h*0.4,h*1.4,h*1.1);for(var i=0;i<3;i++){P();ctx.arc(-h*0.4+i*h*0.4,-h*0.4,h*0.2,Math.PI,0);ctx.stroke();}}
+    else if(sym==="puzzle"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);P();ctx.arc(h*0.8,0,h*0.28,-1.6,1.6);ctx.stroke();}
+    else if(sym==="skull"){P();ctx.arc(0,-h*0.15,h*0.75,Math.PI,0);ctx.lineTo(h*0.45,h*0.4);ctx.lineTo(-h*0.45,h*0.4);ctx.closePath();ctx.stroke();ctx.fillStyle=col;P();ctx.arc(-h*0.3,-h*0.15,h*0.2,0,7);ctx.arc(h*0.3,-h*0.15,h*0.2,0,7);ctx.fill();}
+    else if(sym==="mtn"){P();ctx.moveTo(-h,h*0.7);ctx.lineTo(-h*0.15,-h*0.8);ctx.lineTo(h*0.25,-h*0.1);ctx.lineTo(h*0.5,-h*0.5);ctx.lineTo(h,h*0.7);ctx.closePath();ctx.stroke();}
+    else if(sym==="key"){P();ctx.arc(-h*0.4,0,h*0.42,0,7);ctx.stroke();P();ctx.moveTo(-h*0.02,0);ctx.lineTo(h*0.85,0);ctx.moveTo(h*0.6,0);ctx.lineTo(h*0.6,h*0.35);ctx.moveTo(h*0.85,0);ctx.lineTo(h*0.85,h*0.3);ctx.stroke();}
+    else if(sym==="sprout"){P();ctx.moveTo(0,h);ctx.lineTo(0,-h*0.2);ctx.stroke();P();ctx.ellipse(-h*0.35,-h*0.35,h*0.4,h*0.22,0.7,0,7);ctx.ellipse(h*0.35,-h*0.35,h*0.4,h*0.22,-0.7,0,7);ctx.fill();}
+    else if(sym==="flag"){P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(-h*0.6,h);ctx.stroke();P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(h*0.7,-h*0.55);ctx.lineTo(-h*0.6,-h*0.1);ctx.closePath();ctx.fill();}
+    ctx.restore();
+  }
+})();
+</script>

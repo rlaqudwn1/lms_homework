@@ -15,7 +15,8 @@ Use the table as a coverage checklist, not as a requirement to reproduce mini-No
 | 13 | Google login | Test-account OAuth flow and protected profile area | No production user rollout |
 | 14 | Worktree feature completion | 2–3 independent scoped features with merge evidence | Features follow the user's product, not Notion UI |
 
+| 16 | Vercel deployment and custom-domain connection | Final HTTPS URL, domain/DNS evidence and fresh-browser smoke test | Course slice remains separate from production; purchase and DNS are HITL |
+
 ## Minimum submission package
 
 For each day, create `assignments/day-XX/SUBMISSION.md` containing the requirement, submitted URL or PR, commit SHA, verification steps, mock disclosure, and any user-approved LMS submission timestamp.
-

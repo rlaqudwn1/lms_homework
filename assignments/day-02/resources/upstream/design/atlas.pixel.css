@@ -1,0 +1,249 @@
+/* ── 003 · Taste Atlas · PIXEL MAP styles ────────────────────────────────
+   Owner brief: "맵을 게임같이 — RPG/어드벤처 맵처럼 도트로." Everything the
+   pixel rebuild needs lives here so landing.css stays untouched. Palette is
+   COOL only — no amber/gold, no neon glow. Elevation encoding:
+     정복(claim)   = deep→bright teal   (c3..c0)
+     탐험(explore) = medium teal        (e2..e0)
+     미개척(unchart)= faint slate (foggy) (u1/u0)
+     프론티어       = brand violet        (f1/f0)
+   Selectors that reference .ns-atl-* only ADD a new distinguishing class
+   (px-*, pst-*, ns-px-*) so they never collide with landing.css rules. */
+
+/* ── the map surface ─────────────────────────────────────────────────── */
+.ns-px-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 5px;
+  border: 1px solid var(--edge-soft);
+  background:
+    linear-gradient(180deg, rgba(139, 92, 246, 0.05) 0%, rgba(139, 92, 246, 0) 40%),
+    radial-gradient(130% 130% at 28% 16%, #0c2233 0%, #0a1830 52%, #071324 100%);
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  shape-rendering: crispEdges; /* hard pixel edges, no anti-alias smoothing */
+
+  /* elevation palette (cool only) */
+  --c3: #0a544c; /* conquered core — deepest teal */
+  --c2: #0f7d70;
+  --c1: #17a897;
+  --c0: #4fe0cd; /* bright coast rim */
+  --e2: #158c80; /* explore — medium teal */
+  --e1: #22c4b1;
+  --e0: #63e6d3;
+  --u1: rgba(132, 152, 180, 0.34); /* unchart — faint slate */
+  --u0: rgba(132, 152, 180, 0.19);
+  --f1: #8b5cf6; /* frontier — brand violet */
+  --f0: #a78bfa;
+}
+
+/* decorative overlays never intercept pointer events meant for continents */
+.ns-px-grat,
+.ns-px-coord,
+.ns-px-compass,
+.ns-px-frontier-mark {
+  pointer-events: none;
+}
+
+/* pixel coordinate grid */
+.ns-px-grat line {
+  stroke: rgba(150, 180, 200, 0.06);
+  stroke-width: 1;
+}
+.ns-px-coord text {
+  font-family: var(--f3-mono), monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.1em;
+  fill: rgba(150, 180, 200, 0.32);
+}
+
+/* ── continents ──────────────────────────────────────────────────────── */
+.ns-px-cont {
+  cursor: pointer;
+  outline: none;
+}
+.ns-px-hit {
+  fill: rgba(0, 0, 0, 0);
+  pointer-events: all;
+}
+
+.ns-px-t {
+  shape-rendering: crispEdges;
+  transition: filter 0.14s var(--snap);
+}
+.ns-px-t.c3 { fill: var(--c3); }
+.ns-px-t.c2 { fill: var(--c2); }
+.ns-px-t.c1 { fill: var(--c1); }
+.ns-px-t.c0 { fill: var(--c0); }
+.ns-px-t.e2 { fill: var(--e2); }
+.ns-px-t.e1 { fill: var(--e1); }
+.ns-px-t.e0 { fill: var(--e0); }
+.ns-px-t.u1 { fill: var(--u1); }
+.ns-px-t.u0 { fill: var(--u0); }
+.ns-px-t.f1 { fill: var(--f1); }
+.ns-px-t.f0 { fill: var(--f0); }
+
+/* hover / focus / active — flat brighten (no glow), plus RPG selection cursor */
+.ns-px-cont:hover .ns-px-t,
+.ns-px-cont:focus-visible .ns-px-t,
+.ns-px-cont.active .ns-px-t {
+  filter: brightness(1.18) saturate(1.05);
+}
+
+.ns-px-bracket {
+  fill: none;
+  stroke: var(--insight-hi);
+  stroke-width: 2;
+  stroke-linejoin: miter;
+  opacity: 0;
+  shape-rendering: crispEdges;
+  transition: opacity 0.12s var(--snap);
+  pointer-events: none;
+}
+.ns-px-cont.frontier .ns-px-bracket { stroke: var(--violet-hi); }
+.ns-px-cont:hover .ns-px-bracket,
+.ns-px-cont:focus-visible .ns-px-bracket,
+.ns-px-cont.active .ns-px-bracket { opacity: 0.95; }
+
+/* continent labels */
+.ns-px-label {
+  font-family: var(--f3-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  fill: #a7bccb;
+  paint-order: stroke;
+  stroke: #071624;
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.ns-px-cont.claim .ns-px-label { fill: #d3ece6; }
+.ns-px-cont.explore .ns-px-label { fill: #c2e3dc; }
+.ns-px-cont.unchart .ns-px-label { fill: #8296ac; }
+.ns-px-cont.frontier .ns-px-label { fill: var(--violet-hi); }
+.ns-px-cont:hover .ns-px-label,
+.ns-px-cont:focus-visible .ns-px-label,
+.ns-px-cont.active .ns-px-label {
+  fill: #ffffff;
+  font-weight: 700;
+}
+.ns-px-frontier-sub {
+  font-family: var(--f3-mono), monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.14em;
+  fill: var(--violet-hi);
+  paint-order: stroke;
+  stroke: #071624;
+  stroke-width: 2.5px;
+  pointer-events: none;
+}
+
+/* frontier marker — pixel flag + blinking beacon */
+.ns-px-flag-pole { fill: var(--violet-hi); shape-rendering: crispEdges; }
+.ns-px-flag { fill: var(--violet); shape-rendering: crispEdges; }
+.ns-px-beacon {
+  fill: var(--violet-hi);
+  stroke: #071624;
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+/* pixel compass rose */
+.ns-px-comp-box {
+  fill: rgba(8, 20, 32, 0.55);
+  stroke: rgba(150, 180, 200, 0.28);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+.ns-px-comp-n { fill: var(--violet-hi); shape-rendering: crispEdges; }
+.ns-px-comp-s { fill: rgba(150, 180, 200, 0.5); shape-rendering: crispEdges; }
+.ns-px-comp-x { fill: var(--insight); opacity: 0.7; shape-rendering: crispEdges; }
+.ns-px-comp-c { fill: #cfe0e8; shape-rendering: crispEdges; }
+.ns-px-comp-lbl {
+  font-family: var(--f3-mono), monospace;
+  font-size: 8.5px;
+  letter-spacing: 0.06em;
+  fill: rgba(150, 180, 200, 0.6);
+}
+.ns-px-comp-lbl.n { fill: var(--violet-hi); }
+
+/* ── reveal (only when motion is welcome) ────────────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  .ns-px-cont {
+    opacity: 0;
+    transform: scale(0.9);
+    transform-box: fill-box;
+    transform-origin: center;
+    transition: opacity 0.45s ease, transform 0.45s ease;
+  }
+  .ns-px-map.charted .ns-px-cont {
+    opacity: 1;
+    transform: scale(1);
+  }
+  .ns-px-frontier-mark {
+    animation: ns-px-blink 1.8s steps(2, jump-none) infinite;
+  }
+  @keyframes ns-px-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+}
+
+/* ── legend swatches (cool; replaces amber sw-claim) ─────────────────── */
+.ns-atl-legend .ns-px-sw {
+  border-radius: 2px; /* squared for the pixel legend */
+}
+.ns-atl-legend .ns-px-sw.sw-claim { background: var(--c3); }
+.ns-atl-legend .ns-px-sw.sw-explore { background: var(--insight); }
+.ns-atl-legend .ns-px-sw.sw-unchart {
+  background: transparent;
+  border: 1px dashed rgba(132, 152, 180, 0.6);
+}
+
+/* ── verdict narr (측정 방식 설명 — v0.7에서 판정 헤드라인 제거) ──────── */
+.ns-atl-narr.ns-px-narr {
+  border-left-color: var(--insight-line);
+}
+
+/* ── territory list — cool state colors (pst-* replaces amber st-claim) ── */
+.ns-atl-row.pst-claim .ns-atl-tag { color: var(--insight-hi); }
+.ns-atl-row.pst-explore .ns-atl-tag { color: var(--insight); }
+.ns-atl-row.pst-unchart .ns-atl-tag,
+.ns-atl-row.pst-unchart .ns-atl-terr-name { color: var(--text-dim); }
+.ns-atl-row.pst-frontier .ns-atl-tag { color: var(--violet-hi); }
+
+.ns-atl-row.pst-claim .ns-atl-bar i {
+  background: linear-gradient(90deg, var(--c3), var(--c1));
+}
+.ns-atl-row.pst-explore .ns-atl-bar i { background: var(--insight); }
+.ns-atl-row.pst-unchart .ns-atl-bar i { background: rgba(132, 152, 180, 0.45); }
+.ns-atl-row.pst-frontier .ns-atl-bar i {
+  background: linear-gradient(90deg, var(--violet), var(--violet-hi));
+}
+
+/* (v0.7) archetype dex 스타일 제거 — 판정/유형 섹션 자체가 빠짐 */
+
+/* ── RecCard frontier (violet, was vermilion + orange glow) ──────────── */
+.ns-atl-rec.px-frontier .ns-atl-rec-fit {
+  background: var(--violet);
+  color: #12082a;
+}
+.ns-atl-rec.px-frontier .ns-atl-rec-eyebrow,
+.ns-atl-rec.px-frontier .ns-atl-rec-cta {
+  color: var(--violet-hi);
+}
+.ns-atl-rec.px-frontier:hover,
+.ns-atl-rec.px-frontier:focus-visible {
+  border-color: var(--violet);
+  box-shadow: 0 18px 44px -24px rgba(0, 0, 0, 0.8); /* no colored glow */
+}
+
+/* ── modal tags + frontier CTA (cool/violet, was amber/vermilion) ────── */
+.ns-atl-mtag.px-claim { color: var(--insight-hi); border-color: var(--insight-line); }
+.ns-atl-mtag.px-explore { color: var(--insight); border-color: var(--insight-line); }
+.ns-atl-mtag.px-unchart { color: var(--text-dim); border-color: var(--edge); }
+.ns-atl-mtag.px-frontier { color: var(--violet-hi); border-color: var(--violet); }
+.ns-atl-mcta.px-frontier {
+  background: var(--violet);
+  color: #12082a;
+}

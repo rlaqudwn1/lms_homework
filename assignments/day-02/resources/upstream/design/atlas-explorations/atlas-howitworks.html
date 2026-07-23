@@ -1,0 +1,407 @@
+<title>데이터는 어떻게 대륙이 되나 — 생성 파이프라인</title>
+<style>
+  :root{
+    --bg:#0a1016; --bg2:#0e1a22; --sea:#0a1a23; --panel:#101d26; --line:#1e2f3a;
+    --ink:#dbeaf1; --muted:#88a1af; --faint:#5d7684;
+    --teal:#5ad6c2; --violet:#8fa2ff; --amber:#e6b862; --red:#e77d7d;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:radial-gradient(130% 90% at 50% -8%,#0f1e28 0%,var(--bg) 58%);
+    color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","Malgun Gothic",sans-serif;
+    line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1180px;margin:0 auto;padding:34px 20px 72px}
+  .eyebrow{font-family:ui-monospace,Menlo,monospace;font-size:12px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--teal);margin:0 0 8px}
+  h1{font-size:clamp(22px,3vw,32px);margin:0 0 12px;font-weight:800;letter-spacing:-.01em;text-wrap:balance}
+  .lede{margin:0;color:var(--muted);max-width:74ch;font-size:15px}
+  .lede b{color:var(--ink)}
+  h2.sec{font-size:16px;margin:38px 0 6px;font-weight:750;display:flex;align-items:center;gap:9px}
+  h2.sec .b{font-family:ui-monospace,monospace;font-size:11px;background:var(--teal);color:#08110d;
+    padding:3px 8px;border-radius:6px;letter-spacing:.05em}
+  .sub{margin:0 0 16px;color:var(--muted);font-size:13.5px;max-width:72ch}
+
+  .pipe{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;align-items:start}
+  @media(max-width:900px){.pipe{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.pipe{grid-template-columns:1fr}}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    display:flex;flex-direction:column;position:relative}
+  .stage .num{position:absolute;top:8px;left:8px;z-index:2;font-family:ui-monospace,monospace;font-size:11px;
+    font-weight:700;color:#08110d;background:var(--teal);border-radius:5px;width:20px;height:20px;
+    display:grid;place-items:center}
+  .stage canvas{display:block;width:100%;height:auto;background:var(--sea)}
+  .stage .cap{padding:10px 12px 12px}
+  .stage .cap h3{margin:0 0 3px;font-size:13.5px;font-weight:700}
+  .stage .cap p{margin:0;font-size:12px;color:var(--muted)}
+  .stage .lev{display:inline-block;margin-top:7px;font-size:10.5px;font-family:ui-monospace,monospace;
+    padding:2px 7px;border-radius:20px;background:rgba(143,162,255,.14);color:var(--violet)}
+  .stage .lev.data{background:rgba(90,214,194,.14);color:var(--teal)}
+
+  .hero{margin-top:16px;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+    box-shadow:0 22px 50px -28px rgba(0,0,0,.85)}
+  .hero canvas{display:block;width:100%;height:auto;background:var(--sea)}
+  .hero .cap{padding:14px 18px 16px;font-size:13.5px;color:var(--muted)}
+  .hero .cap b{color:var(--teal)}
+
+  .det{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+  @media(max-width:760px){.det{grid-template-columns:1fr}}
+  .detcol{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:14px 15px}
+  .detcol.good{border-color:#2c6f66} .detcol.bad{border-color:#5a3535}
+  .detcol h3{margin:0 0 3px;font-size:14px;font-weight:750;display:flex;align-items:center;gap:7px}
+  .detcol.good h3{color:var(--teal)} .detcol.bad h3{color:var(--red)}
+  .detcol p{margin:0 0 11px;font-size:12.5px;color:var(--muted)}
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .three canvas{display:block;width:100%;height:auto;background:var(--sea);border-radius:7px;border:1px solid var(--line)}
+  .three .t{grid-column:1/-1;font-size:11px;color:var(--faint);font-family:ui-monospace,monospace;margin-top:3px}
+
+  .evo{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}
+  @media(max-width:720px){.evo{grid-template-columns:1fr}.evoarrow{transform:rotate(90deg)}}
+  .evocol{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+  .evocol canvas{display:block;width:100%;height:auto;background:var(--sea)}
+  .tag2{font-size:12px;font-family:ui-monospace,monospace;color:var(--muted);padding:9px 13px 7px;border-bottom:1px solid var(--line)}
+  .tag2.t1{color:var(--teal)}
+  .evoarrow{font-size:26px;color:var(--faint);text-align:center}
+  .evonote{margin-top:12px;font-size:13px;color:var(--muted);background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:12px 15px}
+  .evonote b{color:var(--ink)} .evonote .up{color:var(--teal);font-weight:600} .evonote .new{color:var(--violet);font-weight:600}
+
+  .legend{margin-top:26px;display:flex;flex-wrap:wrap;gap:11px 20px;align-items:center;
+    padding:14px 18px;background:var(--bg2);border:1px solid var(--line);border-radius:12px;font-size:13px;color:var(--muted)}
+  .legend .sw{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+  .foot{margin-top:18px;color:var(--faint);font-size:12px;font-family:ui-monospace,monospace}
+  .ask{margin-top:24px;font-size:15px} .ask b{color:var(--teal)}
+</style>
+
+<div class="wrap">
+  <p class="eyebrow">003 · Taste Atlas · 생성 파이프라인 (어떻게 작동하나)</p>
+  <h1>데이터는 어떻게 대륙이 되나 — 실제로 돌려본 5단계</h1>
+  <p class="lede">추천했던 방식(<b>고정 인접 그래프 + 약한 노이즈 + 3레버</b>)을 진짜 코드로 구현해서 단계별로 렌더했어요. 예시 스팀 라이브러리(12장르, 보유량·정복도 예시값)가 입력이고, 오른쪽 끝이 결과물입니다. 손으로 배치한 게 아니라 <b>규칙이 만든 지도</b> — 그래서 생성기(Claude Design/Pencil)에 규칙만 넘기면 재현돼요.</p>
+
+  <h2 class="sec"><span class="b">파이프라인</span> 데이터 → 대륙, 다섯 걸음</h2>
+  <p class="sub">각 단계에서 무엇이 들어가는지(<span style="color:var(--teal)">데이터 레버</span> / <span style="color:var(--violet)">삽화 레버</span>) 표시했어요. 같은 12장르가 왼→오로 변형됩니다.</p>
+  <div class="pipe">
+    <div class="stage"><span class="num">1</span><canvas id="s1" width="360" height="360"></canvas>
+      <div class="cap"><h3>입력 데이터</h3><p>장르별 보유량·정복도. 그냥 숫자.</p><span class="lev data">데이터</span></div></div>
+    <div class="stage"><span class="num">2</span><canvas id="s2" width="360" height="360"></canvas>
+      <div class="cap"><h3>인접 그래프</h3><p>유사 장르를 선으로 연결. 어느 땅이 붙을지 <b>고정</b>.</p><span class="lev data">유사도</span></div></div>
+    <div class="stage"><span class="num">3</span><canvas id="s3" width="360" height="360"></canvas>
+      <div class="cap"><h3>씨앗 배치</h3><p>그래프를 지도 좌표로 이완. 연결된 장르가 이웃이 됨.</p><span class="lev data">넓이=보유</span></div></div>
+    <div class="stage"><span class="num">4</span><canvas id="s4" width="360" height="360"></canvas>
+      <div class="cap"><h3>성장 + 노이즈</h3><p>씨앗이 자라 겹치며 <b>한 대륙</b>으로. 약한 노이즈가 해안을 유기적으로.</p><span class="lev">지형</span></div></div>
+    <div class="stage"><span class="num">5</span><canvas id="s5" width="360" height="360"></canvas>
+      <div class="cap"><h3>색·고도·모티프</h3><p>밝기=정복도, 변방=미개척, 픽셀 모티프로 장르 인식.</p><span class="lev">삽화</span></div></div>
+  </div>
+
+  <h2 class="sec"><span class="b">결과</span> 완성된 취향 대륙 — 3레버가 지형으로</h2>
+  <p class="sub">5단계의 결과를 크게. 심장부는 <b>넓이의 창발</b>(제일 넓은 땅이 가운데)이라 따로 안 넣어도 생겨요.</p>
+  <div class="hero"><canvas id="big" width="1120" height="620"></canvas>
+    <div class="cap">읽는 법 — <b>넓이</b>=보유·플레이시간 · <b>밝기</b>=정복도(밝을수록 마스터) · <b>보라 변방</b>=미개척(다음 개척지) · <b>중앙 대형 = 심장부</b>(핵심 취향, 창발) · <b>모티프</b>=장르. 웜 색 0, 쿨 단일.</div>
+  </div>
+
+  <h2 class="sec"><span class="b">왜 고정?</span> "매번 같은 지도"라야 신뢰가 산다</h2>
+  <p class="sub">추천했던 열린결정 #2(절차생성 강도)를 눈으로. 왼쪽=우리 방식, 오른쪽=순수 절차생성.</p>
+  <div class="det">
+    <div class="detcol good"><h3>✅ 고정 그래프 + 약한 노이즈 (추천)</h3>
+      <p>같은 라이브러리 → <b>항상 같은 대륙</b>. 내일 다시 봐도 내 지형이 그대로 → "이게 내 세계"가 성립.</p>
+      <div class="three"><canvas id="g1" width="240" height="180"></canvas><canvas id="g2" width="240" height="180"></canvas><canvas id="g3" width="240" height="180"></canvas>
+        <div class="t">// 3번 렌더 — 픽셀 단위로 동일</div></div></div>
+    <div class="detcol bad"><h3>❌ 순수 절차생성</h3>
+      <p>매번 다른 지도. 예뻐도 <b>"내 것"이 안 됨</b> — 새로고침마다 취향 지형이 바뀌면 신뢰가 깨짐.</p>
+      <div class="three"><canvas id="b1" width="240" height="180"></canvas><canvas id="b2" width="240" height="180"></canvas><canvas id="b3" width="240" height="180"></canvas>
+        <div class="t">// 3번 렌더 — 제각각</div></div></div>
+  </div>
+
+  <h2 class="sec"><span class="b">진화</span> 당신의 대륙은 자란다 — 계정이 발전하면</h2>
+  <p class="sub">고정 그래프라 <b style="color:var(--ink)">자리·이웃은 그대로</b>(정체성 유지). 데이터가 자라면 <b style="color:var(--ink)">크기·밝기만</b> 자라고, 미개척 변방이 개척지로 바뀐다. 결정론 = 정지가 아니라 <b style="color:var(--ink)">안정적 진화</b>.</p>
+  <div class="evo">
+    <div class="evocol"><div class="tag2">지금</div><canvas id="ev0" width="560" height="380"></canvas></div>
+    <div class="evoarrow">→</div>
+    <div class="evocol"><div class="tag2 t1">3개월 뒤 · 더 플레이·더 정복</div><canvas id="ev1" width="560" height="380"></canvas></div>
+  </div>
+  <p class="evonote"><b>바뀐 것:</b> 소울라이크 <span class="up">↑넓어짐·↑밝아짐</span>(더 사고 더 깸) · 대전격투 곶 <span class="up">↑성장</span>(더 플레이) · 시뮬 <span class="new">보라→teal 개척 시작</span>(미개척→탐험). &nbsp;<b>안 바뀐 것:</b> 대륙 실루엣·각 땅의 자리·이웃 → 그래서 여전히 "내 대륙".</p>
+
+  <div class="legend">
+    <span style="color:var(--ink);font-weight:600">범례</span>
+    <span><span class="sw" style="background:#59d6c2"></span>정복(밝음)</span>
+    <span><span class="sw" style="background:#2b7d76"></span>탐험 중</span>
+    <span><span class="sw" style="background:#173a3f"></span>거의 안 함(어두움)</span>
+    <span><span class="sw" style="background:#2f3566;border:1px solid #8fa2ff"></span>미개척 변방</span>
+    <span>· 심볼 = 장르 · 격자 = 탐험 좌표</span>
+  </div>
+
+  <p class="ask">이게 "어떻게 한건지"예요. 이대로면 <b>옵션 A(biome 사전 + 인접 그래프 스펙)</b> 착수할게요 — 이 파이프라인의 ②③⑤를 규칙서로 옮기는 일이에요.</p>
+  <p class="foot">// 절차 생성 예시맵(실제 라이브러리 아님) · 파이프라인 실제 구현(고정 FR 레이아웃 + 시드 노이즈) · 최종 질감은 생성기가 만든다.</p>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+
+  // ---- example library (12 genres) ----
+  // owned drives AREA, mastery drives BRIGHTNESS(정복도), frontier=미개척
+  var GEN=[
+    {name:"RPG",        sym:"sword",  owned:1.00, mastery:0.92, frontier:false},
+    {name:"오픈월드",    sym:"mtn",    owned:0.86, mastery:0.72, frontier:false},
+    {name:"액션",       sym:"bolt",   owned:0.82, mastery:0.88, frontier:false},
+    {name:"소울라이크",  sym:"skull",  owned:0.62, mastery:0.78, frontier:false},
+    {name:"메트로배니아", sym:"key",    owned:0.52, mastery:0.55, frontier:false},
+    {name:"로그라이크",  sym:"dice",   owned:0.58, mastery:0.64, frontier:false},
+    {name:"FPS",        sym:"cross",  owned:0.46, mastery:0.40, frontier:false},
+    {name:"대전격투",    sym:"fist",   owned:0.30, mastery:0.34, frontier:false},
+    {name:"퍼즐",       sym:"puzzle", owned:0.40, mastery:0.52, frontier:false},
+    {name:"레이싱",      sym:"race",   owned:0.34, mastery:0.30, frontier:false},
+    {name:"전략",       sym:"flag",   owned:0.42, mastery:0.16, frontier:true},
+    {name:"시뮬",       sym:"sprout", owned:0.30, mastery:0.12, frontier:true}
+  ];
+  // fixed adjacency (genre similarity) — undirected pairs by index
+  var EDGES=[[0,1],[0,2],[0,3],[0,4],[1,2],[1,11],[1,9],[2,3],[2,6],[2,7],[2,9],[3,4],[4,8],[5,2],[5,10],[5,8],[6,7],[8,10],[10,11]];
+  var N=GEN.length;
+
+  var TIER={f:"#2f3566",lo:"#173a3f",mid:"#2b7d76",hi:"#59d6c2"};
+  var TIER_C={f:"#20264a",lo:"#0e2529",mid:"#1c554f",hi:"#3aa593"};
+  function tierOf(g){if(g.frontier)return"f";if(g.mastery>=0.66)return"hi";if(g.mastery>=0.33)return"mid";return"lo";}
+
+  // ---- deterministic force-directed layout (no RNG → identical every run) ----
+  function computeLayout(){
+    var pos=GEN.map(function(_,i){var a=i/N*Math.PI*2;return {x:Math.cos(a),y:Math.sin(a)};});
+    var k=0.9;
+    for(var it=0;it<320;it++){
+      var dsp=pos.map(function(){return{x:0,y:0};});
+      for(var i=0;i<N;i++)for(var j=i+1;j<N;j++){
+        var dx=pos[i].x-pos[j].x,dy=pos[i].y-pos[j].y,d=Math.hypot(dx,dy)||1e-3;
+        var rep=k*k/d, ux=dx/d, uy=dy/d;
+        dsp[i].x+=ux*rep;dsp[i].y+=uy*rep;dsp[j].x-=ux*rep;dsp[j].y-=uy*rep;
+      }
+      for(var e=0;e<EDGES.length;e++){
+        var a=EDGES[e][0],b=EDGES[e][1];
+        var dx2=pos[a].x-pos[b].x,dy2=pos[a].y-pos[b].y,d2=Math.hypot(dx2,dy2)||1e-3;
+        var att=d2*d2/k, vx=dx2/d2, vy=dy2/d2;
+        dsp[a].x-=vx*att;dsp[a].y-=vy*att;dsp[b].x+=vx*att;dsp[b].y+=vy*att;
+      }
+      var temp=0.09*(1-it/320)+0.004;
+      for(var m=0;m<N;m++){var dl=Math.hypot(dsp[m].x,dsp[m].y)||1e-3;
+        pos[m].x+=dsp[m].x/dl*Math.min(dl,temp);pos[m].y+=dsp[m].y/dl*Math.min(dl,temp);}
+    }
+    // normalize to [0,1]
+    var minx=1e9,miny=1e9,maxx=-1e9,maxy=-1e9;
+    pos.forEach(function(p){minx=Math.min(minx,p.x);miny=Math.min(miny,p.y);maxx=Math.max(maxx,p.x);maxy=Math.max(maxy,p.y);});
+    // compress toward center so peripheral genres connect into one landmass
+    return pos.map(function(p){var nx=(p.x-minx)/(maxx-minx),ny=(p.y-miny)/(maxy-miny);
+      return {x:0.5+(nx-0.5)*0.86,y:0.5+(ny-0.5)*0.86};});
+  }
+  var LAYOUT=computeLayout();
+
+  // value noise field factory (seeded)
+  function makeNoise(COLS,ROWS,seed){
+    var rng=mulberry32(seed),nStep=6,nC=Math.ceil(COLS/nStep)+2,nR=Math.ceil(ROWS/nStep)+2,NN=[];
+    for(var k=0;k<nC*nR;k++)NN.push(rng()*2-1);
+    return function(i,j){var gx=i/nStep,gy=j/nStep,x0=Math.floor(gx),y0=Math.floor(gy),tx=gx-x0,ty=gy-y0;
+      var a=NN[y0*nC+x0],b=NN[y0*nC+x0+1],c=NN[(y0+1)*nC+x0],d=NN[(y0+1)*nC+x0+1];
+      var sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
+      return (a*(1-sx)+b*sx)*(1-sy)+(c*(1-sx)+d*sx)*sy;};
+  }
+
+  // core: build region grid from seed positions (normalized) + noise
+  function buildRegions(seedsN,COLS,ROWS,noise,pad,gen){
+    gen=gen||GEN;
+    var seeds=seedsN.map(function(p){return [(pad+p.x*(1-2*pad))*COLS,(pad+p.y*(1-2*pad))*ROWS];});
+    var baseR=COLS*0.104;
+    var radii=gen.map(function(g){return baseR*(0.70+0.66*g.owned);});
+    var reg=new Int16Array(COLS*ROWS);reg.fill(-1);
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){
+      var best=-1,bd=1e9;
+      for(var g=0;g<seeds.length;g++){var dx=i+0.5-seeds[g][0],dy=j+0.5-seeds[g][1],d=Math.sqrt(dx*dx+dy*dy);if(d<bd){bd=d;best=g;}}
+      var eff=radii[best]*(1+0.34*noise(i,j));
+      if(bd<eff)reg[j*COLS+i]=best;
+    }
+    return {reg:reg,seeds:seeds,radii:radii};
+  }
+
+  // draw a continent into a canvas region [x,y,w,h]
+  function drawContinent(ctx,x,y,w,h,seedsN,noiseSeed,opts){
+    opts=opts||{};
+    var GN=opts.gen||GEN;
+    var COLS=opts.cols||84, ROWS=Math.round(COLS*h/w), pad=0.17;
+    var noise=makeNoise(COLS,ROWS,noiseSeed);
+    var R=buildRegions(seedsN,COLS,ROWS,noise,pad,GN);
+    var reg=R.reg, cw=w/COLS, ch=h/ROWS;
+    function px(i){return x+i*cw;} function py(j){return y+j*ch;}
+    function isLand(i,j){return i>=0&&j>=0&&i<COLS&&j<ROWS&&reg[j*COLS+i]>=0;}
+    // sea + graticule
+    ctx.fillStyle="#0a1a23";ctx.fillRect(x,y,w,h);
+    if(opts.grid!==false){ctx.strokeStyle="rgba(120,180,200,0.05)";ctx.lineWidth=1;
+      for(var gi=0;gi<=COLS;gi+=8){ctx.beginPath();ctx.moveTo(px(gi),y);ctx.lineTo(px(gi),y+h);ctx.stroke();}
+      for(var gj=0;gj<=ROWS;gj+=8){ctx.beginPath();ctx.moveTo(x,py(gj));ctx.lineTo(x+w,py(gj));ctx.stroke();}}
+    // land
+    var sum={};
+    for(var j=0;j<ROWS;j++)for(var i=0;i<COLS;i++){
+      var g=reg[j*COLS+i];if(g<0)continue;
+      var coast=!(isLand(i-1,j)&&isLand(i+1,j)&&isLand(i,j-1)&&isLand(i,j+1));
+      var col;
+      if(opts.mode==="flat"){col=coast?"#1c554f":"#2b7d76";}
+      else{var t=tierOf(GN[g]);col=coast?TIER_C[t]:TIER[t];}
+      ctx.fillStyle=col;ctx.fillRect(Math.floor(px(i)),Math.floor(py(j)),Math.ceil(cw)+1,Math.ceil(ch)+1);
+      if(opts.mode!=="flat"&&GN[g].frontier&&!coast&&((i+j)%2===0)){ctx.fillStyle="rgba(143,162,255,0.24)";ctx.fillRect(Math.floor(px(i)),Math.floor(py(j)),Math.ceil(cw)+1,Math.ceil(ch)+1);}
+      if(!sum[g])sum[g]={x:0,y:0,n:0};sum[g].x+=i;sum[g].y+=j;sum[g].n++;
+    }
+    // region borders (adjacency without walls)
+    if(opts.mode!=="flat"){ctx.fillStyle="rgba(9,16,22,0.5)";
+      for(var j2=0;j2<ROWS;j2++)for(var i2=0;i2<COLS;i2++){var g2=reg[j2*COLS+i2];if(g2<0)continue;
+        if((isLand(i2+1,j2)&&reg[j2*COLS+i2+1]!==g2)||(isLand(i2,j2+1)&&reg[(j2+1)*COLS+i2]!==g2))
+          ctx.fillRect(Math.floor(px(i2)),Math.floor(py(j2)),Math.ceil(cw)+1,Math.ceil(ch)+1);}}
+    // silhouette
+    if(opts.silhouette!==false){ctx.strokeStyle="rgba(120,222,205,0.5)";ctx.lineWidth=Math.max(1.2,cw*0.16);ctx.lineCap="round";
+      for(var j3=0;j3<ROWS;j3++)for(var i3=0;i3<COLS;i3++){if(!isLand(i3,j3))continue;var ax=px(i3),ay=py(j3);
+        if(!isLand(i3-1,j3)){ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax,ay+ch);ctx.stroke();}
+        if(!isLand(i3+1,j3)){ctx.beginPath();ctx.moveTo(ax+cw,ay);ctx.lineTo(ax+cw,ay+ch);ctx.stroke();}
+        if(!isLand(i3,j3-1)){ctx.beginPath();ctx.moveTo(ax,ay);ctx.lineTo(ax+cw,ay);ctx.stroke();}
+        if(!isLand(i3,j3+1)){ctx.beginPath();ctx.moveTo(ax,ay+ch);ctx.lineTo(ax+cw,ay+ch);ctx.stroke();}}}
+    // motifs + labels
+    if(opts.motif){for(var gk in sum){var s=sum[gk],cx=px(s.x/s.n+0.5),cy=py(s.y/s.n+0.5),G=GN[gk],fr=G.frontier;
+      drawIcon(ctx,G.sym,cx,cy-(opts.labels?7:0),opts.iconSize||15,fr?"#aeb9ff":"#dff4f1");
+      if(opts.labels){ctx.font="600 12px ui-monospace,Menlo,monospace";ctx.textAlign="center";ctx.textBaseline="middle";
+        var nm=(fr?"? ":"")+G.name,tw=ctx.measureText(nm).width;
+        ctx.fillStyle="rgba(8,14,20,0.66)";ctx.fillRect(cx-tw/2-4,cy+7,tw+8,15);
+        ctx.fillStyle=fr?"#c7cffb":"#e6f4f2";ctx.fillText(nm,cx,cy+14);}}}
+    return {sum:sum,COLS:COLS,ROWS:ROWS,cw:cw,ch:ch,px:px,py:py,reg:reg};
+  }
+
+  // ---- Stage 1: input data bars ----
+  (function(){var c=document.getElementById("s1"),ctx=c.getContext("2d"),W=c.width,H=c.height;
+    ctx.fillStyle="#0c1620";ctx.fillRect(0,0,W,H);
+    var pad=18,rowH=(H-pad*2)/N;
+    ctx.textBaseline="middle";
+    for(var i=0;i<N;i++){var y=pad+i*rowH+rowH/2,G=GEN[i];
+      ctx.font="600 11px ui-monospace,monospace";ctx.textAlign="left";ctx.fillStyle=G.frontier?"#aeb9ff":"#9fb6c2";
+      ctx.fillText(G.name,10,y);
+      var bx=118,bw=W-bx-14;
+      // owned bar (teal)
+      ctx.fillStyle="#12303a";ctx.fillRect(bx,y-6,bw,5);
+      ctx.fillStyle="#5ad6c2";ctx.fillRect(bx,y-6,bw*G.owned,5);
+      // mastery bar (lighter)
+      ctx.fillStyle="#12303a";ctx.fillRect(bx,y+2,bw,4);
+      ctx.fillStyle=G.frontier?"#8fa2ff":"#cfeee8";ctx.fillRect(bx,y+2,bw*G.mastery,4);
+    }
+    ctx.font="700 10px ui-monospace,monospace";ctx.textAlign="left";
+    ctx.fillStyle="#5ad6c2";ctx.fillText("■ 보유량",118,11);
+    ctx.fillStyle="#cfeee8";ctx.fillText("■ 정복도",200,11);
+  })();
+
+  // ---- Stage 2: adjacency graph ----
+  (function(){var c=document.getElementById("s2"),ctx=c.getContext("2d"),W=c.width,H=c.height,pad=34;
+    ctx.fillStyle="#0c1620";ctx.fillRect(0,0,W,H);
+    function P(i){return [pad+LAYOUT[i].x*(W-2*pad),pad+LAYOUT[i].y*(H-2*pad)];}
+    ctx.strokeStyle="rgba(143,162,255,0.35)";ctx.lineWidth=1.4;
+    EDGES.forEach(function(e){var a=P(e[0]),b=P(e[1]);ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(b[0],b[1]);ctx.stroke();});
+    for(var i=0;i<N;i++){var p=P(i),G=GEN[i],t=tierOf(G),r=5+G.owned*8;
+      ctx.fillStyle=G.frontier?TIER.f:TIER[t];ctx.strokeStyle=G.frontier?"#8fa2ff":"#5ad6c2";ctx.lineWidth=1.4;
+      ctx.beginPath();ctx.arc(p[0],p[1],r,0,7);ctx.fill();ctx.stroke();
+      ctx.fillStyle="#cfe4ee";ctx.font="600 9.5px ui-monospace,monospace";ctx.textAlign="center";ctx.textBaseline="middle";
+      ctx.fillText(G.name,p[0],p[1]-r-7);}
+  })();
+
+  // ---- Stage 3: seeds on map ----
+  (function(){var c=document.getElementById("s3"),ctx=c.getContext("2d"),W=c.width,H=c.height,pad=0.13;
+    ctx.fillStyle="#0a1a23";ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle="rgba(120,180,200,0.06)";ctx.lineWidth=1;
+    for(var gx=0;gx<=10;gx++){ctx.beginPath();ctx.moveTo(gx/10*W,0);ctx.lineTo(gx/10*W,H);ctx.stroke();}
+    for(var gy=0;gy<=10;gy++){ctx.beginPath();ctx.moveTo(0,gy/10*H);ctx.lineTo(W,gy/10*H);ctx.stroke();}
+    for(var i=0;i<N;i++){var X=(pad+LAYOUT[i].x*(1-2*pad))*W,Y=(pad+LAYOUT[i].y*(1-2*pad))*H,G=GEN[i],r=6+G.owned*16;
+      ctx.strokeStyle="rgba(90,214,194,0.28)";ctx.lineWidth=1;ctx.beginPath();ctx.arc(X,Y,r,0,7);ctx.stroke();
+      ctx.fillStyle=G.frontier?"#8fa2ff":"#5ad6c2";ctx.beginPath();ctx.arc(X,Y,2.6,0,7);ctx.fill();}
+  })();
+
+  // ---- Stage 4: growth flat / Stage 5: full ----
+  (function(){var c=document.getElementById("s4"),ctx=c.getContext("2d");
+    drawContinent(ctx,0,0,c.width,c.height,LAYOUT,4242,{cols:70,mode:"flat",silhouette:true});})();
+  (function(){var c=document.getElementById("s5"),ctx=c.getContext("2d");
+    drawContinent(ctx,0,0,c.width,c.height,LAYOUT,4242,{cols:70,mode:"tier",motif:true,iconSize:12,silhouette:true});})();
+
+  // ---- Big hero continent + annotations ----
+  (function(){var c=document.getElementById("big"),ctx=c.getContext("2d"),W=c.width,H=c.height;
+    var MX=16,MY=16,MW=760,MH=W? H-32:0;MW=740;MH=H-32;
+    var res=drawContinent(ctx,MX,MY,MW,MH,LAYOUT,4242,{cols:88,mode:"tier",motif:true,labels:true,iconSize:15,silhouette:true});
+    // centroids for callouts
+    function cen(idx){var s=res.sum[idx];return [res.px(s.x/s.n+0.5),res.py(s.y/s.n+0.5)];}
+    // find brightest(hi) and a frontier centroid
+    var rpg=cen(0);
+    // biggest small = 대전격투(7)
+    var small=cen(7);
+    var bright=cen(2); // 액션 hi mastery
+    var frontier=cen(10)||cen(11); // 전략/시뮬
+    var CALLS=[
+      {n:"보라 변방", sub:"미개척 = 다음 개척지", tgt:frontier, cy:80},
+      {n:"심장부", sub:"중앙 대형 = 핵심 취향(창발)", tgt:rpg, cy:235},
+      {n:"밝기 = 정복도", sub:"밝은 고원 = 마스터", tgt:bright, cy:390},
+      {n:"넓이 = 보유량", sub:"큰 땅 ↔ 작은 곶(대전격투)", tgt:small, cy:540}
+    ];
+    var CLX=800,CLW=304;
+    function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+    CALLS.forEach(function(c2){
+      if(!c2.tgt)return;
+      ctx.strokeStyle="rgba(143,162,255,0.5)";ctx.lineWidth=1.3;ctx.setLineDash([4,3]);
+      ctx.beginPath();ctx.moveTo(c2.tgt[0],c2.tgt[1]);ctx.lineTo(CLX-8,c2.cy);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle="#8fa2ff";ctx.beginPath();ctx.arc(c2.tgt[0],c2.tgt[1],3.4,0,7);ctx.fill();
+      ctx.strokeStyle="rgba(143,162,255,0.4)";ctx.lineWidth=1;ctx.beginPath();ctx.arc(c2.tgt[0],c2.tgt[1],7,0,7);ctx.stroke();
+      ctx.fillStyle="rgba(14,26,34,0.94)";rr(CLX,c2.cy-27,CLW,54,10);ctx.fill();
+      ctx.strokeStyle="#22384a";ctx.lineWidth=1;rr(CLX,c2.cy-27,CLW,54,10);ctx.stroke();
+      ctx.fillStyle="#5ad6c2";rr(CLX+13,c2.cy-11,7,22,3);ctx.fill();
+      ctx.textAlign="left";ctx.fillStyle="#e6f4f2";ctx.font="750 16px system-ui,'Malgun Gothic',sans-serif";ctx.textBaseline="alphabetic";
+      ctx.fillText(c2.n,CLX+30,c2.cy-3);
+      ctx.fillStyle="#87a0ae";ctx.font="400 12.5px system-ui,'Malgun Gothic',sans-serif";ctx.fillText(c2.sub,CLX+30,c2.cy+16);
+    });
+    // compass
+    var ox=MX+MW-26,oy=MY+MH-24;
+    ctx.strokeStyle="rgba(143,162,255,0.5)";ctx.fillStyle="rgba(143,162,255,0.5)";ctx.lineWidth=1.5;
+    ctx.beginPath();ctx.moveTo(ox,oy-13);ctx.lineTo(ox,oy+13);ctx.moveTo(ox-13,oy);ctx.lineTo(ox+13,oy);ctx.stroke();
+    ctx.beginPath();ctx.moveTo(ox,oy-13);ctx.lineTo(ox-3,oy-5);ctx.lineTo(ox+3,oy-5);ctx.closePath();ctx.fill();
+    ctx.font="700 9px ui-monospace,monospace";ctx.textAlign="center";ctx.fillText("N",ox,oy-17);
+  })();
+
+  // ---- determinism strip ----
+  function randSeeds(){var out=[];for(var i=0;i<N;i++)out.push({x:0.1+Math.random()*0.8,y:0.1+Math.random()*0.8});return out;}
+  ["g1","g2","g3"].forEach(function(id){var c=document.getElementById(id),ctx=c.getContext("2d");
+    drawContinent(ctx,0,0,c.width,c.height,LAYOUT,4242,{cols:46,mode:"tier",motif:false,silhouette:true});});
+  ["b1","b2","b3"].forEach(function(id){var c=document.getElementById(id),ctx=c.getContext("2d");
+    drawContinent(ctx,0,0,c.width,c.height,randSeeds(),(Math.random()*1e6)|0,{cols:46,mode:"tier",motif:false,silhouette:true});});
+
+  // ---- evolution: SAME graph, grown data ----
+  var GEN1=GEN.map(function(g){return {name:g.name,sym:g.sym,owned:g.owned,mastery:g.mastery,frontier:g.frontier};});
+  GEN1[3].owned=0.86; GEN1[3].mastery=0.96;                          // 소울라이크: 더 사고 더 정복
+  GEN1[7].owned=0.52;                                                // 대전격투: 곶 성장
+  GEN1[11].frontier=false; GEN1[11].mastery=0.55; GEN1[11].owned=0.44; // 시뮬: 미개척 → 개척 시작
+  (function(){var c=document.getElementById("ev0"),ctx=c.getContext("2d");
+    drawContinent(ctx,0,0,c.width,c.height,LAYOUT,4242,{cols:60,mode:"tier",motif:true,iconSize:11,labels:true,gen:GEN});})();
+  (function(){var c=document.getElementById("ev1"),ctx=c.getContext("2d");
+    var res=drawContinent(ctx,0,0,c.width,c.height,LAYOUT,4242,{cols:60,mode:"tier",motif:true,iconSize:11,labels:true,gen:GEN1});
+    function rrc(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+    function badge(idx,txt,col){var s=res.sum[idx];if(!s)return;var bx=res.px(s.x/s.n+0.5),by=res.py(s.y/s.n+0.5)-17;
+      ctx.font="700 11px ui-monospace,monospace";ctx.textAlign="center";ctx.textBaseline="middle";var tw=ctx.measureText(txt).width;
+      ctx.fillStyle="rgba(6,11,16,0.9)";rrc(bx-tw/2-6,by-9,tw+12,18,9);ctx.fill();
+      ctx.strokeStyle=col;ctx.lineWidth=1;rrc(bx-tw/2-6,by-9,tw+12,18,9);ctx.stroke();
+      ctx.fillStyle=col;ctx.fillText(txt,bx,by);}
+    badge(3,"↑ 성장","#5ad6c2");
+    badge(7,"↑","#5ad6c2");
+    badge(11,"✦ 개척","#8fa2ff");
+  })();
+
+  // ---- icon drawing ----
+  function drawIcon(ctx,sym,x,y,s,col){
+    ctx.save();ctx.translate(x,y);ctx.strokeStyle=col;ctx.fillStyle=col;
+    ctx.lineWidth=1.6;ctx.lineJoin="round";ctx.lineCap="round";var h=s/2;
+    function P(){ctx.beginPath();}
+    if(sym==="sword"){P();ctx.moveTo(0,-h);ctx.lineTo(0,h*0.55);ctx.stroke();P();ctx.moveTo(-h*0.55,h*0.55);ctx.lineTo(h*0.55,h*0.55);ctx.stroke();P();ctx.moveTo(0,h*0.55);ctx.lineTo(0,h);ctx.stroke();}
+    else if(sym==="dice"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);var d=h*0.34;[[-1,-1],[1,1],[-1,1]].forEach(function(p){P();ctx.arc(p[0]*d,p[1]*d,1.5,0,7);ctx.fill();});}
+    else if(sym==="bolt"){P();ctx.moveTo(h*0.5,-h);ctx.lineTo(-h*0.5,h*0.15);ctx.lineTo(h*0.1,h*0.15);ctx.lineTo(-h*0.4,h);ctx.lineTo(h*0.6,-h*0.2);ctx.lineTo(0,-h*0.2);ctx.closePath();ctx.fill();}
+    else if(sym==="cross"){P();ctx.arc(0,0,h*0.75,0,7);ctx.stroke();P();ctx.moveTo(0,-h);ctx.lineTo(0,-h*0.35);ctx.moveTo(0,h*0.35);ctx.lineTo(0,h);ctx.moveTo(-h,0);ctx.lineTo(-h*0.35,0);ctx.moveTo(h*0.35,0);ctx.lineTo(h,0);ctx.stroke();P();ctx.arc(0,0,1.3,0,7);ctx.fill();}
+    else if(sym==="fist"){ctx.strokeRect(-h*0.7,-h*0.4,h*1.4,h*1.1);for(var i=0;i<3;i++){P();ctx.arc(-h*0.4+i*h*0.4,-h*0.4,h*0.2,Math.PI,0);ctx.stroke();}}
+    else if(sym==="puzzle"){ctx.strokeRect(-h*0.8,-h*0.8,h*1.6,h*1.6);P();ctx.arc(h*0.8,0,h*0.28,-1.6,1.6);ctx.stroke();}
+    else if(sym==="skull"){P();ctx.arc(0,-h*0.15,h*0.75,Math.PI,0);ctx.lineTo(h*0.45,h*0.4);ctx.lineTo(-h*0.45,h*0.4);ctx.closePath();ctx.stroke();ctx.fillStyle=col;P();ctx.arc(-h*0.3,-h*0.15,h*0.2,0,7);ctx.arc(h*0.3,-h*0.15,h*0.2,0,7);ctx.fill();}
+    else if(sym==="mtn"){P();ctx.moveTo(-h,h*0.7);ctx.lineTo(-h*0.15,-h*0.8);ctx.lineTo(h*0.25,-h*0.1);ctx.lineTo(h*0.5,-h*0.5);ctx.lineTo(h,h*0.7);ctx.closePath();ctx.stroke();}
+    else if(sym==="key"){P();ctx.arc(-h*0.4,0,h*0.42,0,7);ctx.stroke();P();ctx.moveTo(-h*0.02,0);ctx.lineTo(h*0.85,0);ctx.moveTo(h*0.6,0);ctx.lineTo(h*0.6,h*0.35);ctx.moveTo(h*0.85,0);ctx.lineTo(h*0.85,h*0.3);ctx.stroke();}
+    else if(sym==="sprout"){P();ctx.moveTo(0,h);ctx.lineTo(0,-h*0.2);ctx.stroke();P();ctx.ellipse(-h*0.35,-h*0.35,h*0.4,h*0.22,0.7,0,7);ctx.ellipse(h*0.35,-h*0.35,h*0.4,h*0.22,-0.7,0,7);ctx.fill();}
+    else if(sym==="flag"){P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(-h*0.6,h);ctx.stroke();P();ctx.moveTo(-h*0.6,-h);ctx.lineTo(h*0.7,-h*0.55);ctx.lineTo(-h*0.6,-h*0.1);ctx.closePath();ctx.fill();}
+    else if(sym==="race"){P();ctx.moveTo(-h*0.7,-h*0.6);ctx.lineTo(-h*0.05,0);ctx.lineTo(-h*0.7,h*0.6);ctx.stroke();P();ctx.moveTo(h*0.05,-h*0.6);ctx.lineTo(h*0.7,0);ctx.lineTo(h*0.05,h*0.6);ctx.stroke();}
+    ctx.restore();
+  }
+})();
+</script>
