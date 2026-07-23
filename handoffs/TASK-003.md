@@ -3,7 +3,7 @@
 - Owner: incoming coordinator
 - Track: course-mock with cross-assignment product contract
 - Branch/worktree: `codex/day-02-next-save` / main working line
-- Status: Step 08 local implementation complete; publication gate remains closed
+- Status: complete; superseded by `TASK-004.md` after Day 2 publication and LMS submission
 - Goal: revise the completed Claude Design direction with the restored product-wide community-preview contract, obtain owner visual approval, then implement the approved Day 2 slice through a new TDD packet.
 - Handoff at: 2026-07-22 15:14 KST
 
@@ -29,7 +29,13 @@
 - Added Step 07 documentation and updated the Day 2 rollup.
 - `git diff --check` passes. No staging, commit, push, PR, deployment, public share, export, or LMS submission occurred.
 
-## Next safe action
+## Completion record
+
+- Public repository and ready PR #1 created on 2026-07-23 KST.
+- Day 2 submitted to the LMS at 2026-07-23 10:33 KST and marked `제출됨 · 지각`.
+- Continue from `handoffs/TASK-004.md` for Day 5 deployment preparation.
+
+## Historical next safe action
 
 1. Inspect the Step 08 production-render evidence and current dirty tree.
 2. If the owner requests refinements, keep them inside the Step 08 fixture and product-scope contract and rerun all verification.
