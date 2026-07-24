@@ -4,7 +4,7 @@ This document contains the detailed procedure behind the short charter in `AGENT
 
 ## 1. Course-slice boundary
 
-NEXT SAVE is a reusable course slice, not the future production application. Its base flow is a disclosed seeded-profile demo that produces a taste atlas, three traceable recommendations, and one selected game. Live Steam data, production authentication, payments, social features, and a production recommendation engine are out of scope until the user explicitly changes the track.
+NEXT SAVE is a reusable course slice, not the future production application. Its base flow uses disclosed example profiles to produce a taste atlas, three traceable recommendations, and one selected game. Approved public game metadata and media may be requested; private player data, production authentication, payments, live social features, and a production recommendation engine remain out of scope until the user explicitly changes the track.
 
 The canonical requirements are in `specs/course/next-save/`. Assignment packets do not invent competing product requirements; they record only what must be shown for a particular LMS day.
 
@@ -15,6 +15,21 @@ The canonical requirements are in `specs/course/next-save/`. Assignment packets 
 - Assignment source: private `rlaqudwn1/lms_homework`, default branch `master`.
 
 Pin source commit SHAs in the relevant intake under `specs/intake/`; do not merge source repositories wholesale into this course repository. Contradictory source decisions remain open decisions rather than being silently resolved.
+
+Every Day that changes the NEXT SAVE journey must continue to consult both
+private upstream sources. At the start of the Day or source-sensitive step:
+
+1. use `gh` read-only to confirm each repository URL, default branch, and HEAD;
+2. compare HEAD with the pinned commits and the selective local reference
+   manifest under `assignments/day-02/resources/`;
+3. add only missing, in-scope reference files after checking provenance and
+   local modifications;
+4. record the exact files used in that Day's evidence.
+
+The local upstream folder is reference material, not product source. Do not
+bundle private upstream app code, third-party captures, secrets, or personal
+data. Runtime requests for approved public Steam CDN cover art are allowed;
+keep deterministic local SVG fallbacks and record the origin in evidence.
 
 ## 2. Day-packet lifecycle
 
