@@ -2,7 +2,7 @@
 
 ## Submission statement
 
-NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a disclosed sample Steam profile becomes a taste atlas, three traceable recommendations, and one selected game. It uses seeded data in the base version and does not contact Steam or claim production recommendation accuracy.
+NEXT SAVE is a React course prototype that demonstrates one honest vertical slice: a disclosed example Steam profile becomes a taste atlas, three traceable recommendations, and one selected game. It may request approved public Steam game covers while keeping entered URLs and private player data local.
 
 ## Assignment mapping
 
@@ -27,7 +27,8 @@ NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a 
 - [x] Add desktop, 360 px, keyboard-focus, and completed-flow screenshots.
 - [x] Record build, test, and accessibility verification commands and results.
 - [ ] Confirm `예시 데이터 · 데모` is visible on input and result surfaces.
-- [x] Confirm browser network logs contain no Steam request.
+- [x] Confirm browser network logs contain only approved public Steam cover
+  requests and no private-account or unexpected external request.
 - [ ] Record known limitations and any failed checks instead of hiding them.
 - [x] Record the user-approved LMS submission timestamp only after explicit approval.
 
@@ -44,6 +45,7 @@ NEXT SAVE is a React course mock that demonstrates one honest vertical slice: a 
 
 1. Open the deployed route and confirm the demo disclosure.
 2. Submit an invalid value and observe the inline accessible error.
-3. Submit a valid-looking Steam profile URL and confirm that no Steam request occurs.
+3. Submit a valid-looking Steam profile URL and confirm it is not transmitted;
+   public game-cover requests may occur independently.
 4. Compare both seeded profiles and inspect their different atlas/evidence output.
 5. Expand a recommendation reason, select one game, and capture the selection receipt.

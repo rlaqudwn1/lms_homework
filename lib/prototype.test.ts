@@ -35,11 +35,77 @@ describe("Day 7 prototype fixture contract", () => {
     }
   });
 
-  it("contains no live service identifiers or remote assets", () => {
+  it("uses approved public Steam covers without private account identifiers", () => {
     const serialized = JSON.stringify(prototypeProfiles);
-    expect(serialized).not.toMatch(/steamId|imageUrl|apiKey|memberCount/);
-    expect(serialized).not.toMatch(/https?:\/\//);
-    expect(serialized).toMatch(/fixture/i);
+    expect(serialized).not.toMatch(/steamId|apiKey|cookie|memberCount|onlineCount|followerCount/);
+    for (const profile of prototypeProfiles) {
+      for (const candidate of profile.candidates) {
+        expect(candidate.media.kind).toBe("public-steam-cdn");
+        expect(candidate.media.portraitUrl).toBe(
+          `https://cdn.cloudflare.steamstatic.com/steam/apps/${candidate.steamAppId}/library_600x900.jpg`,
+        );
+        expect(candidate.media.headerUrl).toBe(
+          `https://cdn.cloudflare.steamstatic.com/steam/apps/${candidate.steamAppId}/header.jpg`,
+        );
+      }
+    }
+  });
+
+  it("carries one game identity through detail, receipt, and community fixtures", () => {
+    for (const profile of prototypeProfiles) {
+      for (const candidate of profile.candidates) {
+        expect(candidate.detail.gameId).toBe(candidate.id);
+        expect(candidate.community.gameId).toBe(candidate.id);
+        expect(candidate.community.reviews.length).toBeGreaterThan(0);
+        candidate.community.reviews.forEach((review) => {
+          expect(review.gameId).toBe(candidate.id);
+          expect(review.fixtureLabel).toMatch(/fixture|예시/i);
+        });
+      }
+    }
+  });
+
+  it("separates objective game facts from fixture-derived personal interpretation", () => {
+    for (const profile of prototypeProfiles) {
+      const signalIds = new Set(profile.signals.map(({ id }) => id));
+      for (const candidate of profile.candidates) {
+        expect(candidate.detail.facts.length).toBeGreaterThanOrEqual(3);
+        candidate.detail.facts.forEach((fact) => {
+          expect(fact.sourceStatus).toBe("fixture-catalog");
+          expect(fact.label.length).toBeGreaterThan(1);
+          expect(fact.value.length).toBeGreaterThan(1);
+        });
+        expect(candidate.detail.personalInterpretation.label).toBe("내 기록 기반 해석");
+        candidate.detail.personalInterpretation.signalIds.forEach((signalId) => {
+          expect(signalIds.has(signalId)).toBe(true);
+        });
+      }
+    }
+  });
+
+  it("keeps user-base capabilities visibly locked without fabricated activity", () => {
+    for (const profile of prototypeProfiles) {
+      for (const candidate of profile.candidates) {
+        expect(candidate.community.capabilities.map(({ id }) => id)).toEqual([
+          "similar-taste",
+          "atlas-share",
+        ]);
+        candidate.community.capabilities.forEach((capability) => {
+          expect(capability.status).toBe("coming-soon");
+          expect(capability.enabled).toBe(false);
+        });
+      }
+    }
+  });
+
+  it("uses useful local media descriptions and deterministic fallbacks", () => {
+    for (const profile of prototypeProfiles) {
+      for (const candidate of profile.candidates) {
+        expect(candidate.media.kind).toBe("public-steam-cdn");
+        expect(candidate.media.alt).toContain(candidate.title);
+        expect(candidate.media.fallbackLabel).toMatch(/이미지|커버/);
+      }
+    }
   });
 
   it("uses an original cartographic and cover-art vocabulary for every fixture game", () => {
@@ -53,22 +119,21 @@ describe("Day 7 prototype fixture contract", () => {
       const coverKeys = profile.candidates.map(({ coverKey }) => coverKey);
       expect(new Set(coverKeys).size).toBe(3);
       for (const candidate of profile.candidates) {
-        expect(candidate.title).not.toMatch(
-          /Elden Ring|Zelda|Steam|Skyrim|Witcher|Baldur/i,
-        );
         expect(candidate.coverTagline.length).toBeGreaterThan(4);
       }
     }
   });
 
-  it("guides one human decision through four conversational steps", () => {
+  it("guides one human decision through six connected stages", () => {
     expect(prototypeJourney.map(({ id }) => id)).toEqual([
       "profile",
       "atlas",
-      "candidates",
+      "detail",
       "receipt",
+      "community",
+      "share",
     ]);
-    expect(prototypeJourney).toHaveLength(4);
+    expect(prototypeJourney).toHaveLength(6);
     for (const step of prototypeJourney) {
       expect(step.title.length).toBeGreaterThan(8);
       expect(step.action.length).toBeGreaterThan(4);

@@ -55,6 +55,16 @@
                       "repository":  "https://github.com/rlaqudwn1/idea.git",
                       "branch":  "master",
                       "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
+                      "sourcePath":  "specs/001-taste-atlas-landing/spec.md",
+                      "localPath":  "assignments/day-02/resources/upstream/idea/specs/001-taste-atlas-landing/spec.md",
+                      "gitBlob":  "baae55fdc1f90f9586a3d85f8ef85ac2ffd6369c",
+                      "sha256":  "97ec4ccdc875e8cec3a9c4fae85bf1ee6f2411c8dfb8101cd7e019233228fe58",
+                      "usage":  "product-source"
+                  },
+                  {
+                      "repository":  "https://github.com/rlaqudwn1/idea.git",
+                      "branch":  "master",
+                      "commit":  "56efd48215a791febf111ccd4a5a3965364a4598",
                       "sourcePath":  "sessions/2026-07-20-archetype-soft-core-pivot.md",
                       "localPath":  "assignments/day-02/resources/upstream/idea/sessions/2026-07-20-archetype-soft-core-pivot.md",
                       "gitBlob":  "640cfd4c7c3d112365cfd50fe9347690cb85f393",

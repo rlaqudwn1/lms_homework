@@ -10,8 +10,9 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Status: approved
 - Scope / affected assignment: Day 2 `TASK-001`, `TASK-003`, `TASK-004`.
 - Chosen option and reason: Keep the course slice small, locally verifiable, and reusable by later assignment Days.
-- Exact target/environment: local branch `codex/day-02-next-save`; browser-only fixture selection.
-- Risks and mock boundary: no live Steam request, persistence, authentication, deployment, or real profile data.
+- Exact target/environment: local branch `codex/day-02-next-save`; browser-only example-profile selection.
+- Risks and data boundary: approved public game media is allowed; persistence,
+  authentication, deployment, and private profile ingestion are not included.
 - Reversal path: remove the local app files and restore the prior package manifest before publication.
 - Evidence / links: `assignments/day-02/steps/` and `assignments/day-02/evidence/`.
 
@@ -49,7 +50,9 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Scope / affected assignment: Day 2 Step 08 and its fixed application/test files.
 - Chosen option and reason: The revised design preserves the decision-first dashboard while previewing the product horizon without implying live community behavior.
 - Exact target/environment: local branch `codex/day-02-next-save`.
-- Risks and mock boundary: all games, profiles, facts, and interpretations remain fixtures; no accounts, live users/counts, relationships, feeds, UGC, sharing pipes, or remote assets.
+- Risks and data boundary: public games and approved remote covers are allowed;
+  profiles and personal interpretations remain examples. Accounts, live
+  users/counts, relationships, feeds, UGC, and sharing pipes are not included.
 - Reversal path: revert only Step 08-owned application files to the last locally verified composition.
 - Evidence / links: `assignments/day-02/steps/step-08-approved-dashboard-implementation/` and the active Codex task.
 
@@ -62,7 +65,9 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Scope / affected assignment: Day 2 only.
 - Chosen option and reason: A public PR lets the instructor inspect both the implementation diff and full branch source without collaborator access.
 - Exact target/environment: public GitHub repository `rlaqudwn1/lms_homework`, PR #1 to `master`, Day 2 LMS link field.
-- Risks and mock boundary: public source includes only fictional fixtures and course evidence; no secrets, real profiles, live social data, remote assets, or Steam requests.
+- Risks and data boundary: public source includes course evidence and no
+  secrets, private profiles, or live social data. Approved public Steam game
+  cover requests are permitted at runtime.
 - Reversal path: LMS correction through the course UI if available; repository visibility or PR closure requires a separate follow-up decision.
 - Evidence / links: `https://github.com/rlaqudwn1/lms_homework/pull/1` and `assignments/day-02/SUBMISSION.md`.
 
@@ -106,11 +111,12 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Chosen option and reason: the prototype directly exercises NEXT SAVE's primary
   user job. An administrator service would introduce unsupported actors and
   management workflows.
-- Exact target/environment: local branch `codex/day-02-next-save`; fixture-only
-  course-mock documents.
-- Risks and mock boundary: exactly two fictional seeded profiles, deterministic
-  recommendations, no Steam request, real profile/personal data, secret,
-  database write, external API, account, or live community behavior.
+- Exact target/environment: local branch `codex/day-02-next-save`; disclosed
+  example-profile course documents.
+- Risks and data boundary: exactly two example profiles and deterministic
+  recommendations; approved public game media/metadata is allowed. Private
+  player data, secrets, database writes, accounts, and live community behavior
+  are not included.
 - Reversal path: revise the local Day 6 packet and canonical scope before any
   publication; no external state was changed by this decision.
 - Evidence / links:
@@ -132,14 +138,69 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Chosen option and reason: the prototype directly continues the approved Day 6
   flow and already expresses the canonical calm decision instrument. New screens
   or generated assets would add scope without improving the assignment evidence.
-- Exact target/environment: local branch `codex/day-02-next-save`; fixture-only
-  desktop and 360 px renders.
-- Risks and mock boundary: no live Steam request, real profile, personal data,
-  secret, account, social action, database write, or external API.
+- Exact target/environment: local branch `codex/day-02-next-save`; disclosed
+  example-profile desktop and 360 px renders.
+- Risks and data boundary: approved public game media/metadata requests are
+  allowed. Private profiles, personal data, secrets, accounts, social actions,
+  and database writes are not included.
 - Reversal path: revise only the local Day 7 packet and screenshots before any
   approved publication or LMS submission.
 - Evidence / links:
   `assignments/day-07/steps/step-01-prototype-design-gate/`.
+
+## Superseded — Day 7 game image and metadata provider
+
+- Decision: Select whether and how the Step 03 product-journey preview may use
+  third-party real-game cover/header art or metadata.
+- Owner: User
+- Date (KST): 2026-07-24
+- Status: superseded by the approved public Steam media decision below
+- Scope / affected assignment: Day 7
+  `steps/step-03-product-journey-redesign/` and any later public preview.
+- Options considered: keep original fixture art only; use individually verified
+  official publisher/developer press-kit assets hosted locally; integrate
+  IGDB/RAWG after account, attribution, cache, and rights review; use Steam
+  CDN/Steamworks assets.
+- Chosen option and reason: superseded. The user explicitly removed the blanket
+  no-Steam/no-remote-asset constraint and directed the prototype to use the
+  original design's public Steam cover approach.
+- Exact target/environment: not selected. Approval must distinguish local
+  preview, public Git, Vercel deployment, and LMS submission.
+- Risks and mock boundary: retained as historical risk analysis; authority now
+  comes from the decision below.
+- Reversal path: one provider-neutral media adapter and deterministic local
+  fallback; remove provider configuration/asset manifest and return to original
+  fixture art without changing the decision journey.
+- Evidence / links:
+  `assignments/day-07/steps/step-03-product-journey-redesign/EVIDENCE.md`;
+  official Steam/Steamworks, IGDB/Twitch, RAWG, and publisher press-kit policy
+  sources recorded there.
+
+## Approved — public Steam game covers; blanket external-request ban superseded
+
+- Decision: Permit browser requests for public Steam game cover/header images
+  and public game metadata, starting with the original design's
+  `cdn.cloudflare.steamstatic.com/steam/apps/<appid>/...` cover pattern.
+- Owner: User
+- Date (KST): 2026-07-24
+- Status: approved for the local Day 7 prototype
+- Scope / affected assignment: current Day 7 Step 03 and later NEXT SAVE Days.
+  This supersedes earlier Day 2, Day 6, and Day 7 wording that treated every
+  Steam request, every remote asset, or every non-fixture game field as banned.
+- Chosen option and reason: restore the real-game visual language of the pinned
+  original design instead of substituting fictional local covers.
+- Exact target/environment: local `/prototype`; public Steam CDN cover/header
+  requests are allowed. No commit, push, deployment, or LMS submission is
+  authorized by this decision.
+- Risks and data boundary: third-party images may fail or change and reveal
+  ordinary request metadata to the CDN. Deterministic local SVG fallbacks stay
+  in place. Entered Steam URLs, player libraries, cookies, API keys, and private
+  or personal Steam data must not be transmitted without a separate approval.
+- Reversal path: switch the media adapter back to local fallbacks while keeping
+  the same game identity and journey.
+- Evidence / links: pinned upstream
+  `assignments/day-02/resources/upstream/design/steam.ts`; Day 7 Step 03
+  evidence and browser request verification.
 
 ## Decision record template
 

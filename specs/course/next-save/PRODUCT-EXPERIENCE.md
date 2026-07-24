@@ -15,6 +15,12 @@ This document is the cross-assignment source of truth for NEXT SAVE actors, use 
 
 Historical design experiments may supply patterns and assets, but they do not promote deferred product capabilities into a current implementation.
 
+Selective pinned local references and their use boundary are documented in
+[`assignments/day-02/resources/upstream/README.md`](../../../assignments/day-02/resources/upstream/README.md).
+Future Day work must re-check the private `idea` and `design` default-branch
+HEADs against those pins and record which local reference files informed the
+active step.
+
 ## Product promise
 
 NEXT SAVE turns a player's Steam history into a taste atlas, uses traceable signals to explain what to play next, and may later turn that atlas into a shareable identity surface and archetype community.

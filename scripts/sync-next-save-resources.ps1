@@ -7,6 +7,14 @@ $workspace = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
 $cacheRoot = Join-Path $workspace '.source-cache\next-save'
 $resourceRoot = Join-Path $workspace 'assignments\day-02\resources'
 $upstreamRoot = Join-Path $resourceRoot 'upstream'
+$manifestPath = Join-Path $resourceRoot 'SOURCE-MANIFEST.json'
+$existingManifestFiles = @{}
+if (Test-Path -LiteralPath $manifestPath) {
+    $existingManifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
+    foreach ($file in $existingManifest.files) {
+        $existingManifestFiles[$file.localPath] = $file
+    }
+}
 
 function Sync-Repository {
     param(
@@ -54,6 +62,14 @@ function Copy-SourceFile {
 
     $destination = Join-Path $resourceRoot $LocalPath
     New-Item -ItemType Directory -Force -Path (Split-Path $destination -Parent) | Out-Null
+    $manifestLocalPath = "assignments/day-02/resources/$($LocalPath.Replace('\', '/'))"
+    if (Test-Path -LiteralPath $destination) {
+        $currentSha256 = (Get-FileHash -LiteralPath $destination -Algorithm SHA256).Hash.ToLowerInvariant()
+        $recorded = $existingManifestFiles[$manifestLocalPath]
+        if (-not $recorded -or $currentSha256 -ne $recorded.sha256) {
+            throw "Refusing to overwrite a locally modified or untracked reference: $manifestLocalPath"
+        }
+    }
     Copy-Item -LiteralPath $source -Destination $destination -Force
 
     $blob = (git -C $Repository.Path rev-parse "$($Repository.Commit):$SourcePath").Trim()
@@ -64,7 +80,7 @@ function Copy-SourceFile {
         branch = $Repository.Branch
         commit = $Repository.Commit
         sourcePath = $SourcePath.Replace('\', '/')
-        localPath = "assignments/day-02/resources/$($LocalPath.Replace('\', '/'))"
+        localPath = $manifestLocalPath
         gitBlob = $blob
         sha256 = $sha256
         usage = $Usage
@@ -78,6 +94,7 @@ $ideaFiles = @(
     'ideas/next-save.md',
     'handoff/next-save.md',
     'ideas/next-save-domains.md',
+    'specs/001-taste-atlas-landing/spec.md',
     'sessions/2026-07-20-archetype-soft-core-pivot.md',
     'research/signal-sufficiency-sheet.md',
     'research/genre-core-mapping.md',
@@ -147,7 +164,8 @@ foreach ($path in $designFiles) {
 }
 
 $manifest = [ordered]@{
-    schemaVersion = 1
+    schemaVersion = 2
+    retrievedAt = (Get-Date).ToUniversalTime().ToString('o')
     repositories = @(
         [ordered]@{ name = 'idea'; url = $idea.Url; branch = $idea.Branch; commit = $idea.Commit },
         [ordered]@{ name = 'design'; url = $design.Url; branch = $design.Branch; commit = $design.Commit }
@@ -158,10 +176,10 @@ $manifest = [ordered]@{
         'idea archive and legacy 2x2/island prototypes',
         'secrets, environment files, cookies, and real user data'
     )
+    usageBoundary = 'Private upstream reference only. Do not bundle source application code, third-party captures, secrets, or personal data. Approved public Steam CDN cover URLs may be used at runtime with local fallbacks; do not cache or redistribute the images.'
     files = $entries
 }
 
-$manifestPath = Join-Path $resourceRoot 'SOURCE-MANIFEST.json'
 $manifest | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $manifestPath -Encoding utf8
 
 Write-Output "idea=$($idea.Commit)"
