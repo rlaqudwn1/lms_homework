@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | prototype UI and follow-on product journey complete; submission approval pending |
+| State | Day 7 PR #2 published; LMS submission authorized and browser receipt pending |
 | Dependency | `specs/course/next-save/DESIGN.md` |
-| Next action | Obtain action-time approval before external publication or LMS submission |
-| HITL | External Git, deployment, and LMS actions remain unapproved |
+| Next action | Submit PR #2 URL in the exact Day 7 LMS assignment and record the receipt |
+| HITL | New Day 7 PR and LMS submission authorized; merge, deploy, and PR #1 changes remain unauthorized |
 
 ## Evidence
 

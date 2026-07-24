@@ -45,9 +45,11 @@ The design intentionally covers a narrow course slice. Social, reviews, live dat
 ## Submission record
 
 - Repository: `https://github.com/rlaqudwn1/lms_homework`
-- Local source SHA at gate review:
-  `920af24f67ac115de5d172747938b5ef723c8eb3`
+- Submission source SHA:
+  `1fe3c9d`
 - Intended submission route: `/prototype`
-- PR / submitted URL: `TBD — external action not approved`
+- PR / intended LMS URL:
+  `https://github.com/rlaqudwn1/lms_homework/pull/2`
 - Screenshots: desktop and 360 px evidence linked above
-- User-approved LMS submission timestamp: `TBD — explicit approval required`
+- User approved Day 7 LMS submission on `2026-07-24 KST`; LMS receipt
+  timestamp remains pending until the logged-in browser submission succeeds.
