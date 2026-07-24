@@ -51,5 +51,8 @@ The design intentionally covers a narrow course slice. Social, reviews, live dat
 - PR / intended LMS URL:
   `https://github.com/rlaqudwn1/lms_homework/pull/2`
 - Screenshots: desktop and 360 px evidence linked above
-- User approved Day 7 LMS submission on `2026-07-24 KST`; LMS receipt
-  timestamp remains pending until the logged-in browser submission succeeds.
+- LMS submitted URL:
+  `https://github.com/rlaqudwn1/lms_homework/pull/2`
+- LMS submission timestamp: `2026-07-24 12:59 KST`
+- LMS receipt: `제출됨 · 지각`
+- Resubmission remains available; no resubmission was performed.

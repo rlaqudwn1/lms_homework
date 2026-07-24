@@ -148,6 +148,21 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Evidence / links:
   `assignments/day-07/steps/step-01-prototype-design-gate/`.
 
+## Day 7 PR publication and LMS submission
+
+- Decision: Publish the reviewed Day 7 idea-atlas journey as a separate ready
+  PR and submit that PR URL to the exact Day 7 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-24
+- Status: complete; PR #2 ready and LMS submitted at 2026-07-24 12:59 KST
+- Scope / affected assignment: Day 7 only.
+- Exact target/environment: branch `codex/day-07-idea-atlas`, PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/2`, LMS Day 7
+  `나만의 메인서비스에서 활용될 관리자서비스 또는 프로토타입 디자인 하기`.
+- Receipt: `제출됨 · 지각`; submitted URL is PR #2.
+- Boundaries: no merge, deployment, resubmission, LMS file upload, or PR #1
+  state change was authorized or performed.
+
 ## Superseded — Day 7 game image and metadata provider
 
 - Decision: Select whether and how the Step 03 product-journey preview may use

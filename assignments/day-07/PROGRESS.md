@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | Day 7 PR #2 published; LMS submission authorized and browser receipt pending |
+| State | submitted · late; PR #2 ready for review |
 | Dependency | `specs/course/next-save/DESIGN.md` |
-| Next action | Submit PR #2 URL in the exact Day 7 LMS assignment and record the receipt |
-| HITL | New Day 7 PR and LMS submission authorized; merge, deploy, and PR #1 changes remain unauthorized |
+| Next action | Await LMS code review |
+| HITL | Day 7 PR publication and LMS submission complete; merge, deploy, resubmit, and PR #1 changes remain unauthorized |
 
 ## Evidence
 
