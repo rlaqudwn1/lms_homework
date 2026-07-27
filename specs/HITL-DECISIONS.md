@@ -217,6 +217,33 @@ Use this log for product, environment, and submission decisions that an agent mu
   `assignments/day-02/resources/upstream/design/steam.ts`; Day 7 Step 03
   evidence and browser request verification.
 
+## Day 8 minimal executable schema
+
+- Decision: Approve `selection_sessions` as the only schema eligible for
+  implementation in the Day 9 test Supabase project; retain the remaining
+  product-domain schemas as mock/deferred design documentation.
+- Owner: User
+- Date (KST): 2026-07-27
+- Status: approved for local Day 8 completion only
+- Scope / affected assignment: Day 8 database design and the schema boundary
+  inherited by Day 9.
+- Options considered: implement all ten domain schemas; design only
+  `selection_sessions`; document all domains while limiting the executable
+  boundary to `selection_sessions`.
+- Chosen option and reason: the catalog explains the complete product boundary
+  while the single executable table keeps the course slice reversible,
+  fixture-only, and proportionate to the assignment.
+- Exact target/environment: isolated local Day 8 worktree. No Supabase project,
+  remote Git branch, deployment, or LMS state is included in this approval.
+- Risks and mock boundary: only fictional profile keys and selected public game
+  identifiers may be represented. Real Steam profiles, libraries, behavioral
+  telemetry, live social activity, credentials, and billing data remain
+  excluded.
+- Reversal path: remove the local Day 8 catalog and schema packet, or keep the
+  catalog while marking `selection_sessions` deferred before publication.
+- Evidence / links:
+  `assignments/day-08/steps/step-01-domain-schema-catalog/`.
+
 ## Decision record template
 
 ```md

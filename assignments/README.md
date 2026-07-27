@@ -8,7 +8,7 @@ This board tracks only the incomplete LMS work required before Day 16. It is a p
 | 05 | [day-05](day-05/PROGRESS.md) | GitHub + Vercel deployment | submitted · late | Await code review |
 | 06 | [day-06](day-06/PROGRESS.md) | Prototype planning | submitted · late | Await code review |
 | 07 | [day-07](day-07/PROGRESS.md) | Prototype design | submitted · late | Await review |
-| 08 | [day-08](day-08/PROGRESS.md) | Database design | planned | Minimal schema approval |
+| 08 | [day-08](day-08/PROGRESS.md) | Database design | local complete | Publication and LMS submission approval |
 | 09 | [day-09](day-09/PROGRESS.md) | Supabase test schema | planned | Supabase target approval |
 | 10 | [day-10](day-10/PROGRESS.md) | Service–Supabase slice | planned | Integration gate |
 | 11 | [day-11](day-11/PROGRESS.md) | One Open API enrichment | planned | API choice approval |
