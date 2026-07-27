@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | PR published; LMS submission in progress |
+| State | submitted · late; code review pending |
 | Dependency | Day 06 scope and minimal persistence choice |
-| Next action | Submit PR #3 to the exact Day 8 LMS assignment and record the receipt |
-| HITL | Minimal schema and publication approved; LMS submission approved |
+| Next action | Await code review |
+| HITL | Complete for Day 8 publication and LMS submission |
 
 ## Acceptance evidence
 
@@ -22,3 +22,4 @@
   2026-07-27 KST; all other domains remain mock/deferred.
 - PR #3 is published from `codex/day-08-domain-schema`; no external database or
   deployment change was performed.
+- LMS submitted PR #3 at 2026-07-27 11:16 KST; receipt is `제출됨 · 지각`.

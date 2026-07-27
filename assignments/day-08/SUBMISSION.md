@@ -7,4 +7,5 @@
 - Verification: `30 tests + production build passed — identifiers, ERD relationships and fixture boundary reviewed`
 - Mock disclosure: Test-only `selection_sessions`; no real profile data.
 - Schema approval: `2026-07-27 KST — selection_sessions only; all other domains mock/deferred`
-- LMS submission timestamp: `TBD — explicit user approval required`
+- LMS submission timestamp: `2026-07-27 11:16 KST`
+- LMS receipt: `제출됨 · 지각`; code review pending

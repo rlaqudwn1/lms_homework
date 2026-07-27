@@ -244,6 +244,24 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Evidence / links:
   `assignments/day-08/steps/step-01-domain-schema-catalog/`.
 
+## Day 8 PR publication and LMS submission
+
+- Decision: Publish the reviewed Day 8 database blueprint as a ready PR and
+  submit that PR URL to the exact Day 8 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-27
+- Status: complete; PR #3 published and LMS submitted at 11:16 KST
+- Scope / affected assignment: Day 8 only.
+- Exact target/environment: branch `codex/day-08-domain-schema`, PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/3`, LMS assignment
+  `나만의 메인서비스에서 활용될 관리자서비스 또는 프로토타입 DB 설계하기`.
+- Receipt: `제출됨 · 지각`; code review pending.
+- Boundaries: no merge, deployment, Supabase schema, resubmission, or file
+  upload was authorized or performed.
+- Reversal path: use the LMS resubmission control only after separate approval;
+  closing the PR or deleting the remote branch also requires follow-up approval.
+- Evidence / links: PR #3 and `assignments/day-08/SUBMISSION.md`.
+
 ## Decision record template
 
 ```md
