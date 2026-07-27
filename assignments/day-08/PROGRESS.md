@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | local design complete; publication pending |
+| State | PR published; LMS submission in progress |
 | Dependency | Day 06 scope and minimal persistence choice |
-| Next action | Approve commit/push/PR scope and the exact Day 8 LMS submission artifact |
-| HITL | Minimal schema approved; Git publication and LMS submission remain pending |
+| Next action | Submit PR #3 to the exact Day 8 LMS assignment and record the receipt |
+| HITL | Minimal schema and publication approved; LMS submission approved |
 
 ## Acceptance evidence
 
@@ -20,5 +20,5 @@
   desktop/mobile rendered review pass.
 - User approved `selection_sessions` as the only Day 9 executable candidate on
   2026-07-27 KST; all other domains remain mock/deferred.
-- External database, commit, push, PR, deployment, and LMS submission remain
-  unperformed.
+- PR #3 is published from `codex/day-08-domain-schema`; no external database or
+  deployment change was performed.
