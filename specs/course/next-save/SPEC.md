@@ -41,6 +41,10 @@ Product-wide actors, use cases, journeys, and the staged community strategy live
 - Example profiles contain fictionalized labels, play-time bands, genre signals, and recommendation reasons; approved public game titles, metadata, and cover art may be fetched separately.
 - Recommendation output is deterministic. Each reason must cite fixture fields; generic LLM-generated claims are prohibited.
 - A future Supabase exercise may persist only the chosen pick and a generated session ID. It must not store a real Steam URL.
+- The Day 8 landing may visualize a fixture-only mock schema for every product
+  domain. That educational blueprint does not authorize those tables for Day 9:
+  the first executable persistence slice remains the generated selection
+  session, fictional profile key, and chosen public/fixture game ID.
 
 ## Acceptance criteria
 

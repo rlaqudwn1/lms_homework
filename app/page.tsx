@@ -1,4 +1,5 @@
 import { DemoExperience } from "@/components/demo-experience";
+import { DomainSchemaCatalog } from "@/components/domain-schema-catalog";
 import { MarketPositioning } from "@/components/market-positioning";
 
 const steps = [
@@ -17,7 +18,7 @@ export default function Home() {
 
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="NEXT SAVE 홈"><i />NEXT SAVE</a>
-        <nav aria-label="주요 메뉴"><a href="#recommendations">추천</a><a href="#positioning">차이점</a><a href="#how">작동법</a></nav>
+        <nav aria-label="주요 메뉴"><a href="#recommendations">추천</a><a href="#positioning">차이점</a><a href="#how">작동법</a><a href="#database-design">DB 설계</a></nav>
       </header>
 
       <div id="top">
@@ -34,6 +35,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+        <DomainSchemaCatalog />
       </div>
 
       <footer><p>NEXT SAVE <span>COURSE PROTOTYPE · FIXTURE ONLY</span></p><p>실제 Steam 데이터는 조회·저장하지 않습니다.</p></footer>
