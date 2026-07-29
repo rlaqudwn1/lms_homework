@@ -264,6 +264,38 @@ Use this log for product, environment, and submission decisions that an agent mu
 
 ## Decision record template
 
+## Approved — Day 9 Supabase test target and schema write
+
+- Decision: Select the exact isolated Supabase test target and authorize (or
+  reject) the reviewed one-table migration plus two fictional seed rows.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: approved and executed
+- Scope / affected assignment: Day 9 only.
+- Options considered: reuse and, if required, reactivate the existing unlinked
+  project `rlaqudwn1's Project` (`mxxuzfsqizgaaqhuioci`,
+  `ap-southeast-2`, currently `INACTIVE`) after confirming it is dedicated to
+  course fixtures; create a new dedicated course test project; postpone remote
+  execution and retain local migration/mock evidence only.
+- Chosen option and reason: reactivate the existing project, inspect its schema
+  read-only, then apply only the reviewed `selection_sessions` migration and two
+  fictional rows. The user explicitly prohibited changes to other tables/data.
+- Exact target/environment: `rlaqudwn1's Org`, project
+  `mxxuzfsqizgaaqhuioci` (`rlaqudwn1's Project`), region `ap-southeast-2`.
+- Risks and mock boundary: apply creates `public.selection_sessions` and two
+  fictional rows. No real Steam URL, identity, library, secret, telemetry, or
+  live social data. RLS is enabled with no Data API policy.
+- Reversal path: after separate destructive-write confirmation, drop only
+  `public.selection_sessions` in the same test project; do not delete the
+  project or touch unrelated schemas.
+- Evidence / links:
+  `assignments/day-09/steps/step-01-selection-sessions-readiness/`.
+- Execution: project restored from `INACTIVE` to `ACTIVE_HEALTHY`; read-only
+  inspection found existing `public.scores`; dry-run listed only
+  `20260727000100_create_selection_sessions.sql`; migration and two fictional
+  rows applied. Final public tables are `scores,selection_sessions`; RLS is on
+  and `selection_sessions` has zero policies.
+
 ```md
 ## <decision title>
 
