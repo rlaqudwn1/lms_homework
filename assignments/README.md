@@ -11,7 +11,7 @@ This board tracks only the incomplete LMS work required before Day 16. It is a p
 | 08 | [day-08](day-08/PROGRESS.md) | Database design | submitted · late | Await code review |
 | 09 | [day-09](day-09/PROGRESS.md) | Supabase test schema | submitted · late | Await code review |
 | 10 | [day-10](day-10/PROGRESS.md) | Service–Supabase slice | submitted · late | Await code review |
-| 11 | [day-11](day-11/PROGRESS.md) | One Open API enrichment | local complete · HITL pending | Provider/endpoint or fixture-only approval |
+| 11 | [day-11](day-11/PROGRESS.md) | One Open API enrichment | submitted · late | Await code review |
 | 13 | [day-13](day-13/PROGRESS.md) | Google login | planned | OAuth target/test-account approval |
 | 14 | [day-14](day-14/PROGRESS.md) | Worktree feature evidence | planned | Instructor compatibility decision |
 | 16 | [day-16](day-16/PROGRESS.md) | Vercel + custom domain | HITL pending | Domain, registrar and Vercel target |

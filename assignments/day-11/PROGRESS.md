@@ -2,9 +2,9 @@
 
 | Field | Value |
 |---|---|
-| State | ready PR published · LMS submission in progress |
+| State | submitted · late |
 | Dependency | Stable recommendation-card UI |
-| Next action | Submit PR #6 to the exact Day 11 LMS assignment |
+| Next action | Await code review |
 | HITL | API/provider choice, rate-limit and data-use approval |
 
 ## Acceptance evidence
@@ -28,3 +28,12 @@ was executed. Repeated runtime requests are not enabled by default. Deployment,
 Git branch/commit/push/PR, and LMS submission remain separate action-time gates.
 Day 10 remote Supabase write/read, RLS, environment, and data changes remain
 unexecuted.
+
+## Publication
+
+- Branch: `codex/day-11-open-api`
+- Implementation commit: `2ad9da58627612968303f10ea63018fd8bccbebd`
+- Ready PR: `https://github.com/rlaqudwn1/lms_homework/pull/6`
+- Base: `codex/day-10-supabase-service`
+- LMS submitted at `2026-07-29 13:00 KST`; receipt is `제출됨 · 지각`,
+  with code review pending.

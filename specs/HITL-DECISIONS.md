@@ -21,6 +21,21 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Remaining gates: enabling repeated runtime requests, deployment, Git
   publication, and LMS submission require separate approval.
 
+## Day 11 PR publication and LMS submission
+
+- Decision: Publish the verified Wikidata enrichment as a ready PR and submit
+  that PR URL to the exact Day 11 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: complete; PR #6 ready and LMS submitted at 2026-07-29 13:00 KST
+- Exact target: branch `codex/day-11-open-api`, PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/6` targeting
+  `codex/day-10-supabase-service`; LMS Day 11
+  `내가 만든 서비스와 오픈 API 연결하기`.
+- Receipt: `제출됨 · 지각`; code review is pending.
+- Boundaries: no merge, deployment, repeated runtime Wikidata enablement,
+  Supabase change, or Day 10 remote integration was authorized or performed.
+
 ## Day 2 runtime and demo-entry scope
 
 - Decision: Use Next.js App Router + TypeScript + Tailwind CSS and exactly two fictional seeded profiles for the Day 2 introduction/demo-entry slice.
