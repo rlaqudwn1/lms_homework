@@ -264,6 +264,58 @@ Use this log for product, environment, and submission decisions that an agent mu
 
 ## Decision record template
 
+## Pending — Day 10 selection-session service integration
+
+- Decision: authorize or reject the minimal anonymous fictional
+  `selection_sessions` service path.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: pending
+- Scope / affected assignment: Day 10 Step 01 only.
+- Options considered: apply the two narrow fictional-row policies and run one
+  local write/read; revise the policy boundary; retain local fallback evidence
+  without remote integration.
+- Exact target/environment: Supabase project `mxxuzfsqizgaaqhuioci`,
+  `public.selection_sessions`; untracked local `.env.local`; one generated
+  `steady-explorer` / `hollow-knight` row.
+- Proposed operation: apply only the two policies in
+  `assignments/day-10/steps/step-01-selection-session-service-slice/PROPOSED-RLS.sql`,
+  enter the server-only URL/key locally, explicitly set
+  `NEXT_SAVE_SUPABASE_WRITE_ENABLED=true`, then issue one insert and one
+  exact-ID select through `/api/selection-sessions`.
+- Risks and mock boundary: the anon role would be able to insert and select only
+  the six hard-coded fictional mappings, but the endpoint is still publicly
+  callable if deployed. No real Steam/profile data or service-role key is
+  allowed. `public.scores` and all other tables/data are excluded.
+- Reversal path: after separate destructive approval, drop only the two named
+  policies and delete only the exact generated test UUID if requested.
+- Evidence / links:
+  `assignments/day-10/steps/step-01-selection-session-service-slice/`.
+
+## Day 10 PR publication and LMS submission
+
+- Decision: publish the reviewed local-fallback Day 10 slice as a ready PR and
+  submit that PR URL to the exact Day 10 LMS assignment without executing the
+  pending remote RLS/config/write-read integration.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: PR published; LMS UI execution pending
+- Scope / affected assignment: Day 10 only.
+- Exact target/environment: branch `codex/day-10-supabase-service`, base
+  `codex/day-09-supabase-schema`, ready PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/5`.
+- Risks and mock boundary: submission explicitly documents local adapter/API
+  and fallback evidence; it does not claim a successful remote write/read.
+  No Supabase policy, credential, remote row, deployment, or unrelated table
+  state was changed.
+- Reversal path: LMS correction, PR closure, or remote branch deletion requires
+  follow-up approval.
+- Execution note: PR #5 was created successfully. The PR URL was submitted to
+  LMS Day 10 `내가 만든 서비스와 Supabase 연동하기` at
+  `2026-07-29 12:18 KST`. Receipt is `제출됨 · 지각`; code review status is
+  `리뷰를 기다리고 있어요`. No remote Supabase write/read, RLS policy, env,
+  deployment, or unrelated table/data change was performed.
+
 ## Approved — Day 9 Supabase test target and schema write
 
 - Decision: Select the exact isolated Supabase test target and authorize (or
