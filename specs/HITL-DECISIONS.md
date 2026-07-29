@@ -330,6 +330,24 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Evidence / links:
   `assignments/day-13/steps/step-01-auth-boundary/`.
 
+## Day 13 PR publication and LMS submission
+
+- Decision: expose the protected-profile Google login entry on the landing,
+  verify locally, publish a ready stacked PR, and submit its URL to the exact
+  Day 13 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: PR published; LMS UI execution pending
+- Exact target: branch `codex/day-13-supabase-google-auth`, ready PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/7` targeting
+  `codex/day-11-open-api`; LMS Day 13
+  `내가 만든 서비스에 구글로그인 연결하기`.
+- Boundaries: publication and submission do not authorize Google Cloud or
+  Supabase Auth configuration, real login, environment entry, deployment, or
+  database/RLS/data changes. The submission must disclose that provider
+  activation and real-account verification remain pending.
+- Evidence / links: PR #7 and `assignments/day-13/SUBMISSION.md`.
+
 ## Pending — Day 10 selection-session service integration
 
 - Decision: authorize or reject the minimal anonymous fictional
