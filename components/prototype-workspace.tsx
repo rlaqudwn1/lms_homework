@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { prototypeProfiles } from "@/lib/prototype";
+import { getFixtureGameMetadata, type GameMetadata } from "@/lib/game-metadata";
 import { IdeaV3Atlas } from "@/components/idea-v3-atlas";
 import {
   candidateIdForSelection,
@@ -97,12 +98,33 @@ export function PrototypeWorkspace() {
   const [activeId, setActiveId] = useState(profile.candidates[0].id);
   const [selectionSession, setSelectionSession] = useState<SelectionSession | null>(null);
   const [persistenceMode, setPersistenceMode] = useState<"local" | "syncing" | "remote" | "fallback">("local");
+  const [gameMetadata, setGameMetadata] = useState<GameMetadata | null>(
+    getFixtureGameMetadata(activeId) ?? null,
+  );
   const detailRef = useRef<HTMLElement>(null);
   const receiptRef = useRef<HTMLElement>(null);
   const communityRef = useRef<HTMLElement>(null);
   const active = profile.candidates.find(({ id }) => id === activeId) ?? profile.candidates[0];
   const selectedId = selectionSession ? candidateIdForSelection(selectionSession) : null;
   const selected = profile.candidates.find(({ id }) => id === selectedId);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const fixture = getFixtureGameMetadata(active.id) ?? null;
+    setGameMetadata(fixture);
+    fetch(`/api/game-metadata?gameId=${encodeURIComponent(active.id)}`, {
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("metadata boundary rejected request");
+        return response.json() as Promise<GameMetadata>;
+      })
+      .then(setGameMetadata)
+      .catch(() => {
+        if (!controller.signal.aborted) setGameMetadata(fixture);
+      });
+    return () => controller.abort();
+  }, [active.id]);
 
   useEffect(() => {
     const restored = parseStoredSelectionSession(window.localStorage.getItem(selectionSessionStorageKey));
@@ -226,7 +248,19 @@ export function PrototypeWorkspace() {
         <header><p className="origin-eyebrow">GAME DETAIL</p><h2 id="prototype-picks-title">{active.title}</h2><p>공개 게임 정보와 예시 기록 기반 해석을 분리해 보여드립니다.</p></header>
         <div className="origin-detail-body">
           <CoverArt candidate={active} />
-          <section><h3>게임 정보</h3><small>PUBLIC GAME CATALOGUE · STEAM COVER</small><dl>{active.detail.facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl></section>
+          <section>
+            <h3>게임 정보</h3>
+            <small>PUBLIC GAME CATALOGUE · STEAM COVER</small>
+            <dl>
+              {active.detail.facts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}
+              {gameMetadata ? <>
+                <div><dt>Developer</dt><dd>{gameMetadata.developer}</dd></div>
+                <div><dt>Release</dt><dd>{gameMetadata.releaseYear}</dd></div>
+                <div><dt>Metadata</dt><dd>{gameMetadata.source === "provider" ? <a href="https://www.wikidata.org/" rel="noreferrer">Data from Wikidata</a> : "deterministic fixture fallback"}</dd></div>
+              </> : null}
+            </dl>
+            <p role="status">공개 게임 ID만 사용합니다. Steam URL, 계정, 라이브러리, 쿠키, 개인 데이터는 전송하지 않습니다.</p>
+          </section>
           <section><h3>{active.detail.personalInterpretation.label}</h3><p>{active.detail.personalInterpretation.summary}</p><div className="signal-chips">{active.detail.personalInterpretation.signalIds.map((id) => { const signal = profile.signals.find((item) => item.id === id); return <span key={id}>{signal?.label}: {signal?.value}</span>; })}</div><button type="button" onClick={() => chooseCandidate(active.id)}>이 게임으로 오늘을 정할게요</button></section>
         </div>
         <div className="prototype-cards">{profile.candidates.map((candidate, index) => <button key={candidate.id} type="button" className={active.id === candidate.id ? "is-active" : ""} onClick={() => openDetail(candidate.id)} aria-pressed={active.id === candidate.id}><b>0{index + 1}</b><CoverArt candidate={candidate} /><span><strong>{candidate.title}</strong>{candidate.fit}/100 · {candidate.session}</span></button>)}</div>
