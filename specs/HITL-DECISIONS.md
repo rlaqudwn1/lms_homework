@@ -296,6 +296,27 @@ Use this log for product, environment, and submission decisions that an agent mu
   rows applied. Final public tables are `scores,selection_sessions`; RLS is on
   and `selection_sessions` has zero policies.
 
+## Day 9 PR publication and LMS submission
+
+- Decision: Publish the reviewed Day 9 Supabase migration/evidence as a ready
+  stacked PR and submit that PR URL to the exact Day 9 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: complete; PR #4 published and LMS submitted at 10:30 KST
+- Scope / affected assignment: Day 9 only.
+- Exact target/environment: branch `codex/day-09-supabase-schema`, base
+  `codex/day-08-domain-schema`, PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/4`, LMS Day 9
+  `어제 만든 DB 수파베이스에 만들기`.
+- Receipt: `제출됨 · 지각`; submitted URL is PR #4; code review status is
+  `리뷰를 기다리고 있어요`.
+- Risks and mock boundary: the PR contains migration, fictional seed, rollback,
+  sanitized project reference/evidence, and browser-mock disclosure; no secret,
+  personal Steam data, or Supabase CLI `.temp` metadata.
+- Reversal path: LMS resubmission, PR closure, or remote branch deletion requires
+  follow-up approval. Database rollback remains a separate destructive action.
+- Evidence / links: PR #4 and `assignments/day-09/SUBMISSION.md`.
+
 ```md
 ## <decision title>
 

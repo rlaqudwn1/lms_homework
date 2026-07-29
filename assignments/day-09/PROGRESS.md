@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | remote migration + fictional seed complete; prototype evidence ready |
+| State | submitted · late |
 | Dependency | Approved Day 08 schema |
-| Next action | Review rendered DB-status evidence before Git publication |
-| HITL | Supabase target/schema write approved and executed; Git/LMS still pending |
+| Next action | Await code review |
+| HITL | Supabase, Git publication, and LMS submission complete |
 
 ## Acceptance evidence
 
@@ -26,4 +26,9 @@
 
 The approved project was restored, linked locally, inspected, migrated, and
 seeded with exactly two fictional rows. Existing `public.scores` was observed
-but not changed. No Git publication, deployment, or LMS action has occurred.
+but not changed.
+
+Ready PR #4 was published from `codex/day-09-supabase-schema` to
+`codex/day-08-domain-schema`. The PR URL was submitted to the exact Day 9 LMS
+assignment at `2026-07-29 10:30 KST`; receipt is `제출됨 · 지각` and code review
+is pending.

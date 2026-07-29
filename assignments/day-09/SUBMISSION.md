@@ -10,4 +10,6 @@
 - Verification: five expected columns, two exact fixture rows, zero policies;
   existing `public.scores` unchanged by the migration/seed SQL
 - Mock disclosure: Test project with fictional rows only.
-- LMS submission timestamp: `TBD — explicit user approval required`
+- LMS submission timestamp: `2026-07-29 10:30 KST`
+- LMS receipt: `제출됨 · 지각`; code review status:
+  `리뷰를 기다리고 있어요`
