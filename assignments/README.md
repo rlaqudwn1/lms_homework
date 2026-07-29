@@ -10,7 +10,7 @@ This board tracks only the incomplete LMS work required before Day 16. It is a p
 | 07 | [day-07](day-07/PROGRESS.md) | Prototype design | submitted · late | Await review |
 | 08 | [day-08](day-08/PROGRESS.md) | Database design | submitted · late | Await code review |
 | 09 | [day-09](day-09/PROGRESS.md) | Supabase test schema | submitted · late | Await code review |
-| 10 | [day-10](day-10/PROGRESS.md) | Service–Supabase slice | planned | Integration gate |
+| 10 | [day-10](day-10/PROGRESS.md) | Service–Supabase slice | local slice complete | Integration HITL |
 | 11 | [day-11](day-11/PROGRESS.md) | One Open API enrichment | planned | API choice approval |
 | 13 | [day-13](day-13/PROGRESS.md) | Google login | planned | OAuth target/test-account approval |
 | 14 | [day-14](day-14/PROGRESS.md) | Worktree feature evidence | planned | Instructor compatibility decision |

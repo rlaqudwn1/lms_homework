@@ -96,6 +96,7 @@ export function PrototypeWorkspace() {
   const profile = prototypeProfiles.find(({ id }) => id === profileId) ?? prototypeProfiles[0];
   const [activeId, setActiveId] = useState(profile.candidates[0].id);
   const [selectionSession, setSelectionSession] = useState<SelectionSession | null>(null);
+  const [persistenceMode, setPersistenceMode] = useState<"local" | "syncing" | "remote" | "fallback">("local");
   const detailRef = useRef<HTMLElement>(null);
   const receiptRef = useRef<HTMLElement>(null);
   const communityRef = useRef<HTMLElement>(null);
@@ -130,7 +131,7 @@ export function PrototypeWorkspace() {
     setActiveId(id);
     focusSection(detailRef.current);
   };
-  const chooseCandidate = (id: string) => {
+  const chooseCandidate = async (id: string) => {
     const session = createMockSelectionSession(profile.id, id);
     setActiveId(id);
     setSelectionSession(session);
@@ -139,10 +140,22 @@ export function PrototypeWorkspace() {
     } catch {
       // The in-memory receipt remains available if browser storage is blocked.
     }
+    setPersistenceMode("syncing");
+    try {
+      const response = await fetch("/api/selection-sessions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(session),
+      });
+      setPersistenceMode(response.ok ? "remote" : "fallback");
+    } catch {
+      setPersistenceMode("fallback");
+    }
     focusSection(receiptRef.current);
   };
   const resetSelection = () => {
     setSelectionSession(null);
+    setPersistenceMode("local");
     try {
       window.localStorage.removeItem(selectionSessionStorageKey);
     } catch {
@@ -182,7 +195,7 @@ export function PrototypeWorkspace() {
           <div><dt>Project</dt><dd>mxxuzfsqizgaaqhuioci</dd></div>
           <div><dt>Remote seed</dt><dd>fictional rows 2</dd></div>
           <div><dt>Security</dt><dd>RLS ON · API policy 0</dd></div>
-          <div><dt>Prototype</dt><dd>브라우저 mock · API 연결 전</dd></div>
+          <div><dt>Prototype</dt><dd>{persistenceMode === "remote" ? "Supabase write/read 확인" : "브라우저 fallback 사용 가능"}</dd></div>
         </dl>
         <p>원격 테스트 DB에는 migration과 seed가 적용됐습니다. 아래 선택 receipt는 아직 Supabase에 쓰지 않으며 실제 계정·Steam 데이터를 저장하지 않습니다.</p>
       </aside>
@@ -221,7 +234,7 @@ export function PrototypeWorkspace() {
 
       <section ref={receiptRef} tabIndex={-1} className={`selection-receipt ${selected ? "is-visible" : ""}`} aria-live="polite" aria-labelledby="receipt-title">
         <div><p className="origin-eyebrow">DECIDED</p><h2 id="receipt-title">{selected ? `좋아요, 오늘의 선택은 ${selected.title}` : "게임 하나를 선택해 주세요"}</h2></div>
-        {selected && selectionSession ? <><p><b>원격 DB 준비됨 · 이 receipt는 브라우저 mock</b> Supabase API 연결 전이며 실제 계정·Steam 데이터는 저장하지 않습니다.</p><p>{selected.why}</p><dl><div><dt>session UUID</dt><dd>{selectionSession.id}</dd></div><div><dt>fictional profile</dt><dd>{selectionSession.fixture_profile_key}</dd></div><div><dt>selected game UUID</dt><dd>{selectionSession.selected_game_id}</dd></div><div><dt>created at</dt><dd>{selectionSession.created_at}</dd></div><div><dt>예상 세션</dt><dd>{selected.session}</dd></div><div><dt>취향 적합도</dt><dd>{selected.fit}/100</dd></div></dl><div className="receipt-actions"><button type="button" onClick={() => focusSection(detailRef.current)}>← 다른 후보</button><button type="button" onClick={() => focusSection(communityRef.current)}>{selected.title} 커뮤니티 보기 →</button><button type="button" onClick={resetSelection}>mock 기록 지우기</button></div></> : <p>아틀라스에서 후보 하나를 고르면 원격 DB와 같은 SQL 형태의 fictional mock 선택 기록이 여기에 남습니다.</p>}
+        {selected && selectionSession ? <><p><b>{persistenceMode === "remote" ? "Supabase test DB write/read 확인" : persistenceMode === "syncing" ? "Supabase 연결 확인 중 · local receipt 보존" : "브라우저 local fallback · Supabase 미연결"}</b> 실제 계정·Steam 데이터는 저장하지 않습니다.</p><p>{selected.why}</p><dl><div><dt>session UUID</dt><dd>{selectionSession.id}</dd></div><div><dt>fictional profile</dt><dd>{selectionSession.fixture_profile_key}</dd></div><div><dt>selected game UUID</dt><dd>{selectionSession.selected_game_id}</dd></div><div><dt>created at</dt><dd>{selectionSession.created_at}</dd></div><div><dt>예상 세션</dt><dd>{selected.session}</dd></div><div><dt>취향 적합도</dt><dd>{selected.fit}/100</dd></div></dl><div className="receipt-actions"><button type="button" onClick={() => focusSection(detailRef.current)}>← 다른 후보</button><button type="button" onClick={() => focusSection(communityRef.current)}>{selected.title} 커뮤니티 보기 →</button><button type="button" onClick={resetSelection}>mock 기록 지우기</button></div></> : <p>아틀라스에서 후보 하나를 고르면 원격 DB와 같은 SQL 형태의 fictional mock 선택 기록이 여기에 남습니다.</p>}
       </section>
 
       <section id="community" ref={communityRef} tabIndex={-1} className="origin-community" aria-labelledby="community-title">

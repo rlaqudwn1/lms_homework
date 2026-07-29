@@ -264,6 +264,34 @@ Use this log for product, environment, and submission decisions that an agent mu
 
 ## Decision record template
 
+## Pending — Day 10 selection-session service integration
+
+- Decision: authorize or reject the minimal anonymous fictional
+  `selection_sessions` service path.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: pending
+- Scope / affected assignment: Day 10 Step 01 only.
+- Options considered: apply the two narrow fictional-row policies and run one
+  local write/read; revise the policy boundary; retain local fallback evidence
+  without remote integration.
+- Exact target/environment: Supabase project `mxxuzfsqizgaaqhuioci`,
+  `public.selection_sessions`; untracked local `.env.local`; one generated
+  `steady-explorer` / `hollow-knight` row.
+- Proposed operation: apply only the two policies in
+  `assignments/day-10/steps/step-01-selection-session-service-slice/PROPOSED-RLS.sql`,
+  enter the server-only URL/key locally, explicitly set
+  `NEXT_SAVE_SUPABASE_WRITE_ENABLED=true`, then issue one insert and one
+  exact-ID select through `/api/selection-sessions`.
+- Risks and mock boundary: the anon role would be able to insert and select only
+  the six hard-coded fictional mappings, but the endpoint is still publicly
+  callable if deployed. No real Steam/profile data or service-role key is
+  allowed. `public.scores` and all other tables/data are excluded.
+- Reversal path: after separate destructive approval, drop only the two named
+  policies and delete only the exact generated test UUID if requested.
+- Evidence / links:
+  `assignments/day-10/steps/step-01-selection-session-service-slice/`.
+
 ## Approved — Day 9 Supabase test target and schema write
 
 - Decision: Select the exact isolated Supabase test target and authorize (or
