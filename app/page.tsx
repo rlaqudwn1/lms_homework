@@ -13,12 +13,12 @@ export default function Home() {
     <main>
       <aside className="demo-bar" aria-label="데모 데이터 안내">
         <span aria-hidden="true" />
-        <strong>컨셉 데모입니다.</strong> 여기 뜨는 숫자는 전부 예시 프로필이고, 실제 Steam 연동이나 로그인은 없습니다.
+        <strong>컨셉 데모입니다.</strong> 숫자는 예시 프로필이며 Steam 계정은 연결하지 않습니다. Google 로그인은 보호된 프로필에만 사용됩니다.
       </aside>
 
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="NEXT SAVE 홈"><i />NEXT SAVE</a>
-        <nav aria-label="주요 메뉴"><a href="#recommendations">추천</a><a href="#positioning">차이점</a><a href="#how">작동법</a><a href="#database-design">DB 설계</a></nav>
+        <nav aria-label="주요 메뉴"><a href="#recommendations">추천</a><a href="#positioning">차이점</a><a href="#how">작동법</a><a href="#database-design">DB 설계</a><a className="auth-entry" href="/profile">Google 로그인</a></nav>
       </header>
 
       <div id="top">
