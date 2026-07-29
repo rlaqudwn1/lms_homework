@@ -2,9 +2,9 @@
 
 | Field | Value |
 |---|---|
-| State | local implementation and one API verification complete · publication HITL pending |
+| State | ready PR published · LMS submission in progress |
 | Dependency | Stable recommendation-card UI |
-| Next action | Review rendered result, then request separate Git/deployment/LMS approval |
+| Next action | Submit PR #6 to the exact Day 11 LMS assignment |
 | HITL | API/provider choice, rate-limit and data-use approval |
 
 ## Acceptance evidence
