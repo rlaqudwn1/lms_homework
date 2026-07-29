@@ -2,6 +2,25 @@
 
 Use this log for product, environment, and submission decisions that an agent must not infer.
 
+## Day 11 Wikidata single-read verification
+
+- Decision: Replace the unselected RAWG path with one keyless, read-only
+  Wikidata Query Service verification for approved public game metadata.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: approved and executed once
+- Exact target/operation: one `GET` to
+  `https://query.wikidata.org/sparql` for Hollow Knight developer, release date,
+  and genre statements.
+- Result: one request succeeded; developer `Team Cherry`, earliest release year
+  `2017`, and public genre statements were available. Multiple platform release
+  rows required the adapter to select the earliest year deterministically.
+- Data boundary: only the public game label was sent. No Steam URL, account,
+  library, cookie, secret, or personal data was sent or recorded.
+- Attribution: the provider state links `Data from Wikidata`.
+- Remaining gates: enabling repeated runtime requests, deployment, Git
+  publication, and LMS submission require separate approval.
+
 ## Day 2 runtime and demo-entry scope
 
 - Decision: Use Next.js App Router + TypeScript + Tailwind CSS and exactly two fictional seeded profiles for the Day 2 introduction/demo-entry slice.
