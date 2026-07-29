@@ -298,6 +298,56 @@ Use this log for product, environment, and submission decisions that an agent mu
 
 ## Decision record template
 
+## Pending — Day 13 Google login target and activation
+
+- Decision: select the exact isolated OAuth test target and authorize one
+  reviewed activation operation, or retain the local fictional fallback.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: pending
+- Scope / affected assignment: Day 13 Step 01 only; protected `/profile`.
+- Options considered: (A, selected locally) an isolated Google Cloud OAuth web client
+  connected through a named Supabase test project's Google provider, using only
+  an approved test account; (B) direct provider adapter without Supabase; (C)
+  retain the disclosed fictional/test-only local session and make no external
+  change.
+- Chosen option and reason: Supabase Auth was selected to own PKCE/session
+  handling while the app keeps a provider-neutral server boundary.
+- Proposed exact Supabase target: existing course test project
+  `mxxuzfsqizgaaqhuioci` (`rlaqudwn1's Project`). This is a proposal, not
+  authorization. The Google Cloud project/OAuth client, local or preview origin,
+  and every exact callback/redirect URI remain unselected.
+- Proposed operation after approval: configure only the named Google consent screen,
+  OAuth client and allowlisted redirect URIs; place values only in untracked
+  local/server environment storage; enable the corresponding server-side
+  provider adapter; perform one approved test-account login/cancel check.
+- Risks and data boundary: the provider may transmit an account identifier and
+  login metadata. Do not request unnecessary scopes, record email/identity,
+  expose tokens/cookies/secrets, touch `public.scores` or other table/data, or
+  imply that the public demo requires login.
+- Reversal path: disable only the named provider/client and remove only its
+  named redirect/environment configuration after separate approval.
+- Evidence / links:
+  `assignments/day-13/steps/step-01-auth-boundary/`.
+
+## Day 13 PR publication and LMS submission
+
+- Decision: expose the protected-profile Google login entry on the landing,
+  verify locally, publish a ready stacked PR, and submit its URL to the exact
+  Day 13 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: PR published; LMS UI execution pending
+- Exact target: branch `codex/day-13-supabase-google-auth`, ready PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/7` targeting
+  `codex/day-11-open-api`; LMS Day 13
+  `내가 만든 서비스에 구글로그인 연결하기`.
+- Boundaries: publication and submission do not authorize Google Cloud or
+  Supabase Auth configuration, real login, environment entry, deployment, or
+  database/RLS/data changes. The submission must disclose that provider
+  activation and real-account verification remain pending.
+- Evidence / links: PR #7 and `assignments/day-13/SUBMISSION.md`.
+
 ## Pending — Day 10 selection-session service integration
 
 - Decision: authorize or reject the minimal anonymous fictional
