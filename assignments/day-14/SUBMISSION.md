@@ -11,5 +11,7 @@
   production build and assignment harness pass.
 - Mock disclosure: accepts only fictional profile/game mappings and performs no
   live database or account operation.
-- PR / coordinator SHA: pending publication
+- PR / coordinator SHA:
+  `https://github.com/rlaqudwn1/lms_homework/pull/8` /
+  `d77d34e2f05a85178b9049f2ed59b710f5794202`
 - LMS submission timestamp: pending execution

@@ -355,7 +355,7 @@ Use this log for product, environment, and submission decisions that an agent mu
   the exact Day 14 LMS assignment.
 - Owner: User
 - Date (KST): 2026-07-29
-- Status: local integration complete; PR/LMS execution pending
+- Status: ready PR #8 published; LMS execution pending
 - Exact branches: `codex/day-14-session-response-parser`,
   `codex/day-14-session-query-parser`, and coordinator
   `codex/day-14-session-parsers`, all based on
@@ -371,7 +371,9 @@ Use this log for product, environment, and submission decisions that an agent mu
   worktrees/branches only after evidence is preserved and separate destructive
   approval is obtained.
 - Evidence / links: `assignments/day-14/steps/` and
-  `assignments/day-14/SUBMISSION.md`.
+  `assignments/day-14/SUBMISSION.md`; ready PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/8` targeting
+  `codex/day-13-supabase-google-auth`.
 
 ## Pending — Day 10 selection-session service integration
 
