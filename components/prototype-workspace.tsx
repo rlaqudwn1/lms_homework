@@ -1,8 +1,15 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { prototypeProfiles } from "@/lib/prototype";
 import { IdeaV3Atlas } from "@/components/idea-v3-atlas";
+import {
+  candidateIdForSelection,
+  createMockSelectionSession,
+  parseStoredSelectionSession,
+  selectionSessionStorageKey,
+  type SelectionSession,
+} from "@/lib/selection-session";
 
 type Profile = (typeof prototypeProfiles)[number];
 type Candidate = Profile["candidates"][number];
@@ -88,12 +95,23 @@ export function PrototypeWorkspace() {
   const [profileId, setProfileId] = useState(prototypeProfiles[0].id);
   const profile = prototypeProfiles.find(({ id }) => id === profileId) ?? prototypeProfiles[0];
   const [activeId, setActiveId] = useState(profile.candidates[0].id);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectionSession, setSelectionSession] = useState<SelectionSession | null>(null);
   const detailRef = useRef<HTMLElement>(null);
   const receiptRef = useRef<HTMLElement>(null);
   const communityRef = useRef<HTMLElement>(null);
   const active = profile.candidates.find(({ id }) => id === activeId) ?? profile.candidates[0];
+  const selectedId = selectionSession ? candidateIdForSelection(selectionSession) : null;
   const selected = profile.candidates.find(({ id }) => id === selectedId);
+
+  useEffect(() => {
+    const restored = parseStoredSelectionSession(window.localStorage.getItem(selectionSessionStorageKey));
+    if (!restored) return;
+    const restoredCandidateId = candidateIdForSelection(restored);
+    if (!restoredCandidateId) return;
+    setProfileId(restored.fixture_profile_key);
+    setActiveId(restoredCandidateId);
+    setSelectionSession(restored);
+  }, []);
 
   const focusSection = (target: HTMLElement | null) => {
     requestAnimationFrame(() => {
@@ -106,16 +124,30 @@ export function PrototypeWorkspace() {
     const next = prototypeProfiles.find((item) => item.id === id) ?? prototypeProfiles[0];
     setProfileId(id);
     setActiveId(next.candidates[0].id);
-    setSelectedId(null);
+    setSelectionSession(null);
   };
   const openDetail = (id: string) => {
     setActiveId(id);
     focusSection(detailRef.current);
   };
   const chooseCandidate = (id: string) => {
+    const session = createMockSelectionSession(profile.id, id);
     setActiveId(id);
-    setSelectedId(id);
+    setSelectionSession(session);
+    try {
+      window.localStorage.setItem(selectionSessionStorageKey, JSON.stringify(session));
+    } catch {
+      // The in-memory receipt remains available if browser storage is blocked.
+    }
     focusSection(receiptRef.current);
+  };
+  const resetSelection = () => {
+    setSelectionSession(null);
+    try {
+      window.localStorage.removeItem(selectionSessionStorageKey);
+    } catch {
+      // Resetting the visible receipt is still safe.
+    }
   };
 
   return (
@@ -144,6 +176,16 @@ export function PrototypeWorkspace() {
       </section>
 
       <div className="origin-profile-strip"><span>예시 프로필</span><b>{profile.label}</b><span>밝은 장르 {profile.atlas.regions.filter((region) => region.state !== "unexplored").length} / {profile.atlas.regions.length}</span><span>코어 {profile.core}</span></div>
+      <aside className="origin-db-status" aria-label="Day 9 Supabase 상태">
+        <div><span>SUPABASE TEST DB</span><strong>selection_sessions 준비 완료</strong></div>
+        <dl>
+          <div><dt>Project</dt><dd>mxxuzfsqizgaaqhuioci</dd></div>
+          <div><dt>Remote seed</dt><dd>fictional rows 2</dd></div>
+          <div><dt>Security</dt><dd>RLS ON · API policy 0</dd></div>
+          <div><dt>Prototype</dt><dd>브라우저 mock · API 연결 전</dd></div>
+        </dl>
+        <p>원격 테스트 DB에는 migration과 seed가 적용됐습니다. 아래 선택 receipt는 아직 Supabase에 쓰지 않으며 실제 계정·Steam 데이터를 저장하지 않습니다.</p>
+      </aside>
 
       <section id="how" className="origin-how">
         <p className="origin-eyebrow">작동법</p>
@@ -179,7 +221,7 @@ export function PrototypeWorkspace() {
 
       <section ref={receiptRef} tabIndex={-1} className={`selection-receipt ${selected ? "is-visible" : ""}`} aria-live="polite" aria-labelledby="receipt-title">
         <div><p className="origin-eyebrow">DECIDED</p><h2 id="receipt-title">{selected ? `좋아요, 오늘의 선택은 ${selected.title}` : "게임 하나를 선택해 주세요"}</h2></div>
-        {selected ? <><p><b>왜 이 선택인가요?</b>{selected.why}</p><dl><div><dt>예상 세션</dt><dd>{selected.session}</dd></div><div><dt>취향 적합도</dt><dd>{selected.fit}/100</dd></div><div><dt>데이터 경계</dt><dd>공개 게임 정보 + 예시 취향 신호</dd></div></dl><div className="receipt-actions"><button type="button" onClick={() => focusSection(detailRef.current)}>← 다른 후보</button><button type="button" onClick={() => focusSection(communityRef.current)}>{selected.title} 커뮤니티 보기 →</button></div></> : <p>아틀라스의 세 후보 중 하나를 고르면 선택 근거가 여기에 남습니다.</p>}
+        {selected && selectionSession ? <><p><b>원격 DB 준비됨 · 이 receipt는 브라우저 mock</b> Supabase API 연결 전이며 실제 계정·Steam 데이터는 저장하지 않습니다.</p><p>{selected.why}</p><dl><div><dt>session UUID</dt><dd>{selectionSession.id}</dd></div><div><dt>fictional profile</dt><dd>{selectionSession.fixture_profile_key}</dd></div><div><dt>selected game UUID</dt><dd>{selectionSession.selected_game_id}</dd></div><div><dt>created at</dt><dd>{selectionSession.created_at}</dd></div><div><dt>예상 세션</dt><dd>{selected.session}</dd></div><div><dt>취향 적합도</dt><dd>{selected.fit}/100</dd></div></dl><div className="receipt-actions"><button type="button" onClick={() => focusSection(detailRef.current)}>← 다른 후보</button><button type="button" onClick={() => focusSection(communityRef.current)}>{selected.title} 커뮤니티 보기 →</button><button type="button" onClick={resetSelection}>mock 기록 지우기</button></div></> : <p>아틀라스에서 후보 하나를 고르면 원격 DB와 같은 SQL 형태의 fictional mock 선택 기록이 여기에 남습니다.</p>}
       </section>
 
       <section id="community" ref={communityRef} tabIndex={-1} className="origin-community" aria-labelledby="community-title">

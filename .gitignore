@@ -19,3 +19,6 @@ Thumbs.db
 .source-cache/
 
 .vercel
+
+# Supabase CLI local linkage and project metadata
+supabase/.temp/

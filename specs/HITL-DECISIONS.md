@@ -264,6 +264,59 @@ Use this log for product, environment, and submission decisions that an agent mu
 
 ## Decision record template
 
+## Approved — Day 9 Supabase test target and schema write
+
+- Decision: Select the exact isolated Supabase test target and authorize (or
+  reject) the reviewed one-table migration plus two fictional seed rows.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: approved and executed
+- Scope / affected assignment: Day 9 only.
+- Options considered: reuse and, if required, reactivate the existing unlinked
+  project `rlaqudwn1's Project` (`mxxuzfsqizgaaqhuioci`,
+  `ap-southeast-2`, currently `INACTIVE`) after confirming it is dedicated to
+  course fixtures; create a new dedicated course test project; postpone remote
+  execution and retain local migration/mock evidence only.
+- Chosen option and reason: reactivate the existing project, inspect its schema
+  read-only, then apply only the reviewed `selection_sessions` migration and two
+  fictional rows. The user explicitly prohibited changes to other tables/data.
+- Exact target/environment: `rlaqudwn1's Org`, project
+  `mxxuzfsqizgaaqhuioci` (`rlaqudwn1's Project`), region `ap-southeast-2`.
+- Risks and mock boundary: apply creates `public.selection_sessions` and two
+  fictional rows. No real Steam URL, identity, library, secret, telemetry, or
+  live social data. RLS is enabled with no Data API policy.
+- Reversal path: after separate destructive-write confirmation, drop only
+  `public.selection_sessions` in the same test project; do not delete the
+  project or touch unrelated schemas.
+- Evidence / links:
+  `assignments/day-09/steps/step-01-selection-sessions-readiness/`.
+- Execution: project restored from `INACTIVE` to `ACTIVE_HEALTHY`; read-only
+  inspection found existing `public.scores`; dry-run listed only
+  `20260727000100_create_selection_sessions.sql`; migration and two fictional
+  rows applied. Final public tables are `scores,selection_sessions`; RLS is on
+  and `selection_sessions` has zero policies.
+
+## Day 9 PR publication and LMS submission
+
+- Decision: Publish the reviewed Day 9 Supabase migration/evidence as a ready
+  stacked PR and submit that PR URL to the exact Day 9 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: complete; PR #4 published and LMS submitted at 10:30 KST
+- Scope / affected assignment: Day 9 only.
+- Exact target/environment: branch `codex/day-09-supabase-schema`, base
+  `codex/day-08-domain-schema`, PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/4`, LMS Day 9
+  `어제 만든 DB 수파베이스에 만들기`.
+- Receipt: `제출됨 · 지각`; submitted URL is PR #4; code review status is
+  `리뷰를 기다리고 있어요`.
+- Risks and mock boundary: the PR contains migration, fictional seed, rollback,
+  sanitized project reference/evidence, and browser-mock disclosure; no secret,
+  personal Steam data, or Supabase CLI `.temp` metadata.
+- Reversal path: LMS resubmission, PR closure, or remote branch deletion requires
+  follow-up approval. Database rollback remains a separate destructive action.
+- Evidence / links: PR #4 and `assignments/day-09/SUBMISSION.md`.
+
 ```md
 ## <decision title>
 
