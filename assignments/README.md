@@ -13,7 +13,7 @@ This board tracks only the incomplete LMS work required before Day 16. It is a p
 | 10 | [day-10](day-10/PROGRESS.md) | Service–Supabase slice | submitted · late | Await code review |
 | 11 | [day-11](day-11/PROGRESS.md) | One Open API enrichment | submitted · late | Await code review |
 | 13 | [day-13](day-13/PROGRESS.md) | Google login | local boundary complete | Action-time OAuth target/operation approval |
-| 14 | [day-14](day-14/PROGRESS.md) | Worktree feature evidence | planned | Instructor compatibility decision |
+| 14 | [day-14](day-14/PROGRESS.md) | Worktree feature evidence | locally verified | Publish and submit approved PR |
 | 16 | [day-16](day-16/PROGRESS.md) | Vercel + custom domain | HITL pending | Domain, registrar and Vercel target |
 
 ## How to use this harness

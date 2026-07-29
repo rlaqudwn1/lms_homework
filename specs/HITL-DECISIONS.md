@@ -348,6 +348,33 @@ Use this log for product, environment, and submission decisions that an agent mu
   activation and real-account verification remain pending.
 - Evidence / links: PR #7 and `assignments/day-13/SUBMISSION.md`.
 
+## Day 14 worktree integration, PR publication, and LMS submission
+
+- Decision: implement two fixture-safe selection-session parsers in isolated
+  worktrees, integrate them serially, publish a ready PR, and submit its URL to
+  the exact Day 14 LMS assignment.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: ready PR #8 published; LMS execution pending
+- Exact branches: `codex/day-14-session-response-parser`,
+  `codex/day-14-session-query-parser`, and coordinator
+  `codex/day-14-session-parsers`, all based on
+  `bb804999ae9d92295c51d7c56f62eb0d48256e54`.
+- Integration order: response feature `9c0cf81` as `6651db2`, then query feature
+  `b63319b` as `f0f7eef`.
+- Verification: focused 11/11 and 9/9; combined 76/76; production build and
+  assignment harness pass.
+- Risks and boundary: parsers accept only fictional/allowlisted selection data.
+  No Supabase read/write, RLS, OAuth, real identity, deployment, or unrelated
+  table/data change is authorized or performed.
+- Reversal path: revert the two coordinator commits in reverse order; remove
+  worktrees/branches only after evidence is preserved and separate destructive
+  approval is obtained.
+- Evidence / links: `assignments/day-14/steps/` and
+  `assignments/day-14/SUBMISSION.md`; ready PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/8` targeting
+  `codex/day-13-supabase-google-auth`.
+
 ## Pending — Day 10 selection-session service integration
 
 - Decision: authorize or reject the minimal anonymous fictional
