@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | local slice complete; integration HITL pending |
+| State | ready PR published; LMS submission pending |
 | Dependency | Day 09 test schema and a working core flow |
-| Next action | Approve the exact RLS/config/fictional write-read operation |
-| HITL | Pending action-time approval; see Step 01 runbook |
+| Next action | Submit ready PR #5 to the exact Day 10 LMS assignment |
+| HITL | LMS UI submission pending; remote integration remains unapproved |
 
 ## Acceptance evidence
 
@@ -28,3 +28,11 @@ Remote acceptance evidence is not complete. The proposed policies, local
 environment entry, and one fictional write/read against project
 `mxxuzfsqizgaaqhuioci` require action-time approval. Deployment, Git
 publication, and LMS submission remain separate gates.
+
+## Publication
+
+- Branch: `codex/day-10-supabase-service`
+- Commit: `69cde84`
+- Ready PR: `https://github.com/rlaqudwn1/lms_homework/pull/5`
+- Base: `codex/day-09-supabase-schema`
+- LMS submission has not yet completed.

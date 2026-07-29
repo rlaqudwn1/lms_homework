@@ -292,6 +292,27 @@ Use this log for product, environment, and submission decisions that an agent mu
 - Evidence / links:
   `assignments/day-10/steps/step-01-selection-session-service-slice/`.
 
+## Day 10 PR publication and LMS submission
+
+- Decision: publish the reviewed local-fallback Day 10 slice as a ready PR and
+  submit that PR URL to the exact Day 10 LMS assignment without executing the
+  pending remote RLS/config/write-read integration.
+- Owner: User
+- Date (KST): 2026-07-29
+- Status: PR published; LMS UI execution pending
+- Scope / affected assignment: Day 10 only.
+- Exact target/environment: branch `codex/day-10-supabase-service`, base
+  `codex/day-09-supabase-schema`, ready PR
+  `https://github.com/rlaqudwn1/lms_homework/pull/5`.
+- Risks and mock boundary: submission explicitly documents local adapter/API
+  and fallback evidence; it does not claim a successful remote write/read.
+  No Supabase policy, credential, remote row, deployment, or unrelated table
+  state was changed.
+- Reversal path: LMS correction, PR closure, or remote branch deletion requires
+  follow-up approval.
+- Execution note: PR #5 was created successfully. LMS submission remains
+  pending because the local browser-control runtime could not initialize.
+
 ## Approved — Day 9 Supabase test target and schema write
 
 - Decision: Select the exact isolated Supabase test target and authorize (or
