@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | ready PR published; LMS submission pending |
+| State | submitted · late |
 | Dependency | Day 09 test schema and a working core flow |
-| Next action | Submit ready PR #5 to the exact Day 10 LMS assignment |
-| HITL | LMS UI submission pending; remote integration remains unapproved |
+| Next action | Await code review; start Day 11 API-choice gate |
+| HITL | Git/LMS complete; remote integration remains unapproved |
 
 ## Acceptance evidence
 
@@ -35,4 +35,5 @@ publication, and LMS submission remain separate gates.
 - Commit: `69cde84`
 - Ready PR: `https://github.com/rlaqudwn1/lms_homework/pull/5`
 - Base: `codex/day-09-supabase-schema`
-- LMS submission has not yet completed.
+- LMS submitted PR #5 at `2026-07-29 12:18 KST`; receipt is
+  `제출됨 · 지각`, with code review pending.

@@ -310,8 +310,11 @@ Use this log for product, environment, and submission decisions that an agent mu
   state was changed.
 - Reversal path: LMS correction, PR closure, or remote branch deletion requires
   follow-up approval.
-- Execution note: PR #5 was created successfully. LMS submission remains
-  pending because the local browser-control runtime could not initialize.
+- Execution note: PR #5 was created successfully. The PR URL was submitted to
+  LMS Day 10 `내가 만든 서비스와 Supabase 연동하기` at
+  `2026-07-29 12:18 KST`. Receipt is `제출됨 · 지각`; code review status is
+  `리뷰를 기다리고 있어요`. No remote Supabase write/read, RLS policy, env,
+  deployment, or unrelated table/data change was performed.
 
 ## Approved — Day 9 Supabase test target and schema write
 
