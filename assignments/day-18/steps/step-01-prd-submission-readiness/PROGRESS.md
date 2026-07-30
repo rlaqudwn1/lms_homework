@@ -2,10 +2,10 @@
 
 | Field | Value |
 |---|---|
-| State | ready for approval |
+| State | public draft PR published; LMS approval pending |
 | Dependency | pinned original PRD and live LMS Day 18 read access |
 | Scope | read-only source review plus local documentation/PDF |
-| Next checkpoint | action-time LMS target and artifact approval |
+| Next checkpoint | review PR #9 and approve the exact LMS submission action |
 | HITL | no upload, link entry, or submission before approval |
 
 ## Boundary

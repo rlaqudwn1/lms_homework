@@ -30,5 +30,6 @@ To be filled after rendering:
 
 ## External-state boundary
 
-The exact LMS target and candidate are prepared, but no file was uploaded, no
-link was entered, and `제출하기` was not clicked.
+Draft PR `https://github.com/rlaqudwn1/lms_homework/pull/9` was published after
+explicit approval. The exact LMS target and candidate are prepared, but no file
+was uploaded, no link was entered, and `제출하기` was not clicked.

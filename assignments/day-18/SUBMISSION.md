@@ -12,7 +12,8 @@
 
 ## Recommended submission candidate
 
-- Preferred: public Day 18 PR in `rlaqudwn1/lms_homework` (`TBD after creation`).
+- Preferred:
+  `https://github.com/rlaqudwn1/lms_homework/pull/9`.
 - Reason: the LMS explicitly accepts a PR link, the submission repository is
   public, and the PR keeps the source, revision record, course/mock boundary,
   and reviewer-facing PDF together.
@@ -58,6 +59,7 @@ or operate live sharing/community features.
 - Local source identity rechecked against `SOURCE-MANIFEST.json`.
 - PDF render, page count, text extraction, file size, and checksum are recorded
   in the step evidence.
-- Public PR URL: `TBD after PR creation`.
+- Public PR URL: `https://github.com/rlaqudwn1/lms_homework/pull/9`
+  (draft; published 2026-07-30 KST).
 - LMS submission timestamp: `TBD — separate action-time user approval required`.
 
