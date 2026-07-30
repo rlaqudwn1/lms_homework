@@ -1,4 +1,4 @@
-# Assignment delivery board — Day 2 to Day 16
+# Assignment delivery board — Day 2 to Day 18
 
 This board tracks only the incomplete LMS work required before Day 16. It is a planning and evidence harness, not an LMS submission record.
 
@@ -15,6 +15,7 @@ This board tracks only the incomplete LMS work required before Day 16. It is a p
 | 13 | [day-13](day-13/PROGRESS.md) | Google login | local boundary complete | Action-time OAuth target/operation approval |
 | 14 | [day-14](day-14/PROGRESS.md) | Worktree feature evidence | locally verified | Publish and submit approved PR |
 | 16 | [day-16](day-16/PROGRESS.md) | Vercel + custom domain | HITL pending | Domain, registrar and Vercel target |
+| 18 | [day-18](day-18/PROGRESS.md) | NEXT SAVE product requirements document | ready for approval | Approve exact LMS target and pinned PRD PDF or private URL |
 
 ## How to use this harness
 

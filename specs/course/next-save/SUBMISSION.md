@@ -18,6 +18,7 @@ NEXT SAVE is a React course prototype that demonstrates one honest vertical slic
 | 11 | One public API enrichment with fallback | deferred |
 | 13 | Test-account Google OAuth and protected route | deferred |
 | 14 | Two independent scoped features with merge evidence | deferred |
+| 18 | Pinned original product PRD plus an explicit course-slice/mock-boundary note | ready for approval |
 
 ## Required evidence checklist
 
